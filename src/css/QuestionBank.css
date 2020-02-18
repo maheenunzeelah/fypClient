@@ -1,0 +1,124 @@
+#main{
+
+    padding-left: 10%;
+    
+    }
+    #links p{
+    
+    font-size: 15px;    
+    }
+    
+    #links a{
+    padding-left: 20px;
+    font-size: 15px;
+    }
+    
+    
+    a{
+    color: black;
+    }
+    
+    #tab{
+    
+    background-color: black;
+    color: white;
+    
+        }
+
+    #tab .tablink{
+        color: white;
+    }
+    
+    #QuestionBank label{
+    
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    #QuestionBank{
+    
+        border: 1px gray solid;
+        border-radius: 10px;
+margin-top: -20px;
+    }
+    
+    #Questions{
+    
+    border: 1px gray solid;
+    border-radius: 10px;
+    }
+    
+    #btn{
+        border-radius: 10px;
+    
+    }
+    
+    #Questions #libtn{
+    
+        color:purple;
+    }
+    
+    #Qheading{
+    
+        background-color:snow;
+        margin: 0px;
+        border-top: 1px rgb(216, 214, 214) solid;
+        border-bottom: 1px rgb(216, 214, 214) solid;
+        
+    }
+    
+    #Qheading span{
+    
+        font-size: 30px;
+        font-weight: bold;
+    
+    }
+    
+    #Qheading li{
+        display: inline;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    
+    
+    #Qheading ul{
+        margin-top: 10px;
+    }
+    
+    #Question #options li{
+        display: inline;
+        border-left: 1px solid gray;
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 0.4;
+    }
+    
+    #Question #options li:hover{
+        opacity: 10;
+        
+    }
+    
+    #Question li a:hover{
+        
+        color:red;
+    }
+    
+    #Question #options  #firstitem{
+        
+        border-left: none;
+        padding-left: 0px;
+    }
+    
+    #ansoptions{
+    
+        list-style-type: upper-alpha;
+    }
+    
+    #Qtype .row{
+       
+        margin-top: -25px;
+        
+    }
+        
