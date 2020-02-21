@@ -4,38 +4,59 @@ import {Link, NavLink} from 'react-router-dom';
 import {Field, reduxForm ,isPristine} from 'redux-form';
 import validate from './validate';
 import renderField from './renderField';
+import {connect} from 'react-redux';
+import {teacherSignup} from '../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+import { async } from 'q';
 
 
 class Signup extends Component {
-
-  buttonEnable=(e)=>{
-    if(e.target.checked){
-     document.getElementById('StuNext').removeAttribute('disabled');
-     console.log(document.getElementById('StuNext'));
-    }
-  }  
-  handleSubmit=(formValues)=>{
-  console.log(formValues);
+  // constructor(props){
+  //   super(props);
+  //   this.state={
+  //     nextisDisabled:true,
+  //     registerisDisabled:true
+  //   }
+  // }
+// componentWillUnmount(){
+  
+//   const res=this.props.signup;
+   
+   
+//     alert("Teacher added");
+//    // window.location.reload();
+//     }
  
-  //  axios.post('http://localhost:3001/signup',{fname:this.state.fname,lname:this.state.lname,email:this.state.email,password:this.state.password})
-  //  .then(res => {
-  //    if(res.data==="Something went wrong"){
-  //      document.write(res.data);
-  //    }
-  //    else{
-  //    const token = res.data;
-  //    localStorage.setItem("authorization",token);
-  //    alert("User added");
-  //    window.location.reload();
-  //    }
+ 
+    
+  
+  // buttonEnable=(e)=>{
+  //   if(e.target.value==='student'){
+    
+  //    this.setState({
+  //      nextisDisabled:false,
+  //      registerisDisabled:true
+  //    })
      
-  //  })
+  //   }
+  //   else{
+  //     this.setState({
+  //       nextisDisabled:true,
+  //       registerisDisabled:false
+  //     })
+  //   }
+  // }  
+  handleSubmit=(formValues)=>{
+   
+  this.props.teacherSignup(formValues);
+  //   if(this.props.signup!=={}){
+  // }
+  
   }
 
 
       render(){ 
-        
+         //console.log(this.props)
          return (
     <MDBContainer >
       <MDBRow>
@@ -51,7 +72,7 @@ class Signup extends Component {
               <label>Register as a:</label>
         <div>
           <label>
-            <Field name="role" component="input" type="radio" value="teacher" />
+            <Field name="role" component="input" type="radio" value="teacher"  onClick={this.buttonEnable} />
             Teacher
           </label><br />
           <label>
@@ -61,10 +82,10 @@ class Signup extends Component {
           <Field name="role" component={renderError} />
         </div>
             <div className="text-center mt-4">
-              <MDBBtn  id="StuNext" className="default-color" type="submit" style={{marginBottom:"74px"}} disabled={this.props.pristine}>
+              <MDBBtn  id="StuNext" className="default-color" type="submit" style={{marginBottom:"74px" }} >
                 Next
               </MDBBtn>
-              <MDBBtn className="default-color" type="submit" style={{marginBottom:"74px"}}>
+              <MDBBtn className="default-color" type="submit" style={{marginBottom:"74px"}} >
                 Register
               </MDBBtn>
             </div>
@@ -79,8 +100,18 @@ class Signup extends Component {
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span className="ui error message">{error}</span> : false
 
-export default reduxForm({
+ const mapStateToProps=(state,ownProps)=>{
+   //console.log(state.formInp);
+   
+   return {
+     signup: state.signup,
+     //formInp:state.formInp 
+  }
+ } 
+
+const formWrapped= reduxForm({
   form: 'Signup',
-  validate,
-   pristine: isPristine('role')
+  validate
 })(Signup);
+
+export default connect(mapStateToProps,{teacherSignup})(formWrapped); 

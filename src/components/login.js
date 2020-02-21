@@ -4,87 +4,118 @@ import {Link, NavLink, BrowserRouter, Route, Switch} from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import Dashboard from './Dashboard';
 import Account from './Account';
+import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import validate from './validate';
+import renderField from './renderField';
+import {teacherLogin} from '../actions'; 
 
 
 class Login extends Component {
-  state={
-    email:"",
-    password: ""
+  constructor(){
+    super();
+    this.state={
+      nextisDisabled:true,
+      registerisDisabled:true
+    }
   }
-  handleSubmit=(e)=>{
-   e.preventDefault();
-   axios.post('http://localhost:3001/login',{email:this.state.email,password:this.state.password})
-   .then(res => {
-     if(res.data==="user not found"){
-       alert(res.data);
-       window.location.reload();
-     }
-     else{
-        const token = res.data;
-        localStorage.setItem("authorization",token);
-        alert("login");
-        window.location.replace("/dashboard");
-        }
+  componentDidMount(formValues){
+  
+  }
+
+  buttonEnable=(e)=>{
+    if(e.target.value==='student'){
+    
+     this.setState({
+       nextisDisabled:false,
+       registerisDisabled:true
+     })
      
-   })
+    }
+    else{
+      this.setState({
+        nextisDisabled:true,
+        registerisDisabled:false
+      })
+    }
+  }  
+  
+  handleSubmit=(formValues)=>{
+    console.log(formValues);
+      
+    this.props.teacherLogin(formValues);
+  
+  //  e.preventDefault();
+  //  axios.post('http://localhost:3001/login',{email:this.state.email,password:this.state.password})
+  //  .then(res => {
+  //    if(res.data==="user not found"){
+  //      alert(res.data);
+  //      window.location.reload();
+  //    }
+  //    else{
+  //       const token = res.data;
+  //       localStorage.setItem("authorization",token);
+  //       alert("login");
+  //       window.location.replace("/dashboard");
+  //       }
+     
+  //  })
 
   }
-  handlechange=(e)=>{
-    this.setState({
-      [e.target.id]:e.target.value
-    })
-  }
-      render(){ 
-         return (
-        <div>   
-{/*           
-        <Route exact path="/account" component={Account}></Route> */}
-       
-    <MDBContainer >
-      <MDBRow>
-      <MDBCol md="3"></MDBCol>
-        <MDBCol md="6">
-          <form onSubmit={this.handleSubmit}>
-            <p className="h4 text-center " style={{ marginTop:"50px", marginBottom:"-60px"}}>Login</p>
-            <div style={{textAlign:"left"}}>
-            <label
-              htmlFor="email"
-              className="black-text"
-            >
-               Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              onChange={this.handlechange}
-            />
-            <br />
-            <label
-              htmlFor="password"
-              className="black-text"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="form-control"
-              onChange={this.handlechange}
-            />
-            <div className="text-center mt-4">
-              <MDBBtn className="default-color" type="submit" style={{marginBottom:"74px"}} >
-                Login
-              </MDBBtn>
-            </div>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-    </div>
-  );
+ 
+     
+  render(){ 
+     
+    return (
+<MDBContainer >
+ <MDBRow>
+   <MDBCol md="3"></MDBCol>
+   <MDBCol md="6">
+     <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error">
+       <p className="h4 text-center" style={{ marginTop:"50px", marginBottom:"-60px"}} >LOG IN</p>
+       <div style={{textAlign:"left"}}>
+         
+         <Field name="email" type="email" component={renderField} label="Email"  />
+         <Field name="password" type="password" component={renderField} label="Password"  />
+         <label>Login as a:</label>
+   <div>
+     <label>
+       <Field name="role" component="input" type="radio" value="teacher"  onClick={this.buttonEnable} />
+       Teacher
+     </label><br />
+     <label>
+       <Field name="role" component="input" type="radio" value="student"  onClick={this.buttonEnable}/>
+       Student
+     </label>
+     <Field name="role" component={renderError} />
+   </div>
+       <div className="text-center mt-4">
+         <MDBBtn  id="StuNext" className="default-color" type="submit" style={{marginBottom:"74px" }} disabled={this.state.nextisDisabled}>
+           Next
+         </MDBBtn>
+         <MDBBtn className="default-color" type="submit" style={{marginBottom:"74px"}} disabled={this.state.registerisDisabled}>
+           Login
+         </MDBBtn>
+       </div>
+     </div>
+     </form>
+   </MDBCol>
+ </MDBRow>
+</MDBContainer>
+);
 }
 }
+const renderError = ({ meta: { touched, error } }) =>
+touched && error ? <span className="ui error message">{error}</span> : false
 
-export default Login;
+const mapStateToProps=(state)=>{
+
+return {login: state.login}
+} 
+
+const formWrapped= reduxForm({
+form: 'Login',
+validate
+})(Login);
+
+export default connect(mapStateToProps,{teacherLogin})(formWrapped); 
