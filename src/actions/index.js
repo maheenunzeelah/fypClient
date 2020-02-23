@@ -32,10 +32,11 @@ export const teacherLogin=(formValues)=>async dispatch=>{
         console.log(response.data)
         // saving token in response in localStorage
         localStorage.setItem('jwtToken',response.data);
-        setAuthtoken(response.data);
-        //Decoding token
-        const decoded=jwt_decode(response.data);
-        dispatch(setCurrentUser(decoded));
+        
+         
+        // //Decoding token
+        // const decoded=jwt_decode(response.data);
+        // dispatch(setCurrentUser(decoded));
         alert("login");
         window.location.replace("/dashboard");
     })
@@ -53,6 +54,7 @@ export const createTest=(testName)=>async dispatch=>{
   console.log(testName)
   await postDataApi.post('/login/teacher',testName)
    .then(response=>{
+    
      alert(response.data)
    })
    .catch(err=>{

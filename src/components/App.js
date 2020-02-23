@@ -16,14 +16,14 @@ import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 import setAuthToken from '../utils/setAuthToken';
 
-if(localStorage.jwtToken)
- setAuthToken(localStorage.jwtToken)
 
+
+ axios.defaults.headers.common['authorization'] = localStorage.getItem('jwtToken');
 axios.interceptors.request.use(function (config) {
   // spinning start to show
   const token = localStorage.getItem("jwtToken");
   if (token) {
-     config.headers.authorization = token
+     config.headers.Authorization = token
      
   }
   return config
