@@ -1,5 +1,7 @@
 import postDataApi from '../apis/postDataApi';
-import  {SIGN_UP, LOG_IN} from './types';
+import  {SIGN_UP, LOG_IN,SET_CURRENT_USER} from './types';
+import setAuthtoken from '../utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
 
 export const teacherSignup=(formValues)=>async (dispatch,getState)=>{
     
@@ -28,7 +30,12 @@ export const teacherLogin=(formValues)=>async dispatch=>{
     .then(response=>{
         
         console.log(response.data)
+        // saving token in response in localStorage
         localStorage.setItem('jwtToken',response.data);
+        setAuthtoken(response.data);
+        //Decoding token
+        const decoded=jwt_decode(response.data);
+        dispatch(setCurrentUser(decoded));
         alert("login");
         window.location.replace("/dashboard");
     })
@@ -40,4 +47,24 @@ export const teacherLogin=(formValues)=>async dispatch=>{
       window.location.reload();
     })
    // dispatch({type:LOG_IN, payload:response.data})
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+}  
+
+export const createTest=(testName)=>async dispatch=>{
+  console.log(testName)
+  await postDataApi.post('/login/teacher',testName)
+   .then(response=>{
+     alert(response.data)
+   })
+   .catch(err=>{
+     if(err.response.data.test!==undefined)
+       alert(err.response.data.test);
+      
+   })
+}
+export const setCurrentUser=decoded=>{
+return {
+   type:SET_CURRENT_USER,
+   payload: decoded
+}
+
+}

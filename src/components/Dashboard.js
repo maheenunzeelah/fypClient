@@ -10,7 +10,7 @@ class Dashboard extends Component {
       this.setState({ isOpen: !this.state.isOpen });
     }
      handleClick=(e)=>{
-      localStorage.removeItem('authorization');
+      localStorage.removeItem('jwtToken');
       window.location='http://localhost:3000/login';
   }
     
