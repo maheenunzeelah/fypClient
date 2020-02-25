@@ -55,7 +55,8 @@ export const createTest=(testName)=>async dispatch=>{
   await postDataApi.post('/login/teacher',testName)
    .then(response=>{
     
-     alert(response.data)
+     alert(response.data);
+     window.location.replace("/editTest");
    })
    .catch(err=>{
      if(err.response.data.test!==undefined)

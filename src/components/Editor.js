@@ -15,7 +15,7 @@ class Editor extends Component{
     render(){
     return(
     <div className="Editor">
-     <textarea value={this.state.value} style={{width:"650px", height:"140px"}} onChange={this.handleChange} />
+     <textarea value={this.state.value} style={{width:"650px", height:"140px", margin:"20px"}} onChange={this.handleChange} />
 
      
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route , Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route , Switch} from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Test from './Test';
 import Newtest from './Newtest';
@@ -16,7 +16,7 @@ function PrivateLayout(){
            <Route path="/newTest" component={Newtest}></Route>
            <Route path="/editTest" component={AddQues}></Route>
            <Route path="/QuestionBank" component={QuestionBank}></Route>
-           <Route path ="/dashboard" component={Test}></Route>
+           <Route path ="/dashboard" component={AddQues}></Route>
        </Switch>
          </div>
          </BrowserRouter>
