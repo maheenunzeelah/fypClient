@@ -4,10 +4,17 @@ import { Link , withRouter } from 'react-router-dom'
 import Buttontest from './Buttontest';
 import Tab from './Tab.js'
 import TestWindow from './TestWindow';
+import {connect} from 'react-redux';
+import {fetchTests} from '../actions'
 
 
 class Test extends Component{
+ componentDidMount(){
+   this.props.fetchTests();
+ }
+ 
   render(){
+    console.log(this.props.tests)
     return(
     <div className="container">
       <TestWindow />
@@ -42,10 +49,15 @@ class Test extends Component{
     </div>
     
     <br/>
+    { 
+     
 
+      this.props.tests.map(test=>{
+      console.log(test[0].testName)
+      return(
     <div className="container">
     
-    <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo1">Test One</button>
+    <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo1">{test[0].testName}</button>
         
     <div id="demo1" class="w3-container collapse">
       <p>Assigned 1 time:</p>
@@ -80,10 +92,11 @@ class Test extends Component{
       </div>
     </div>
    <br/>
-   </div>
+   </div>);
+   })}
 
 
-   <div className="container">
+   {/* <div className="container">
     
     <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo2">Test Two</button>
         
@@ -134,7 +147,7 @@ class Test extends Component{
     </div>
    <br/>
    </div>
-  
+   */}
       </div>
         
         </div>
@@ -148,4 +161,11 @@ class Test extends Component{
   
 }
 }
-export default Test;
+const mapStateToProps=(state)=>{
+  console.log(state.tests);
+  return{
+   
+  tests:Object.values(state.tests)
+  }
+}
+export default connect(mapStateToProps,{fetchTests})(Test);

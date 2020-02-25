@@ -38,9 +38,9 @@ class Tests extends Component {
               </div>
               <Field type="text" className="form-control" name="testName" component={renderField} />
             </div>
-            <Link to="/editTest"><button type="submit" className="btn btn-danger">
+            <button type="submit" className="btn btn-danger">
               Start Adding Question
-            </button></Link>
+            </button>
           </form>
         </div>
       </div>

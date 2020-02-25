@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import  {SIGN_UP, LOG_IN,SET_CURRENT_USER} from './types';
+import  {SIGN_UP, LOG_IN,SET_CURRENT_USER, FETCH_TESTS} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
@@ -70,4 +70,33 @@ return {
    payload: decoded
 }
 
+}
+export const quesType=(quesType)=>{
+ return{
+   type:'SET_QUEST_TYPE',
+   payload:quesType
+ }
+}
+export const addQues=(formValues)=>async (dispatch,getState)=>{
+  const val=getState().ques;
+  console.log(formValues);
+  const newformValues={...formValues,type:val}
+ await postDataApi.post('login/teacher/addQues',newformValues)
+ .then(response=>{
+    
+  alert(response.data);
+  window.location.reload();
+  
+})
+.catch(err=>{
+  if(err.response.data.question!==undefined)
+    alert(err.response.data.question);
+   
+})
+}
+
+export const fetchTests=()=>async dispatch=>{
+  const response=await postDataApi.get('login/teacher/tests');
+
+  dispatch({type:FETCH_TESTS, payload:response.data})
 }
