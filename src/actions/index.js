@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import  {SIGN_UP, LOG_IN,SET_CURRENT_USER, FETCH_TESTS} from './types';
+import  {SIGN_UP, LOG_IN,SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
@@ -99,4 +99,9 @@ export const fetchTests=()=>async dispatch=>{
   const response=await postDataApi.get('login/teacher/tests');
 
   dispatch({type:FETCH_TESTS, payload:response.data})
+}
+export const fetchQues=()=>async dispatch=>{
+  const response=await postDataApi.get('login/teacher/readQues');
+
+  dispatch({type:FETCH_QUESTIONS, payload:response.data})
 }
