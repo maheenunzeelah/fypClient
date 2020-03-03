@@ -101,7 +101,7 @@ class Test extends Component{
     </div>
     
     <br/>
-}
+
 {this.renderList()}
 
 
@@ -167,9 +167,9 @@ class Test extends Component{
 </div>
 </div>
 );
-  
 }
 }
+
 const mapStateToProps=(state)=>{
   console.log(state.tests.testName)
   return{

@@ -38,7 +38,6 @@ export const addQuesReducer=(state={},action)=>{
 }
 
 export const fetchTestReducer=(state={},action)=>{
-    console.log(action.payload)
     switch(action.type){
        
         case 'FETCH_TESTS':
@@ -49,11 +48,22 @@ export const fetchTestReducer=(state={},action)=>{
     }
 }
 export const fetchQuesReducer=(state={},action)=>{
-    console.log(action.payload)
+    // console.log(action.payload)
     switch(action.type){
        
         case 'FETCH_QUESTIONS':
         return {...state, question:action.payload}
+        
+        default:
+        return state
+    }
+}
+export const currentTestReducer=(state={}, action)=>{
+    
+    switch(action.type){
+       
+        case 'CURRENT_TEST':
+        return action.payload   
         
         default:
         return state

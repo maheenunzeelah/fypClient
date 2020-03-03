@@ -1,6 +1,6 @@
 import {reducer as formReducer} from 'redux-form';
 import {combineReducers} from 'redux';
-import {signupReducer, loginReducer, formInputReducer, addQuesReducer,fetchTestReducer, fetchQuesReducer} from './teacherReducer';
+import {signupReducer, loginReducer, formInputReducer, addQuesReducer,fetchTestReducer,currentTestReducer, fetchQuesReducer} from './teacherReducer';
 import {authReducer} from './authReducer';
 export default combineReducers({
     form:formReducer,
@@ -10,5 +10,6 @@ export default combineReducers({
     questions:fetchQuesReducer,
     //formInp:formInputReducer
     login:loginReducer,
-    currentUser:authReducer
+    currentUser:authReducer,
+    currentTest:currentTestReducer
 })

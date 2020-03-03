@@ -147,7 +147,7 @@ import {fetchQues} from '../actions';
  }
         render(){
     return(<div className="container">
-    <TestWindow />
+    <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
     <div class="jumbotron vertical-center "> 
 

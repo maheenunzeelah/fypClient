@@ -1,10 +1,12 @@
 import React,{Component} from 'react';
 import Editor from './Editor';
 import QuesType from './QuesType';
+import TestWindow from './TestWindow';
 import {Field, reduxForm} from 'redux-form';
 import renderField from './renderField';
 import {connect} from 'react-redux';
 import {addQues,quesType} from '../actions';
+
 class AddQues extends Component{
   componentDidMount(){
       this.props.quesType("T/F")
@@ -17,28 +19,30 @@ class AddQues extends Component{
             type:ChildData
         })
     this.props.quesType(ChildData);
-  //  console.log(this.props.quesType)
+  //  console.log(this.props.quesType)  
     }
     handleSubmit=(formValues)=>{
+        console.log(formValues);
       this.props.addQues(formValues)
     }
     render(){
-       
+        console.log(this.props)
         return(
          <div>
-             <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-             <h3>Select Question Type</h3>
-             <QuesType parentFunction={this.callbackFunction}/>
-             <h3>Question 1</h3>
+            <TestWindow to={this.props.match.url} label="Add Questions" separator=  ' > ' />
+             <form onSubmit={this.props.handleSubmit(this.handleSubmit)} style={{margin:"100px"}}>
+             <h3>Select Question Type</h3><br />
+             <QuesType parentFunction={this.callbackFunction}/><br />
+             <h3>Question 1</h3><br/>   
             <Editor name={"question"}/>
             {this.state.type==="MCQs"?(
                 <div>
             <h3>Answer 1</h3>
-            <Editor name={"answer"}/>
+            <Editor name={"answer1"}/>
             <h3>Answer 2</h3>
-            <Editor name={"answer"}/>
+            <Editor name={"answer2"}/>
             <h3>Answer 3</h3>
-            <Editor name={"answer"}/></div>):
+            <Editor name={"answer3"}/></div>):
             (<div>
                  <h3>Answer </h3>
             <div className="jumbotron" style={{width:"650px", height:"180px", margin:"20px"}}>

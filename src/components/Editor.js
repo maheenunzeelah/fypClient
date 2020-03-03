@@ -3,6 +3,7 @@ import {Field, reduxForm } from 'redux-form'
 class Editor extends Component{
    
     render(){
+      console.log(this.props.name)
     return(
     <div className="Editor">
      <div>
