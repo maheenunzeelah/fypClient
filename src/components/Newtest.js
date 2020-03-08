@@ -81,32 +81,3 @@ const formWrapped = reduxForm({
 
 export default connect(null, { createTest })(formWrapped);
 
-//   <div className="row">
-//   <div className="col-lg-8 col-xl-8 col-md-6 col-sm-6 col-5">
-//   <h6>
-//     <a href="#">
-//       {" "}
-//       <strong> Tests </strong>{" "}
-//     </a>{" "}
-//     &gt; New Test
-//   </h6>
-// </div>
-// {/* side links */}
-// <div className="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-7" id="links">
-//   <a href>
-//     <i className="fa fa-file-o fa-2x" aria-hidden="true">
-//       <p>Tests</p>
-//     </i>
-//   </a>
-//   <a href>
-//     <i className="fa fa-users fa-2x" aria-hidden="true">
-//       <p>Groups</p>
-//     </i>
-//   </a>
-//   <a href>
-//     <i className="fa fa-link fa-2x" aria-hidden="true">
-//       <p>Links</p>
-//     </i>
-//   </a>
-// </div>
-// </div>
