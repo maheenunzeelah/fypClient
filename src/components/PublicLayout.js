@@ -5,6 +5,7 @@ import Quizsettings from './QuizSettings';
 import Overview from './Overview';
 import FooterPage from './Footer';
 import Signup from './Signup';
+import SignupSecond from './signupSecond'
 import Login from './login';
 import Contact from './contact';
 import NavbarPage from'./Navbar';
@@ -18,7 +19,7 @@ return(
    
     <Switch>
      
-      <Route  path="/signup" component={Signup}></Route>
+      <Route  path="/signup" component={SignupSecond}></Route>
       <Route  path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>
