@@ -34,7 +34,7 @@ class Tests extends Component {
           <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error">
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text">Test Name</span>
+                <span className="input-group-text" style={{height:'20px'}}>Test Name</span>
               </div>
               <Field type="text" className="form-control" name="testName" component={renderField} />
             </div>
