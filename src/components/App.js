@@ -55,8 +55,8 @@ function App() {
    <BrowserRouter>
    <div className="App">
      <Switch>
-     <Route  path="/dashboard" component={PrivateLayout} />
-      <Route path="/" component={PublicLayout} /> 
+     <Route   path="/dashboard" component={PrivateLayout} />
+      <Route  path="/" component={PublicLayout} /> 
               
       </Switch>                                                      
   </div>
