@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
 class FooterPage extends Component {
+ 
     state = {
       isOpen: false
     };
@@ -12,7 +13,7 @@ class FooterPage extends Component {
     
     render() {
   return (
-    <MDBFooter color="default-color">
+    <MDBFooter color="default-color" >
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="4">

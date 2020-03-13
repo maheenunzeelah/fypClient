@@ -40,9 +40,9 @@ class TestWindow extends Component {
 
                 <div className="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-7" id="links">
 
-                    <a ><i className="fa fa-file fa-2x" aria-hidden="true"><p>Tests</p></i></a>
-                    <a ><i className="fa fa-users fa-2x" aria-hidden="true"><p>Groups</p></i></a>
-                    <a ><i className="fa fa-link fa-2x" aria-hidden="true"><p>Links</p></i></a>
+                    <Link to="/dashboard"><i className="fa fa-file fa-2x" aria-hidden="true"><p>Tests</p></i></Link>
+                    <Link to="/group"><i className="fa fa-users fa-2x" aria-hidden="true"><p>Groups</p></i></Link>
+                    <Link><i className="fa fa-link fa-2x" aria-hidden="true"><p>Links</p></i></Link>
 
                 </div>
 

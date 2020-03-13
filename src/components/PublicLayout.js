@@ -4,7 +4,7 @@ import TourPage from './TourPage';
 import Quizsettings from './QuizSettings';
 import Overview from './Overview';
 import FooterPage from './Footer';
-import Signup from './signup';
+import Signup from './Signup';
 import Login from './login';
 import Contact from './contact';
 import NavbarPage from'./Navbar';

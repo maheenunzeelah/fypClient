@@ -98,7 +98,7 @@ export const addQues = (formValues) => async (dispatch, getState) => {
     .then(response => {
       
       alert(response.data);
-            
+        window.location.reload();    
 
     })
     .catch(err => {
