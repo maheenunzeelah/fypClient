@@ -1,0 +1,39 @@
+#main{
+
+    padding-left: 10%;
+    
+}
+
+#links p{
+
+    font-size: 15px;    
+}
+
+#links a{
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+
+a{
+    color: black;
+}
+
+.jumbotron{
+
+    background-color: white;
+}
+
+#info{
+    margin-top: 50px;
+    background-color: azure;
+    padding:20px;
+    border:2px black solid;
+    border-radius: 10px;
+}
+
+#info p{
+
+   margin-top: -5%;
+}
+    

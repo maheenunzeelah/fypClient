@@ -4,10 +4,69 @@ import { Link , withRouter } from 'react-router-dom'
 import Buttontest from './Buttontest';
 import Tab from './Tab.js'
 import TestWindow from './TestWindow';
+import {connect} from 'react-redux';
+import {fetchTests} from '../actions'
 
 
 class Test extends Component{
+ componentDidMount(){
+   this.props.fetchTests();
+ }
+
+ renderList=()=>{
+     
+     
+     console.log(this.props.tests)
+  
+      return this.props.tests.map(test=>{
+        return test.map((test)=>{
+          return(
+            <div className="container">
+            
+            <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo1">{test.testName}</button>
+                
+            <div id="demo1" class="w3-container collapse">
+              <p>Assigned 1 time:</p>
+              <hr/>
+                <div className="w3-row">
+                    <div className="w3-half">
+                    <p><i class="fa fa-users fa-2x "  aria-hidden="true"></i> arisha</p>
+                    </div>
+                    <div className="w3-right">
+                    <Link to='/setting' id="Setting">Settings</Link>
+                    <Link to='/setting' id="Preview">Preview</Link>
+                    <Link to='/setting' class="w3-btn w3-ripple w3-teal">Result</Link>
+                    </div>
+                </div>
+                <hr/>
+        
+              <div className="w3-row" id="Links">
+                <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Edit' class="w3-btn" >Edit </Link></span>
+                <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign </Link></span>
+                <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
+                 <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">
+                          Statistics
+                        </button>
+                        <div class="dropdown-menu">
+                         
+                        <Link to='/Assign' class="dropdown-item" href="">By Group</Link>
+                        <Link to='/Assign' class="dropdown-item" href="#">By Questions</Link>
+                         
+                        </div>
+                </span>
+                 
+              </div>
+            </div>
+           <br/>
+           </div>)
+        })
+        ;
+
+    })
+ }
+ 
   render(){
+    console.log(this.props.tests,'propssss')
     return(
     <div className="container">
       <TestWindow />
@@ -43,47 +102,10 @@ class Test extends Component{
     
     <br/>
 
-    <div className="container">
-    
-    <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo1">Test One</button>
-        
-    <div id="demo1" class="w3-container collapse">
-      <p>Assigned 1 time:</p>
-      <hr/>
-        <div className="w3-row">
-            <div className="w3-half">
-            <p><i class="fa fa-users fa-2x "  aria-hidden="true"></i> arisha</p>
-            </div>
-            <div className="w3-right">
-            <Link to='/setting' id="Setting">Settings</Link>
-            <Link to='/setting' id="Preview">Preview</Link>
-            <Link to='/setting' class="w3-btn w3-ripple w3-teal">Result</Link>
-            </div>
-        </div>
-        <hr/>
-
-      <div className="w3-row" id="Links">
-        <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Edit' class="w3-btn" >Edit </Link></span>
-        <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign </Link></span>
-        <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
-         <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">
-                  Statistics
-                </button>
-                <div class="dropdown-menu">
-                 
-                <Link to='/Assign' class="dropdown-item" href="">By Group</Link>
-                <Link to='/Assign' class="dropdown-item" href="#">By Questions</Link>
-                 
-                </div>
-        </span>
-         
-      </div>
-    </div>
-   <br/>
-   </div>
+{this.renderList()}
 
 
-   <div className="container">
+   {/* <div className="container">
     
     <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo2">Test Two</button>
         
@@ -134,7 +156,7 @@ class Test extends Component{
     </div>
    <br/>
    </div>
-  
+   */}
       </div>
         
         </div>
@@ -145,7 +167,14 @@ class Test extends Component{
 </div>
 </div>
 );
-  
 }
 }
-export default Test;
+
+const mapStateToProps=(state)=>{
+  console.log(state.tests.testName)
+  return{
+   
+  tests:Object.values(state.tests)
+  }
+}
+export default connect(mapStateToProps,{fetchTests})(Test);
