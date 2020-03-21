@@ -122,7 +122,7 @@ export const fetchQues = () => async dispatch => {
 
 export const sendVoice=(msg)=>async dispatch =>{
   console.log(msg)
-  await postDataApi.post('login/student',{audio:msg})
+  await postDataApi.post('login/student',msg)
    .then(response=>{
      console.log(response)
    })
