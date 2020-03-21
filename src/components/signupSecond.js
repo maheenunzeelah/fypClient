@@ -7,6 +7,7 @@ const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
 var audioChunks;
 var rec;
+let formatData;
 let blob;
 var FD;
 class SignupSecond extends Component {
@@ -14,38 +15,44 @@ class SignupSecond extends Component {
         isRecording: false,
         blobURL: '',
         isBlocked: false,
+        isCalled:true
     }
   
     start = () => {
-        // if (this.state.isBlocked) {
-        //     console.log('Permission Denied');
-        // } else {
-        //     Mp3Recorder
-        //         .start()
-        //         .then(() => {
-        //             this.setState({ isRecording: true });
-        //         }).catch((e) => console.error(e));
-        // }
-        this.setState({ isRecording: true })
-        audioChunks = [];
-        rec.start();
+        
+        if (this.state.isBlocked) {
+            console.log('Permission Denied');
+        } else {
+            Mp3Recorder
+                .start()
+                .then(() => {
+                    this.setState({ isRecording: true });
+                }).catch((e) => console.error(e));
+        }
+        // this.setState({ isRecording: true })
+        // audioChunks = [];
+        // rec.start();
     };
     stop = () => {
-        // Mp3Recorder
-        //     .stop()
-        //     .getMp3()
-        //     .then(([buffer, blob]) => {
+        Mp3Recorder
+            .stop()
+            .getMp3()
+            .then(([buffer, blob]) => {
                
-        //         this.props.sendVoice(blob)
-        //         const blobURL = URL.createObjectURL(blob)
-        //         console.log(blobURL)
-        //         this.setState({ blobURL, isRecording: false });
-                  
-        //     },
+                
+                const blobURL = URL.createObjectURL(blob)
+                console.log(blobURL)
+                this.setState({ blobURL, isRecording: false });
+                let formatData = new FormData();
+                formatData.append('data', blob);
+    
+                
+                this.props.sendVoice(formatData);
+            },
            
-        //     ).catch((e) => console.log(e));
+            ).catch((e) => console.log(e));
         
-        rec.stop();
+        // rec.stop();
     };
     sendData=(data)=>{
         console.log(blob)
@@ -59,16 +66,17 @@ class SignupSecond extends Component {
         rec.ondataavailable = e => {
           audioChunks.push(e.data);
           if (rec.state == "inactive"){
-            blob = new Blob(audioChunks,{type:'audio/wav'});
+            blob = new Blob(audioChunks,{type:'audio/mpeg-3'});
             const blobURL = URL.createObjectURL(blob)
             // recordedAudio.src = URL.createObjectURL(blob);
             // recordedAudio.controls=true;
             // recordedAudio.autoplay=true;
-            let formatData = new FormData();
+             formatData = new FormData();
             formatData.append('data', blob);
 
-            // var file=new File([blob],"recording.wav",{type:blob.type})
+            
             this.props.sendVoice(formatData);
+            // var file=new File([blob],"recording.wav",{type:blob.type})
           }
         }
       }
@@ -78,22 +86,22 @@ class SignupSecond extends Component {
       return fd.get('a')
       }
     componentDidMount() {
-        navigator.mediaDevices.getUserMedia({audio:true})
-      .then(stream => {this.handlerFunction(stream)})
-        // navigator.getUserMedia = (navigator.getUserMedia ||
-        //                  navigator.webkitGetUserMedia ||
-        //                  navigator.mozGetUserMedia);
-        //                  console.log(navigator.getUserMedia)
-        // navigator.mediaDevices.getUserMedia({ audio: true },
-        //     () => {
-        //         console.log('Permission Granted');
-        //         this.setState({ isBlocked: false });
-        //     },
-        //     () => {
-        //         console.log('Permission Denied');
-        //         this.setState({ isBlocked: true })
-        //     },
-        // );
+    //     navigator.mediaDevices.getUserMedia({audio:true})
+    //   .then(stream => {this.handlerFunction(stream)})
+        navigator.getUserMedia = (navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia);
+                         console.log(navigator.getUserMedia)
+        navigator.mediaDevices.getUserMedia({ audio: true },
+            () => {
+                console.log('Permission Granted');
+                this.setState({ isBlocked: false });
+            },
+            () => {
+                console.log('Permission Denied');
+                this.setState({ isBlocked: true })
+            },
+        );
     }
     render() {
         return (
