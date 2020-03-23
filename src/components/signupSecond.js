@@ -1,6 +1,7 @@
 import MicRecorder from 'mic-recorder-to-mp3';
 import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
 class SignupSecond extends Component {
