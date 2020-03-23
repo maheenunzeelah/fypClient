@@ -113,8 +113,17 @@ export const fetchTests = () => async dispatch => {
 
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
+
 export const fetchQues = () => async dispatch => {
   const response = await postDataApi.get('login/teacher/readQues');
 
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
+}
+
+export const sendVoice=(msg)=>async dispatch =>{
+ 
+  await postDataApi.post('login/student',msg)
+   .then(response=>{
+     console.log(response)
+   })
 }

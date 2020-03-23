@@ -23,7 +23,7 @@ function PrivateLayout(){
            <Route path="/group" component={Group}></Route>
            <Route path="/newGroup" component={New_Group}></Route>
            <Route path="/QuestionBank" component={QuestionBank}></Route>
-           <Route path ="/dashboard" component={Test}></Route>
+           <Route path ="/dashboard" component={QuestionBank}></Route>
            </Switch>
          </div>
          </BrowserRouter>

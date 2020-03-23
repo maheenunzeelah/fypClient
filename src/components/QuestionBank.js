@@ -38,18 +38,18 @@ import {fetchQues} from '../actions';
    
          <p>{qu.question}</p>
          <br></br>
- <div id="demo" class="container collapse">
+      <div id="demo" class="container collapse">
          <ol  id="ansoptions">
  
-             <li>qw</li>
-             <li>rf</li>
-             <li>ed</li>
+             <li>{qu.answer1}</li>
+             <li>{qu.answer2}</li>
+             <li>{qu.answer3}</li>
  
          </ol>
          <br></br>
          <hr></hr>
  
-         <div class="container" id="Qtype">
+         <div class="container" >
  
  
          <br></br>
@@ -60,7 +60,7 @@ import {fetchQues} from '../actions';
              </div>
  
              <div class="col-lg-4 col-xl-4 col-md-6 col-sm-8 col-6">
-                     <p>Multiple Question</p>
+                     <p>{qu.type}</p>
              </div>
         
          </div>
@@ -131,7 +131,7 @@ import {fetchQues} from '../actions';
          <hr></hr>
  
          <ul id="options" class="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
-                 <li id="firstitem"><a  href><i class="fa fa-expand" aria-hidden="true"></i>Answers</a></li>
+                 <li id="firstitem collapsible" data-toggle="collapse" data-target="#demo"><i class="fa fa-expand " aria-hidden="true"></i>Answers</li>
                  <li><a href ><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
                  <li><a  href><i class="fa fa-files-o" aria-hidden="true"></i>Duplicate</a></li>
                  <li><a  href><i class="fa fa-share" aria-hidden="true"></i>Used In</a></li>

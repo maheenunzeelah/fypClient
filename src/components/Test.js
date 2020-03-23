@@ -19,13 +19,14 @@ class Test extends Component{
      console.log(this.props.tests)
   
       return this.props.tests.map(test=>{
-        return test.map((test)=>{
+        return test.map((test,index)=>{
           return(
-            <div className="container">
+            <div className="container" >
+            {/* {`#${test._id}`} */}
             
-            <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo1">{test.testName}</button>
-                
-            <div id="demo1" class="w3-container collapse">
+            <button  class="collapsible Test1" id={`#${test._id}`} data-toggle="collapse" data-target="#demo">{test.testName}</button>
+                {console.log(test._id)}
+            <div id="demo" class="w3-container collapse">
               <p>Assigned 1 time:</p>
               <hr/>
                 <div className="w3-row">
