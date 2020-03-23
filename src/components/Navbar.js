@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TourPage from "./TourPage";
-import Signup from "./Signup";
+import Signup from "./signup";
 import Login from './login';
 
 class NavbarPage extends Component {

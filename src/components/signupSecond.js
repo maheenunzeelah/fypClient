@@ -1,15 +1,25 @@
 import MicRecorder from 'mic-recorder-to-mp3';
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+import {sendVoice} from '../actions'; 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
+var audioChunks;
+var rec;
+let formatData;
+let blob;
+var FD;
 class SignupSecond extends Component {
     state = {
         isRecording: false,
         blobURL: '',
         isBlocked: false,
+        isCalled:true
     }
+  
     start = () => {
+        
         if (this.state.isBlocked) {
             console.log('Permission Denied');
         } else {
@@ -19,18 +29,70 @@ class SignupSecond extends Component {
                     this.setState({ isRecording: true });
                 }).catch((e) => console.error(e));
         }
+        // this.setState({ isRecording: true })
+        // audioChunks = [];
+        // rec.start();
     };
     stop = () => {
         Mp3Recorder
             .stop()
             .getMp3()
             .then(([buffer, blob]) => {
+               
+                
                 const blobURL = URL.createObjectURL(blob)
+                console.log(blobURL)
                 this.setState({ blobURL, isRecording: false });
-            }).catch((e) => console.log(e));
+                let formatData = new FormData();
+                formatData.append('data', blob);
+    
+                
+                this.props.sendVoice(formatData);
+            },
+           
+            ).catch((e) => console.log(e));
+        
+        // rec.stop();
     };
+    sendData=(data)=>{
+        console.log(blob)
+      FD=new FormData();
+      
+      console.log(FD)
+      this.props.sendVoice(FD)
+    }
+    handlerFunction=(stream)=> {
+        rec = new MediaRecorder(stream);
+        rec.ondataavailable = e => {
+          audioChunks.push(e.data);
+          if (rec.state == "inactive"){
+            blob = new Blob(audioChunks,{type:'audio/mpeg-3'});
+            const blobURL = URL.createObjectURL(blob)
+            // recordedAudio.src = URL.createObjectURL(blob);
+            // recordedAudio.controls=true;
+            // recordedAudio.autoplay=true;
+             formatData = new FormData();
+            formatData.append('data', blob);
+
+            
+            this.props.sendVoice(formatData);
+            // var file=new File([blob],"recording.wav",{type:blob.type})
+          }
+        }
+      }
+      blobToFile=(theblob)=>{
+      const fd=new FormData();
+      fd.set('a',theblob)
+      return fd.get('a')
+      }
     componentDidMount() {
-        navigator.getUserMedia({ audio: true },
+    //     navigator.mediaDevices.getUserMedia({audio:true})
+    //   .then(stream => {this.handlerFunction(stream)})
+        navigator.getUserMedia = (navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia);
+                         console.log(navigator.getUserMedia)
+        navigator.mediaDevices.getUserMedia({ audio: true },
             () => {
                 console.log('Permission Granted');
                 this.setState({ isBlocked: false });
@@ -70,4 +132,4 @@ class SignupSecond extends Component {
 
 }
 
-export default SignupSecond;
+export default connect(null,{sendVoice})(SignupSecond);
