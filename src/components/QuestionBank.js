@@ -9,6 +9,10 @@ import {connect} from 'react-redux';
 import {fetchQues} from '../actions';
 
  class QuestionBank extends Component{
+  handleClick=(e)=>{
+          console.log(e.target.href)
+          
+  }       
  componentDidMount(){
          this.props.fetchQues();
  }
@@ -38,14 +42,21 @@ import {fetchQues} from '../actions';
    
          <p>{qu.question}</p>
          <br></br>
-      <div id="demo" class="container collapse">
+      <div id={`demo${qu._id}`} class="container collapse">
+
+    {qu.type==="MCQs"?(
          <ol  id="ansoptions">
  
              <li>{qu.answer1}</li>
              <li>{qu.answer2}</li>
              <li>{qu.answer3}</li>
  
-         </ol>
+         </ol>):(
+          <ul>
+            <div>Correct Ans is</div><br />   
+            <li>{qu.answer}</li>
+          </ul>    
+         )}
          <br></br>
          <hr></hr>
  
@@ -131,7 +142,7 @@ import {fetchQues} from '../actions';
          <hr></hr>
  
          <ul id="options" class="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
-                 <li id="firstitem collapsible" data-toggle="collapse" data-target="#demo"><i class="fa fa-expand " aria-hidden="true"></i>Answers</li>
+                 <li id="firstitem collapsible" ><a href={`#demo${qu._id}`} data-toggle="collapse" onClick={this.handleClick}><i class="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                  <li><a href ><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
                  <li><a  href><i class="fa fa-files-o" aria-hidden="true"></i>Duplicate</a></li>
                  <li><a  href><i class="fa fa-share" aria-hidden="true"></i>Used In</a></li>
