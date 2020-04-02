@@ -1,18 +1,20 @@
 import React,{Component} from 'react'
 import  '../css/Test.css'
-import { Link , withRouter } from 'react-router-dom' 
+import {BrowserRouter, HashRouter, Route , Switch, Link, withRouter} from 'react-router-dom';
 import Buttontest from './Buttontest';
 import Tab from './Tab.js'
 import TestWindow from './TestWindow';
 import {connect} from 'react-redux';
-import {fetchTests, editTest} from '../actions'
+import {fetchTests} from '../actions';
+import Newtest from './Newtest';
+import AddQues from './AddQues';
+import EditTest from './EditTest';
+import QuestionBank from './QuestionBank';
 
 
 class Test extends Component{
 
- handleClick=(id)=>{
-  this.props.editTest(id)
- } 
+ 
  componentDidMount(){
    this.props.fetchTests();
  }
@@ -47,8 +49,8 @@ class Test extends Component{
         
               <div className="w3-row" id="Links">
                 <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i>
-                <Link to={{pathname:'/editTest', state:{testName:test.testName,course:test.course,id:test._id}}} className="w3-btn"  >Edit </Link></span> 
-                {/* onClick={()=>{this.handleClick(test._id)}} */}
+                <Link to={{pathname:'/dashboard/editTest', state:{testName:test.testName,course:test.course,id:test._id}}} className="w3-btn"  >Edit </Link></span> 
+                {/*  */}
                 <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign </Link></span>
                 <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
                  <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">
@@ -75,6 +77,9 @@ class Test extends Component{
   render(){
     console.log(this.props.tests,'propssss')
     return(
+     
+
+
     <div className="container">
      <div ><TestWindow /></div>
     <div class="jumbotron vertical-center"> 
@@ -104,7 +109,7 @@ class Test extends Component{
       </div>
           
       <div class="w3-quarter w3-right" >
-      <Link to='/newTest' class="w3-button w3-dark-grey">New Test +</Link></div>
+      <Link to='/dashboard/newTest' class="w3-button w3-dark-grey">New Test +</Link></div>
     </div>
     
     <br/>
@@ -132,4 +137,4 @@ const mapStateToProps=(state)=>{
   tests:Object.values(state.tests)
   }
 }
-export default connect(mapStateToProps,{fetchTests,editTest})(Test);
+export default connect(mapStateToProps,{fetchTests})(Test);

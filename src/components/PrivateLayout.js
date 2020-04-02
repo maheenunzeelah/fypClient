@@ -19,13 +19,15 @@ function PrivateLayout(){
          <Dashboard />
          
          <Switch>
-         <Route exact path="/addQues" component={AddQues}></Route>
-           <Route path="/newTest" component={Newtest}></Route>
-           <Route path="/editTest" component={EditTest}></Route>
+         <Route exact path="/dashboard/addQues" component={AddQues}></Route>
+           <Route exact path="/dashboard/newTest" exact component={Newtest}></Route>
+           <Route exact path="/dashboard/editTest" component={EditTest}></Route>
            <Route path="/group" component={Group}></Route>
            <Route path="/newGroup" component={New_Group}></Route>
-           <Route path="/QuestionBank" component={QuestionBank}></Route>
-           <Route path ="/dashboard" component={Test}></Route>
+           <Route exact path="/dashboard/QuestionBank" component={QuestionBank}></Route>
+           <Route exact path ="/dashboard" component={Test}>
+           
+           </Route>
            </Switch>
          </div>
          </BrowserRouter>

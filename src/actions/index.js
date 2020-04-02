@@ -92,6 +92,7 @@ export const quesType = (quesType) => {
     payload: quesType
   }
 }
+
 export const addQues = (formValues) => async (dispatch, getState) => {
   const val = getState().ques;
   const currTest = getState().currentTest;
@@ -100,7 +101,7 @@ export const addQues = (formValues) => async (dispatch, getState) => {
     .then(response => {
       
       alert(response.data);
-        window.location.reload();    
+        window.location.replace('/dashboard/addQues');    
 
     })
     .catch(err => {
@@ -129,6 +130,7 @@ export const updateTest=(data)=>async dispatch=>{
  await postDataApi.put(`login/teacher/updateTest/${data.id}`,data)
   .then(response=>{
     alert(response.data)
+
   })
   .catch(err => {
     if (err.response.data.test !== undefined)
@@ -138,7 +140,9 @@ export const deleteTest=(id)=>async dispatch=>{
   await postDataApi.delete(`login/teacher/deleteTest/${id}`)
    .then(response=>{
      alert(response.data)
+     window.location.replace('/dashboard')
    })
+   .then()
 }
 
 //STUDENT PANEL ACTION CREATORS

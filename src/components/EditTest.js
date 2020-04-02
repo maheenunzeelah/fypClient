@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
 import renderField from './renderField';
-import { updateTest,deleteTest } from '../actions'
+import { updateTest, deleteTest, editTest } from '../actions'
 
 class EditTest extends Component {
   state = {
@@ -23,14 +23,17 @@ class EditTest extends Component {
     this.props.updateTest({ id: this.state.data.testId, ...formValues })
   }
   handleDelete = () => {
-   this.props.deleteTest(this.state.data.testId)
+    this.props.deleteTest(this.state.data.testId)
   }
+  handleClick=(id)=>{
+    this.props.editTest(id)
+   } 
   render() {
     console.log(this.state.value)
     return (
       <div>
 
-        <TestWindow to="/newTest" label="Edit Test" separator=' > ' />
+        <TestWindow to="/dashboard/editTest" label="Edit Test" separator=' > ' />
 
         <div className="container">
           <div className="jumbotron ">
@@ -39,7 +42,7 @@ class EditTest extends Component {
             <div className="row">
               <div className="col-lg-5 col-xl-5 col-md-7 col-sm-10 ">
                 <br />
-                <form  className="ui form error">
+                <form className="ui form error">
                   <div className="input-group mb-3">
                     <label>
                       Test Name <br />
@@ -51,18 +54,21 @@ class EditTest extends Component {
             <Field type="text" name="course" component={renderField} />
 
                   </label><br />
-                  <Link to="/addQues" ><button className="btn btn-sm float-right btn-danger" >
-                    Add Questions
+                  <Link to="/dashboard" ><button className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
+                    Cancel
             </button></Link>
-                  <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.props.handleSubmit(this.handleSubmit)} disabled={this.props.pristine}>
-                    Update
-            </button>
                   <button className="btn btn-sm float-right btn-danger" onClick={this.handleDelete} disabled={this.props.pristine}>
                     Delete
             </button>
-                  <Link to="/dashboard" ><button  className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
-                    Cancel
+
+                  <Link to="/dashboard/addQues" ><button className="btn btn-sm float-right btn-danger" onClick={()=>{this.handleClick(this.state.data.testId)}}>
+                    Add Questions
             </button></Link>
+
+                  <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.props.handleSubmit(this.handleSubmit)} disabled={this.props.pristine}>
+                    Update
+            </button>
+
                 </form>
               </div>
             </div>
@@ -81,4 +87,4 @@ const formWrapped = reduxForm({
 
 })(EditTest);
 
-export default connect(null, { updateTest , deleteTest})(formWrapped);
+export default connect(null, { updateTest, deleteTest,editTest })(formWrapped);

@@ -10,7 +10,7 @@ function Tab() {
 
                 <div class="row" >
                     <Link to='/dashboard' class="w3-bar-item w3-button tablink" ><i class="fa fa-window-maximize w3-margin-right" aria-hidden="true"></i>Test</Link>
-                    <Link to='/QuestionBank' class="w3-bar-item w3-button tablink" ><i class="fa fa-window-restore w3-margin-right" aria-hidden="true"></i>Question Bank</Link>
+                    <Link to='/dashboard/QuestionBank' class="w3-bar-item w3-button tablink" ><i class="fa fa-window-restore w3-margin-right" aria-hidden="true"></i>Question Bank</Link>
                     <Link to='#' class="w3-bar-item w3-button tablink" ><i class="fa fa-list w3-margin-right" aria-hidden="true "></i>Categories</Link>
                     <Link to='#' class="w3-bar-item w3-button tablink" ><i class="fa fa-certificate w3-margin-right" aria-hidden="true "></i>Certificates</Link>
 

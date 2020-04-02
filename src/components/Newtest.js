@@ -26,13 +26,14 @@ class Tests extends Component {
    })
   }
   render() {
+    console.log("hello")
     return (
       <div>
     
 
         {/* <link rel="stylesheet" type="text/css" href="New_test.css" /> */}
         {/* main page container */}
-        <TestWindow to="/newTest" label="New Test" separator= ' > ' />
+        <TestWindow to="/dashboard/newTest" label="New Test" separator= ' > ' />
         {/* <TestWindow /> */}
           <div className="container">
           <div className="jumbotron ">
@@ -53,7 +54,7 @@ class Tests extends Component {
             <Field type="text" name="course" component={renderField} />
 
                   </label><br />
-                  <Link to="/addQues" ><button className="btn btn-sm float-right btn-danger" disabled={this.state.isClicked}>
+                  <Link to="/dashboard/addQues" ><button className="btn btn-sm float-right btn-danger" disabled={this.state.isClicked}>
                     Start Adding Questions
             </button></Link>
                   <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
