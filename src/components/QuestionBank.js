@@ -142,11 +142,10 @@ import {fetchQues} from '../actions';
          <hr></hr>
  
          <ul id="options" class="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
-                 <li id="firstitem collapsible" ><a href={`#demo${qu._id}`} data-toggle="collapse" onClick={this.handleClick}><i class="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
+                 <li><a href={`#demo${qu._id}`} data-toggle="collapse"><i class="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                  <li><a href ><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
-                 <li><a  href><i class="fa fa-files-o" aria-hidden="true"></i>Duplicate</a></li>
-                 <li><a  href><i class="fa fa-share" aria-hidden="true"></i>Used In</a></li>
-                 <li><a  href><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
+                 <li><a href><i class="fa fa-share" aria-hidden="true"></i>Used In</a></li>
+                 <li><a href><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
  
              </ul>
    <br></br>

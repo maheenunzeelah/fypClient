@@ -21,7 +21,7 @@ toggleCollapse = () => {
 render() {
   return (
     <Router>      
-      <MDBNavbar color="teal"  dark expand="md">
+      <MDBNavbar color="pink darken-4"  dark expand="md">
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
@@ -37,7 +37,7 @@ render() {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>       
-      <MDBNavbar color="default-color" dark expand="md">
+      <MDBNavbar color="pink" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text"></strong>
         </MDBNavbarBrand>

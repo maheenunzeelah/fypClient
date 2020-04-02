@@ -10,6 +10,7 @@ import Login from './login';
 import Contact from './contact';
 import NavbarPage from'./Navbar';
 import Main from './Main';
+import signupFirst from './signupFirst';
 
 function PublicLayout(props){
 return(
@@ -19,7 +20,7 @@ return(
    
     <Switch>
      
-      <Route  path="/signup" component={SignupSecond}></Route>
+      <Route  path="/signup" component={signupFirst}></Route>
       <Route  path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>

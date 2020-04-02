@@ -10,6 +10,8 @@ import React from 'react';
 function onClick(){
   alert("hello")
 }
+
+//TEACHER PANEL ACTION CREATORS
 export const teacherSignup = (formValues) => async (dispatch, getState) => {
 
   await postDataApi.post('/signup', formValues)
@@ -119,11 +121,33 @@ export const fetchQues = () => async dispatch => {
 
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }
+export const editTest=(id)=>{
+  return{ type: CURRENT_TEST, payload:id }
+}
+export const updateTest=(data)=>async dispatch=>{
+  console.log(data);
+ await postDataApi.put(`login/teacher/updateTest/${data.id}`,data)
+  .then(response=>{
+    alert(response.data)
+  })
+  .catch(err => {
+    if (err.response.data.test !== undefined)
+      alert(err.response.data.test);})
+}
+export const deleteTest=(id)=>async dispatch=>{
+  await postDataApi.delete(`login/teacher/deleteTest/${id}`)
+   .then(response=>{
+     alert(response.data)
+   })
+}
 
+//STUDENT PANEL ACTION CREATORS
 export const sendVoice=(msg)=>async dispatch =>{
  
   await postDataApi.post('login/student',msg)
    .then(response=>{
      console.log(response)
    })
+   
 }
+

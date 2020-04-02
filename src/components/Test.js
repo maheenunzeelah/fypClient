@@ -5,10 +5,14 @@ import Buttontest from './Buttontest';
 import Tab from './Tab.js'
 import TestWindow from './TestWindow';
 import {connect} from 'react-redux';
-import {fetchTests} from '../actions'
+import {fetchTests, editTest} from '../actions'
 
 
 class Test extends Component{
+
+ handleClick=(id)=>{
+  this.props.editTest(id)
+ } 
  componentDidMount(){
    this.props.fetchTests();
  }
@@ -21,12 +25,12 @@ class Test extends Component{
       return this.props.tests.map(test=>{
         return test.map((test,index)=>{
           return(
-            <div className="container" >
-            {/* {`#${test._id}`} */}
+            <div className="container">
+            {/*  */}
             
-            <button  class="collapsible Test1" id={`#${test._id}`} data-toggle="collapse" data-target="#demo">{test.testName}</button>
+            <button  className="collapsible Test1" id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
                 {console.log(test._id)}
-            <div id="demo" class="w3-container collapse">
+            <div id={`demo${test._id}`} class="w3-container collapse">
               <p>Assigned 1 time:</p>
               <hr/>
                 <div className="w3-row">
@@ -42,7 +46,9 @@ class Test extends Component{
                 <hr/>
         
               <div className="w3-row" id="Links">
-                <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Edit' class="w3-btn" >Edit </Link></span>
+                <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i>
+                <Link to={{pathname:'/editTest', state:{testName:test.testName,course:test.course,id:test._id}}} className="w3-btn"  >Edit </Link></span> 
+                {/* onClick={()=>{this.handleClick(test._id)}} */}
                 <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign </Link></span>
                 <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
                  <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">
@@ -70,17 +76,17 @@ class Test extends Component{
     console.log(this.props.tests,'propssss')
     return(
     <div className="container">
-      <TestWindow />
+     <div ><TestWindow /></div>
     <div class="jumbotron vertical-center"> 
 
 <Tab></Tab>
 <br></br>
 
-   <div className="container">
-   <div id="Test" class="w3-container w3-white w3-padding-16 ">
+   <div className="container" >
+   <div id="Test" class="w3-container  w3-padding-16 " >
       <br/>
       
-      <div class="w3-row-padding" >
+      <div class="w3-row-padding"  >
 
       <div class="w3-quarter">   
       <Buttontest />
@@ -106,58 +112,6 @@ class Test extends Component{
 {this.renderList()}
 
 
-   {/* <div className="container">
-    
-    <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo2">Test Two</button>
-        
-    <div id="demo2" class="w3-container collapse">
-      <p>Assigned 1 time:</p>
-      <hr/>
-        <div className="w3-row">
-            <div className="w3-half">
-            <p><i class="fa fa-users fa-2x" aria-hidden="true"></i> arisha</p>
-            </div>
-            <div className="w3-right">
-            <Link to='/setting' id="Setting">Settings</Link>
-            <Link to='/setting' id="Preview">Preview</Link>
-            <Link to='/setting' class="w3-btn w3-ripple w3-teal">Result</Link>
-            </div>
-        </div>
-        <hr/>
-
-      <div className="w3-row" id="Assign">
-         <i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign</Link>
-      </div>
-    </div>
-   <br/>
-   </div>
-
-   <div className="container">
-    
-    <button  class="collapsible" id="Test1" data-toggle="collapse" data-target="#demo3">Test Three</button>
-        
-    <div id="demo3" class="w3-container collapse">
-      <p>Assigned 1 time:</p>
-      <hr/>
-        <div className="w3-row">
-            <div className="w3-half">
-            <p><i class="fa fa-users fa-2x" aria-hidden="true"></i> Izma</p>
-            </div>
-            <div className="w3-right">
-            <Link to='/setting' id="Setting">Settings</Link>
-            <Link to='/setting' id="Preview">Preview</Link>
-            <Link to='/setting' class="w3-btn w3-ripple w3-teal">Result</Link>
-            </div>
-        </div>
-        <hr/>
-
-      <div className="w3-row" id="Assign">
-         <i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign</Link>
-      </div>
-    </div>
-   <br/>
-   </div>
-   */}
       </div>
         
         </div>
@@ -178,4 +132,4 @@ const mapStateToProps=(state)=>{
   tests:Object.values(state.tests)
   }
 }
-export default connect(mapStateToProps,{fetchTests})(Test);
+export default connect(mapStateToProps,{fetchTests,editTest})(Test);

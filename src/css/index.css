@@ -6,7 +6,8 @@ body {
     font-family: "Signika" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:rgb(183, 240, 240) !important;
+  background-color:#003566!important;
+
 }
 
 code {

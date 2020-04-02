@@ -16,12 +16,12 @@ class Dashboard extends Component {
     
     render() {
         return(
-            <MDBNavbar color="black" dark expand="md">
+            <MDBNavbar color="pink" dark expand="md">
             <MDBNavbarToggler onClick={this.toggleCollapse} />
             <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
               <MDBNavbarNav left>
                 <MDBDropdown>
-                    <MDBDropdownToggle caret color="dark">
+                    <MDBDropdownToggle caret color="cyan lighten-5">
                         Dashboard
                     </MDBDropdownToggle>
                     <MDBDropdownMenu color="dark" basic>
@@ -75,7 +75,7 @@ class Dashboard extends Component {
                 </MDBDropdown>
 
                 <MDBDropdown>
-                    <MDBDropdownToggle caret color="dark">
+                    <MDBDropdownToggle caret color="cyan lighten-5">
                         Help
                     </MDBDropdownToggle>
                     <MDBDropdownMenu color="dark" basic>
@@ -100,9 +100,9 @@ class Dashboard extends Component {
                         <MDBDropdownItem>Separated link</MDBDropdownItem>
                     </MDBDropdownMenu>
                 </MDBDropdown> */}
-                 <MDBBtn  className="mr-auto grey darken-4"  color="dark" basic>My Account</MDBBtn>
-                <MDBBtn className="mr-auto grey darken-4"><MDBIcon className="text-white" icon="search" /></MDBBtn>
-                <MDBBtn className="mr-auto grey darken-4"  color="dark" basic onClick={this.handleClick}>Log out</MDBBtn>
+                 <MDBBtn  className="mr-auto "  color="cyan lighten-5" basic>My Account</MDBBtn>
+                <MDBBtn className="mr-auto " color="cyan lighten-5"><MDBIcon className="text-white" icon="search" /></MDBBtn>
+                <MDBBtn className="mr-auto "  color="cyan lighten-5" basic onClick={this.handleClick}>Log out</MDBBtn>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBNavbar>

@@ -1,8 +1,4 @@
-#main{
-
-    padding-left: 10%;
-    
-    }
+/* 
     #links p{
     
     font-size: 15px;    
@@ -11,13 +7,15 @@
     #links a{
     padding-left: 20px;
     font-size: 15px;
-    }
+    } */
     
     
     a{
     color: black;
     }
-    
+    a:focus{
+        color: #c62828
+    } 
     #tab{
     
     background-color: black;
@@ -122,14 +120,16 @@ margin-top: -20px;
         
     }
     .collapsible {
-        background-color: #fff!important;
         color: black;
-        cursor: pointer;
         padding: 18px;
         width: 100%;
         border: none;
         text-align: left;
         outline: none;
         font-size: 15px;
+      }
+      .collapsible:hover{
+        cursor: pointer;
+        background-color: none;
       }
         

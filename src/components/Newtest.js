@@ -8,6 +8,7 @@ import { createTest } from '../actions';
 
 class Tests extends Component {
   state = {
+ 
     isOpen: false,
     isClicked:true
   };
@@ -52,7 +53,7 @@ class Tests extends Component {
             <Field type="text" name="course" component={renderField} />
 
                   </label><br />
-                  <Link to="/editTest" ><button className="btn btn-sm float-right btn-danger" disabled={this.state.isClicked}>
+                  <Link to="/addQues" ><button className="btn btn-sm float-right btn-danger" disabled={this.state.isClicked}>
                     Start Adding Questions
             </button></Link>
                   <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
