@@ -8,10 +8,9 @@ import { Link , withRouter } from 'react-router-dom' ;
 import {connect} from 'react-redux';
 import {fetchQues} from '../actions';
 
+let corrAnsStyle=""
  class QuestionBank extends Component{
-  state={
-    corrAnsStyle:"green"
-  }       
+
   handleClick=(e)=>{
           console.log(e.target.href)
           
@@ -49,12 +48,19 @@ import {fetchQues} from '../actions';
 
     {qu.type==="MCQs"?(
          <ol  id="ansoptions">
-         { <div>
-             <li>{qu.answer1}</li>
-             <li>{qu.answer2}</li>
-             <li>{qu.answer3}</li>
-             </div>
-             }
+         {qu.answers.filter(answer=>
+         {      
+                 return Object.values(answer)==qu.corr.map(corr=> corr)
+                        
+        //    return<div>
+        //              {qu.corr.map(corr=>{
+
+        //                      corr===Object.values(answer)?(corrAnsStyle="info-color"):(corrAnsStyle="info-text")
+        //              })}
+        //            <li className={corrAnsStyle}>{Object.values(answer)}</li>
+        //            </div>
+         })
+        }
  
          </ol>):(
           <ul>
@@ -124,7 +130,7 @@ import {fetchQues} from '../actions';
                  </div>
      
                  <div class="col-lg-4 col-xl-4 col-md-6 col-sm-8 col-6">
-                         <p>Mon 30th Sep 2019</p>
+                         <p>{qu.created_at}</p>
                  </div>
             
          </div>
@@ -136,7 +142,7 @@ import {fetchQues} from '../actions';
                  </div>
      
                  <div class="col-lg-4 col-xl-4 col-md-6 col-sm-8 col-6">
-                         <p>N/A</p>
+                         <p>{qu.updated_at}</p>
                  </div>
             
              </div>

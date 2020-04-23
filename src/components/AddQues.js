@@ -35,11 +35,23 @@ class AddQues extends Component {
         // cAns=[...cAns,ans]
     }
     handleSubmit = (formValues) => {
+        var answers=[]
+        var partial={}
+       for(var x in formValues){
+            if(x.includes("answer")){
+             answers= [...answers,{[x]:formValues[x]}]
+            }
+            else{
+            partial={...partial,[x]:formValues[x]}
+            }
+        }
+     partial={...partial,answers}
+     console.log(partial)
         {/*Spread operator will add corr ans*/}
         cAns = [...cAns, this.state.ans]
-        formValues = { ...formValues, corr: cAns }
-        console.log(formValues)
-        this.props.addQues(formValues)
+        partial = { ...partial, corr: cAns }
+        
+        this.props.addQues(partial)
     }
     availAns = (e) => {
 
