@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import SignupFirst from './signupFirst'
 import Tests from './Newtest';
 import SignupSecond from './signupSecond';
+import { connect } from 'react-redux';
+import {studentSignup} from '../actions'; 
+import { Field, reduxForm, isPristine } from 'redux-form';
 
 class Signup extends Component {
   constructor(props) {
@@ -14,22 +17,27 @@ class Signup extends Component {
     }
   }
   nextPage() {
+  
     this.setState({ page: this.state.page + 1 })
   }
 
   previousPage() {
     this.setState({ page: this.state.page - 1 })
   }
+  handleSubmit=()=>{
+    
+  }
 
   render() {
-    const {onNext} = this.props
+    
     const { page } = this.state
+    const {onSubmit}=this.props
     return (
       <div>
         {page === 1 && <SignupFirst onNext={this.nextPage} />}
         {page === 2 && (<SignupSecond 
               previousPage={this.previousPage}
-              onNext={this.nextPage}
+              onNext={this.onSubmit}
               />
         //   <WizardFormSecondPage
         //     previousPage={this.previousPage}
@@ -51,4 +59,4 @@ Signup.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default Signup
+export default connect(null, {studentSignup})(Signup); 

@@ -146,12 +146,28 @@ export const deleteTest=(id)=>async dispatch=>{
 }
 
 //STUDENT PANEL ACTION CREATORS
-export const sendVoice=(msg)=>async dispatch =>{
+export const sendVoice=(msg)=>async (dispatch,getState) =>{
  
-  await postDataApi.post('login/student',msg)
-   .then(response=>{
-     console.log(response)
-   })
+  var studentData=getState().student;
+  await postDataApi.post('signup/student',msg)
+  .then(response => {
+
+    localStorage.setItem('jwtToken', response.data);
+    alert("Student Registered");
+    window.location.replace('/signup');
+  })
+  .catch(err => {
+    alert(err.response.data.email);
+    window.location.reload();
+  })
    
+}
+export const studentSignup = (formValues)  => {
+  console.log(formValues)
+ return ({
+    type:"STUDENT_DATA",
+    payload:formValues
+ })
+    
 }
 

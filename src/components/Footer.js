@@ -13,7 +13,7 @@ class FooterPage extends Component {
     
     render() {
   return (
-    <MDBFooter color="pink" >
+    <MDBFooter color="pink lighten-2" >
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="4">

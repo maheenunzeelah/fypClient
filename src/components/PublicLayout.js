@@ -20,7 +20,7 @@ return(
    
     <Switch>
      
-      <Route  path="/signup" component={signupFirst}></Route>
+      <Route exact path="/signup" component={Signup}></Route>
       <Route  path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>

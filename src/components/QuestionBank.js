@@ -9,6 +9,9 @@ import {connect} from 'react-redux';
 import {fetchQues} from '../actions';
 
  class QuestionBank extends Component{
+  state={
+    corrAnsStyle:"green"
+  }       
   handleClick=(e)=>{
           console.log(e.target.href)
           
@@ -24,7 +27,7 @@ import {fetchQues} from '../actions';
                         return(
          
          <div>     
-        <div  id="Qheading">
+        <div className="blue lighten-5" id="Qheading">
         <span> Question {index+1}</span>
        
             <ul class="float-right">
@@ -46,31 +49,33 @@ import {fetchQues} from '../actions';
 
     {qu.type==="MCQs"?(
          <ol  id="ansoptions">
- 
+         { <div>
              <li>{qu.answer1}</li>
              <li>{qu.answer2}</li>
              <li>{qu.answer3}</li>
+             </div>
+             }
  
          </ol>):(
           <ul>
-            <div>Correct Ans is</div><br />   
-            <li>{qu.answer}</li>
+            <div style={{textAlign:"left"}}>Correct Ans is</div><br />   
+            <li style={{marginLeft:"20px" , textTransform:"capitalize"}}>{qu.answer}</li>
           </ul>    
          )}
          <br></br>
          <hr></hr>
  
-         <div class="container" >
+         <div className="container blue lighten-4 border border-primary black-text" style={{paddingBottom:"20px"}} >
  
  
          <br></br>
-         <div class="row">
+         <div className="row">
   
-             <div class="col-lg-2 col-xl-2 col-md-3 col-sm-4 col-5" >
+             <div className="col-lg-2 col-xl-2 col-md-3 col-sm-4 col-5" >
                <strong>Question Type:</strong>
              </div>
  
-             <div class="col-lg-4 col-xl-4 col-md-6 col-sm-8 col-6">
+             <div className="col-lg-4 col-xl-4 col-md-6 col-sm-8 col-6">
                      <p>{qu.type}</p>
              </div>
         
@@ -141,11 +146,11 @@ import {fetchQues} from '../actions';
  
          <hr></hr>
  
-         <ul id="options" class="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
-                 <li><a href={`#demo${qu._id}`} data-toggle="collapse"><i class="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
-                 <li><a href ><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
-                 <li><a href><i class="fa fa-share" aria-hidden="true"></i>Used In</a></li>
-                 <li><a href><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
+         <ul id="options" className="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
+                 <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="text-primary font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
+                 <li ><a href className="text-primary font-weight-bold"><i className="fa fa-pencil " aria-hidden="true"></i>Edit</a></li>
+                 <li><a href className="text-primary font-weight-bold"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
+                 <li><a href className="text-primary font-weight-bold"><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
  
              </ul>
    <br></br>
@@ -159,13 +164,13 @@ import {fetchQues} from '../actions';
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
-    <div class="jumbotron vertical-center "> 
+    <div className="jumbotron vertical-center pink lighten-4"> 
 
 <Tab></Tab>
 <br></br>
 
-<div className="container" >
-    <div className="w3-container w3-padding-16  w3-white " id="QuestionBank">
+<div className="container"  >
+    <div className="w3-container w3-padding-16 pink lighten-5" style={{color:"#1C2331"}}id="QuestionBank">
         
             <h5><strong>Filters:</strong></h5>
            <br></br>
@@ -213,38 +218,38 @@ import {fetchQues} from '../actions';
    </div>
 <br></br>
  
-   <div class="w3-container w3-padding-16  w3-white" id="Questions">
+   <div className="w3-container w3-padding-16 pink lighten-5" id="Questions" style={{color:"#1C2331"}}>
 
         
-    <div class="row ">
-        <div class="col-xl-7 col-lg-7 col-md-6 col-sm-5 col-6">
+    <div className="row ">
+        <div className="col-xl-7 col-lg-7 col-md-6 col-sm-5 col-6">
                 <Button></Button >
         </div>
 
-        <div class="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
-                <div class="dropdown">
-                <button  class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <div className="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
+                <div className="dropdown">
+                <button  className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         Add Questions
                 </button>
 
-                <div class="dropdown-menu">
-                        <Link to='#' class="dropdown-item" href>Add new</Link>
-                        <Link to='#' href class="dropdown-item" >Import new</Link> 
+                <div className="dropdown-menu">
+                        <Link to='/dashboard/addQues' className="dropdown-item" href>Add new</Link>
+                        <Link to='#' href className="dropdown-item" >Import new</Link> 
                 </div>
                 </div>
         </div>
 
             
 
-        <div class="dropdown col-xl-2
+        <div className="dropdown col-xl-2
          col-lg-2 col-md-1 col-sm-1 col-1 d-none d-lg-block d-xl-block d-md-block d-sm-block">
-               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+               <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                   More
                 </button>
-                <div class="dropdown-menu">
+                <div className="dropdown-menu">
                  
-                    <a class="dropdown-item" href="">Edit Question Setting</a>
-                  <a class="dropdown-item" href="#">Export Questions</a>
+                    <a className="dropdown-item" href="">Edit Question Setting</a>
+                  <a className="dropdown-item" href="#">Export Questions</a>
                  
                 </div>
               </div>
@@ -256,7 +261,7 @@ import {fetchQues} from '../actions';
             
 
     
-<div class="container">
+<div className="container">
     
 
 

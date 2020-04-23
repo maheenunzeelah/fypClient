@@ -33,7 +33,7 @@ class Editor extends Component {
               type="checkbox"
               onClick={this.handleClick}
             />&nbsp;&nbsp;
-         <label >This is the correct answer</label>
+         <label className="text-info">This is the correct answer</label>
          </div>
             <div>
               <Field name={this.props.name} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />

@@ -5,7 +5,7 @@ import { Field, reduxForm, isPristine } from 'redux-form';
 import validate from './validate';
 import renderField from './renderField';
 import { connect } from 'react-redux';
-import { teacherSignup } from '../actions';
+import { teacherSignup,studentSignup } from '../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
 
@@ -36,12 +36,14 @@ class SignupFirst extends Component {
       })
     }
   }
-  handleSubmit = (formValues) => {
-
+  handleSubmit = (e,formValues) => {
+   e.preventDefault();
+   console.log(formValues)
+   if(e.target.id=="StuNext")
+    this.props.studentSignup(formValues)
+    else
     this.props.teacherSignup(formValues);
-    //   if(this.props.signup!=={}){
-    // }
-
+    
   }
 
 
@@ -72,7 +74,9 @@ class SignupFirst extends Component {
                   <Field name="role" component={renderError} />
                 </div>
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} onClick={this.props.onNext}>
+                  <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} onClick={(e)=>{
+                    this.props.onNext();
+                    this.props.handleSubmit(this.handleSubmit);}}>
                     Next
               </MDBBtn>
                   <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >

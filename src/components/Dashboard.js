@@ -16,7 +16,7 @@ class Dashboard extends Component {
     
     render() {
         return(
-            <MDBNavbar color="pink" dark expand="md">
+            <MDBNavbar color="pink lighten-2" dark expand="md">
             <MDBNavbarToggler onClick={this.toggleCollapse} />
             <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
               <MDBNavbarNav left>

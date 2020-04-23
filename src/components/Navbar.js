@@ -27,7 +27,7 @@ render() {
           <MDBNavbarNav left>
             <a className="navbar-brand white-text" href="#">E-Catechism</a>
           </MDBNavbarNav>
-          <MDBNavbarNav right  classsName="cyan-text">
+          <MDBNavbarNav right  className="cyan-text">
             <MDBNavItem >
             <a className="navbar-brand white-text" href="/login">Login</a>
             </MDBNavItem>
@@ -37,7 +37,7 @@ render() {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>       
-      <MDBNavbar color="pink" dark expand="md">
+      <MDBNavbar color="pink lighten-2" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text"></strong>
         </MDBNavbarBrand>

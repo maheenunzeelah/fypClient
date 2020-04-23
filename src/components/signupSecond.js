@@ -54,13 +54,13 @@ class SignupSecond extends Component {
         
         // rec.stop();
     };
-    sendData=(data)=>{
-        console.log(blob)
-      FD=new FormData();
+    // sendData=(data)=>{
+    //     console.log(blob)
+    //   FD=new FormData();
       
-      console.log(FD)
-      this.props.sendVoice(FD)
-    }
+    //   console.log(FD)
+    //   this.props.sendVoice(FD)
+    // }
     handlerFunction=(stream)=> {
         rec = new MediaRecorder(stream);
         rec.ondataavailable = e => {
@@ -80,11 +80,11 @@ class SignupSecond extends Component {
           }
         }
       }
-      blobToFile=(theblob)=>{
-      const fd=new FormData();
-      fd.set('a',theblob)
-      return fd.get('a')
-      }
+    //   blobToFile=(theblob)=>{
+    //   const fd=new FormData();
+    //   fd.set('a',theblob)
+    //   return fd.get('a')
+    //   }
     componentDidMount() {
     //     navigator.mediaDevices.getUserMedia({audio:true})
     //   .then(stream => {this.handlerFunction(stream)})
@@ -122,8 +122,8 @@ class SignupSecond extends Component {
                   <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }}  onClick={this.props.previousPage}>
                     Previous
               </MDBBtn>
-                  <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} onClick={this.props.onNext}>
-                    Next
+                  <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} onClick={this.props.onSubmit}>
+                    Register
               </MDBBtn>
                 </div>
             </div>

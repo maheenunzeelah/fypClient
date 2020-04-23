@@ -12,11 +12,11 @@ class QuesType extends Component{
             <div className="container">
             
              <div className="row" >
-              <div className="col-md-1 ">
+              <div className="col-md-2 ">
                <button className=".btn-default btn btn-md btn-primary "  onClick={(e)=>{this.sendQuestionType(e,"T/F")}}>True/False</button>
                
               </div>&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="col-md-1" >
+              <div className="col-md-2" >
               <button className=".btn-default btn btn-md btn-primary " style={{width:"100px"}} onClick={(e)=>{this.sendQuestionType(e,"MCQs")}}>MCQ's</button>
                
               </div>
