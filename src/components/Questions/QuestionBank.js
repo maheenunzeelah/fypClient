@@ -165,7 +165,7 @@ let corrAns;
                  <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="pink-text font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                 
                 {/*Edit Question button*/}
-                <li ><Link to={{ pathname: '/dashboard/addQues'  }}  className="pink-text  font-weight-bold"><i className="fa fa-pencil " aria-hidden="true"></i>Edit</Link></li>
+                <li ><Link to={{ pathname: '/dashboard/addQues' }}  className="pink-text  font-weight-bold"><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
 
                 {/*Used In button show us test in which question is used*/}
                  <li><a href={`#used${qu._id}`} className="pink-text  font-weight-bold" data-toggle="collapse"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>

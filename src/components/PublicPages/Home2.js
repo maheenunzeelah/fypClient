@@ -8,7 +8,7 @@ class Home2 extends Component{
     {
         return <div  >
           
-        <div className="style_O  dib" >
+        <div style={{marginTop:"50px"}} >
             <h2> Create Custom Tests & Exams Online</h2>
                        <li> Secure & private</li>
                       

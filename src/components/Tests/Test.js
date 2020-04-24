@@ -83,16 +83,19 @@ class Test extends Component {
     let filtered
     this.props.tests.filter(test => {
       filtered = test.filter(tes => {
+        //If value in searched bar matches the value of testname
         return (tes.testName.indexOf(this.state.search) !== -1)
       })
 
     })
-
+    
+    // When component will render first time
     if (filtered == undefined) {
 
       return this.props.tests.map(test => {
         return test.map((test, index) => {
           return <div>
+            {/* For preventing code replication function is called*/}
             {this.filteredList(test, index)}
           </div>
         })
@@ -100,6 +103,7 @@ class Test extends Component {
 
       })
     }
+    // When we have list of filtered arry
     else {
       return filtered.map((test, index) => {
         return <div>
