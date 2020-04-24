@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import { Field, reduxForm, isPristine } from 'redux-form';
-import validate from './validate';
-import renderField from './renderField';
+import validate from '../validate';
+import renderField from '../renderField';
 import { connect } from 'react-redux';
-import { teacherSignup,studentSignup } from '../actions';
+import { teacherSignup,studentSignup } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
 

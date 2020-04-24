@@ -1,16 +1,16 @@
 import React from 'react';
 import {BrowserRouter, Route , Switch} from 'react-router-dom';
-import TourPage from './TourPage';
-import Quizsettings from './QuizSettings';
-import Overview from './Overview';
-import FooterPage from './Footer';
-import Signup from './Signup';
-import SignupSecond from './signupSecond'
-import Login from './login';
-import Contact from './contact';
-import NavbarPage from'./Navbar';
-import Main from './Main';
-import signupFirst from './signupFirst';
+import TourPage from './PublicPages/TourPage';
+import Quizsettings from './PublicPages/QuizSettings';
+import Overview from './PublicPages/Overview';
+import FooterPage from './PublicPages/Footer';
+import Signup from './Authentication/Signup';
+import SignupSecond from './Authentication/signupSecond'
+import Login from './Authentication/login';
+import Contact from './PublicPages/contact';
+import NavbarPage from'./PublicPages/Navbar';
+import Main from './PublicPages/Main';
+import signupFirst from './Authentication/signupFirst';
 
 function PublicLayout(props){
 return(

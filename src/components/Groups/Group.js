@@ -1,7 +1,7 @@
 import React from 'react'
-import '../css/Group.css'
+import '../../css/Group.css'
 import { Link } from 'react-router-dom' 
-import TestWindow from './TestWindow'
+import TestWindow from '../TestWindow'
 const Group = () =>{
 
     return(

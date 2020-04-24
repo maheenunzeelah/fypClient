@@ -1,13 +1,13 @@
 import React from 'react';
 import {BrowserRouter, HashRouter, Route , Switch, Link} from 'react-router-dom';
 import Dashboard from './Dashboard';
-import Test from './Test';
-import Newtest from './Newtest';
-import AddQues from './AddQues';
-import EditTest from './EditTest';
-import QuestionBank from './QuestionBank';
-import New_Group from './New_Group';
-import Group from './Group';
+import Test from './Tests/Test';
+import Newtest from './Tests/Newtest';
+import AddQues from './Questions/AddQues';
+import EditTest from './Tests/EditTest';
+import QuestionBank from './Questions/QuestionBank';
+import New_Group from './Groups/New_Group';
+import Group from './Groups/Group';
 
 
 function PrivateLayout(){

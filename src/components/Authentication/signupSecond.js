@@ -2,7 +2,7 @@ import MicRecorder from 'mic-recorder-to-mp3';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import {sendVoice} from '../actions'; 
+import {sendVoice} from '../../actions'; 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
 var audioChunks;

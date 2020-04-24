@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
-import '../css/New_group.css'
+import '../../css/New_group.css'
 class NewGroup extends Component {
         state = {
           isOpen: false

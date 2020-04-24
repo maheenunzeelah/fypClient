@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TestWindow from './TestWindow';
+import TestWindow from '../TestWindow';
 import { Link } from 'react-router-dom';
 import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
-import renderField from './renderField';
-import { updateTest, deleteTest, editTest } from '../actions'
+import renderField from '../renderField';
+import { updateTest, deleteTest, editTest } from '../../actions'
 
 class EditTest extends Component {
   state = {
