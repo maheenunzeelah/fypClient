@@ -34,9 +34,9 @@ class Test extends Component {
       <div className="container">
         {/*  */}
 
-        <button className="collapsible Test1" id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
+        <button className="unique-color Test1" id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
         {console.log(test._id)}
-        <div id={`demo${test._id}`} class="w3-container collapse">
+        <div id={`demo${test._id}`} className="w3-container collapse">
           <p>Assigned 1 time:</p>
           <hr />
           <div className="w3-row">
@@ -46,18 +46,18 @@ class Test extends Component {
             <div className="w3-right">
               <Link to='/setting' id="Setting">Settings</Link>
               <Link to='/setting' id="Preview">Preview</Link>
-              <Link to='/setting' class="w3-btn w3-ripple w3-teal">Result</Link>
+              <Link to='/setting' class="w3-btn w3-ripple pink accent-3">Result</Link>
             </div>
           </div>
           <hr />
 
           <div className="w3-row" id="Links">
-            <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i>
-              <Link to={{ pathname: '/dashboard/editTest', state: { testName: test.testName, course: test.course, id: test._id } }} className="w3-btn"  >Edit </Link></span>
+            <span className="Link" ><i class="fa fa-pencil" aria-hidden="true"></i>
+              <Link to={{ pathname: '/dashboard/editTest', state: { testName: test.testName, course: test.course, id: test._id } }} className="w3-btn deep-orange-text font-weight-bold"  >Edit </Link></span>
             {/*  */}
-            <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' class="w3-btn" >Assign </Link></span>
+            <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Assign' className="w3-btn deep-orange-text " >Assign </Link></span>
             <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
-              <button class="w3-btn dropdown-toggle" data-toggle="dropdown">
+              <button className="w3-btn  deep-orange-text  dropdown-toggle" data-toggle="dropdown">
                 Statistics
                   </button>
               <div class="dropdown-menu">
@@ -111,13 +111,13 @@ class Test extends Component {
     return (
       <div className="container">
         <div ><TestWindow /></div>
-        <div class="jumbotron vertical-center">
+        <div className="jumbotron vertical-center black">
 
           <Tab></Tab>
           <br></br>
 
           <div className="container" >
-            <div id="Test" class="w3-container  w3-padding-16 " >
+            <div id="Test" class="w3-container  w3-padding-16 blue lighten-4" >
               <br />
 
               <div class="w3-row-padding"  >

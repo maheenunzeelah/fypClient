@@ -4,17 +4,16 @@ import Button from './Button.js'
 import Tab from './Tab.js'
 import TestWindow from './TestWindow';
 import { Link , withRouter } from 'react-router-dom' ;
-
 import {connect} from 'react-redux';
-import {fetchQues} from '../actions';
+import {fetchQues,deleteQuestion} from '../actions';
 
-let corrAnsStyle=""
+let corrAnsStyle="";
+let corrAns;
  class QuestionBank extends Component{
 
-  handleClick=(e)=>{
-          console.log(e.target.href)
-          
-  }       
+  handleDelete=(id)=>{
+  this.props.deleteQuestion(id);
+  }    
  componentDidMount(){
          this.props.fetchQues();
  }
@@ -48,17 +47,17 @@ let corrAnsStyle=""
 
     {qu.type==="MCQs"?(
          <ol  id="ansoptions">
-         {qu.answers.filter(answer=>
-         {      
-                 return Object.values(answer)==qu.corr.map(corr=> corr)
-                        
-        //    return<div>
-        //              {qu.corr.map(corr=>{
-
-        //                      corr===Object.values(answer)?(corrAnsStyle="info-color"):(corrAnsStyle="info-text")
-        //              })}
-        //            <li className={corrAnsStyle}>{Object.values(answer)}</li>
-        //            </div>
+         {qu.answers.map(answer=>
+         {    return<div>
+                  
+                     {/* { corrAns=qu.corr.filter(corr=>{
+                           return corr!==Object.values(answer)
+                           
+                     })
+                } */}
+                    <li className={corrAnsStyle}>{Object.values(answer)}</li>
+                   
+                   </div>
          })
         }
  
@@ -156,7 +155,8 @@ let corrAnsStyle=""
                  <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="text-primary font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                  <li ><a href className="text-primary font-weight-bold"><i className="fa fa-pencil " aria-hidden="true"></i>Edit</a></li>
                  <li><a href className="text-primary font-weight-bold"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
-                 <li><a href className="text-primary font-weight-bold"><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
+                 <li><a href className="text-primary font-weight-bold"
+                  onClick={()=>this.handleDelete(qu._id)}><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
  
              </ul>
    <br></br>
@@ -170,13 +170,13 @@ let corrAnsStyle=""
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
-    <div className="jumbotron vertical-center pink lighten-4"> 
+    <div className="jumbotron vertical-center black"> 
 
 <Tab></Tab>
 <br></br>
 
 <div className="container"  >
-    <div className="w3-container w3-padding-16 pink lighten-5" style={{color:"#1C2331"}}id="QuestionBank">
+    <div className="w3-container w3-padding-16 blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
         
             <h5><strong>Filters:</strong></h5>
            <br></br>
@@ -224,7 +224,7 @@ let corrAnsStyle=""
    </div>
 <br></br>
  
-   <div className="w3-container w3-padding-16 pink lighten-5" id="Questions" style={{color:"#1C2331"}}>
+   <div className="w3-container w3-padding-16 blue lighten-4 " id="Questions" style={{color:"#1C2331"}}>
 
         
     <div className="row ">
@@ -289,4 +289,4 @@ const mapStateToProps=(state)=>{
 }
 }
 
-export default connect(mapStateToProps,{fetchQues})(QuestionBank);
+export default connect(mapStateToProps,{fetchQues,deleteQuestion})(QuestionBank);

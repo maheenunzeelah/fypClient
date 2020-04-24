@@ -110,7 +110,16 @@ export const addQues = (formValues) => async (dispatch, getState) => {
 
     })
 }
+// delete question action creators
+export const deleteQuestion=(id)=>async dispatch=>{
+  console.log(id)
+  await postDataApi.delete(`login/teacher/delQues/${id}`)
+  .then(response=>{
+    alert(response.data)
+    window.location.replace("/dashboard/QuestionBank")
+  })
 
+}
 export const fetchTests = () => async dispatch => {
   const response = await postDataApi.get('login/teacher/tests');
 

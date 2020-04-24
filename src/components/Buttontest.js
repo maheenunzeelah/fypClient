@@ -17,7 +17,7 @@ class Buttontest extends React.Component {
   
     render() {
       return (
-        <button onClick={this.handleClick} class="btn btn-primary" id="myButton1" data-toggle="collapse" data-target="#demo1,#demo2,#demo3"  >
+        <button onClick={this.handleClick} className="btn" id="myButton1" style={{backgroundColor:"#f50057", color:"white"}} data-toggle="collapse" data-target="#demo1,#demo2,#demo3"  >
           {this.state.isToggleOn ? 'Expand All' : 'Collapse All'}
         </button>
       );
