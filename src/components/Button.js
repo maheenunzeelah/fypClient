@@ -17,7 +17,7 @@ class Button extends React.Component {
   
     render() {
       return (
-        <button onClick={this.handleClick} class="btn btn-primary" id="myButton1" data-toggle="collapse" data-target="#demo">
+        <button onClick={this.handleClick} class="btn pink white-text" id="myButton1" data-toggle="collapse" data-target="#demo">
           {this.state.isToggleOn ? 'Expand Answers' : 'Collapse Answers'}
         </button>
       );

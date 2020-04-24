@@ -70,7 +70,7 @@ let corrAns;
          <br></br>
          <hr></hr>
  
-         <div className="container blue lighten-4 border border-primary black-text" style={{paddingBottom:"20px"}} >
+         <div className="container blue lighten-3 border border-dark black-text" style={{paddingBottom:"20px"}} >
  
  
          <br></br>
@@ -152,10 +152,10 @@ let corrAns;
          <hr></hr>
  
          <ul id="options" className="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
-                 <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="text-primary font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
-                 <li ><a href className="text-primary font-weight-bold"><i className="fa fa-pencil " aria-hidden="true"></i>Edit</a></li>
-                 <li><a href className="text-primary font-weight-bold"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
-                 <li><a href className="text-primary font-weight-bold"
+                 <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="pink-text font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
+                 <li ><a href className="pink-text  font-weight-bold"><i className="fa fa-pencil " aria-hidden="true"></i>Edit</a></li>
+                 <li><a href className="pink-text  font-weight-bold"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
+                 <li><a href className="pink-text  font-weight-bold"
                   onClick={()=>this.handleDelete(qu._id)}><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
  
              </ul>
@@ -176,7 +176,7 @@ let corrAns;
 <br></br>
 
 <div className="container"  >
-    <div className="w3-container w3-padding-16 blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
+    <div className="w3-container w3-padding-16  w3-border-blue w3-leftbar blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
         
             <h5><strong>Filters:</strong></h5>
            <br></br>
@@ -224,7 +224,7 @@ let corrAns;
    </div>
 <br></br>
  
-   <div className="w3-container w3-padding-16 blue lighten-4 " id="Questions" style={{color:"#1C2331"}}>
+   <div className="w3-container w3-padding-16 w3-border-blue w3-leftbar blue lighten-4 " id="Questions" style={{color:"#1C2331"}}>
 
         
     <div className="row ">
@@ -234,7 +234,7 @@ let corrAns;
 
         <div className="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
                 <div className="dropdown">
-                <button  className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button  className="btn pink white-text dropdown-toggle " data-toggle="dropdown">
                         Add Questions
                 </button>
 
@@ -249,7 +249,7 @@ let corrAns;
 
         <div className="dropdown col-xl-2
          col-lg-2 col-md-1 col-sm-1 col-1 d-none d-lg-block d-xl-block d-md-block d-sm-block">
-               <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+               <button type="button" className="btn pink white-text dropdown-toggle" data-toggle="dropdown">
                   More
                 </button>
                 <div className="dropdown-menu">

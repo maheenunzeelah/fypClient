@@ -27,7 +27,7 @@ class TestWindow extends Component {
 
                         {items.map(({ to, label,separator }) => (
                             <span >
-                            <Link style={{color:"#ff4081"}} key={to} to={to}>
+                            <Link style={{color:"#ffbb33"}} key={to} to={to}>
                                 {label}
                             </Link>
                             {separator}
@@ -40,9 +40,9 @@ class TestWindow extends Component {
 
                 <div className="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-7" id="links">
 
-                    <Link to="/dashboard" style={{color:"#ff4081"}}><i className="fa fa-file fa-2x " aria-hidden="true"><p>Tests</p></i></Link>
-                    <Link to="/group" style={{color:"#ff4081"}}><i className="fa fa-users fa-2x" aria-hidden="true"><p>Groups</p></i></Link>
-                    <Link style={{color:"#ff4081"}}><i className="fa fa-link fa-2x" aria-hidden="true"><p>Links</p></i></Link>
+                    <Link to="/dashboard" style={{color:"#ffbb33"}}><i className="fa fa-file fa-2x " aria-hidden="true"><p>Tests</p></i></Link>
+                    <Link to="/group" style={{color:"#ffbb33"}}><i className="fa fa-users fa-2x" aria-hidden="true"><p>Groups</p></i></Link>
+                    <Link style={{color:"#ffbb33"}}><i className="fa fa-link fa-2x" aria-hidden="true"><p>Links</p></i></Link>
 
                 </div>
 

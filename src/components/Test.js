@@ -34,14 +34,14 @@ class Test extends Component {
       <div className="container">
         {/*  */}
 
-        <button className="unique-color Test1" id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
+        <button className="blue lighten-3 Test1" id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
         {console.log(test._id)}
-        <div id={`demo${test._id}`} className="w3-container collapse">
-          <p>Assigned 1 time:</p>
+        <div id={`demo${test._id}`} className="w3-container collapse black-text ">
+          <p >Assigned 1 time:</p>
           <hr />
           <div className="w3-row">
             <div className="w3-half">
-              <p><i class="fa fa-users fa-2x " aria-hidden="true"></i> arisha</p>
+              <p ><i className="fa fa-users fa-2x" aria-hidden="true"></i> arisha</p>
             </div>
             <div className="w3-right">
               <Link to='/setting' id="Setting">Settings</Link>

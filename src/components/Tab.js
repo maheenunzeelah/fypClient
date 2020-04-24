@@ -6,7 +6,7 @@ function Tab() {
     return (
         <div>
             {/* style={{backgroundColor:"rgb(7, 3, 54)"}} */}
-            <div className="container pink lighten-4" id='tab'  >
+            <div className="container unique-color" id='tab' >
 
                 <div class="row" >
                     <Link to='/dashboard' className="w3-bar-item w3-button tablink" style={{color:"rgb(7, 3, 54)"}}><i class="fa fa-window-maximize w3-margin-right" aria-hidden="true"></i>Test</Link>
