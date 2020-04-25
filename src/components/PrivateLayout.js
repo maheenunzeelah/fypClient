@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import Test from './Tests/Test';
 import Newtest from './Tests/Newtest';
 import AddQues from './Questions/AddQues';
+import EditQues from './Questions/EditQues';
 import EditTest from './Tests/EditTest';
 import QuestionBank from './Questions/QuestionBank';
 import New_Group from './Groups/New_Group';
@@ -19,7 +20,8 @@ function PrivateLayout(){
          <Dashboard />
          
          <Switch>
-         <Route exact path="/dashboard/addQues" component={AddQues}></Route>
+           <Route exact path="/dashboard/addQues" component={AddQues}></Route>
+           <Route exact path="/dashboard/editQues" component={EditQues}></Route>
            <Route exact path="/dashboard/newTest" exact component={Newtest}></Route>
            <Route exact path="/dashboard/editTest" component={EditTest}></Route>
            <Route path="/group" component={Group}></Route>

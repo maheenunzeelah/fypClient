@@ -120,7 +120,7 @@ class Test extends Component {
     return (
       <div className="container">
         <div ><TestWindow /></div>
-        <div className="jumbotron vertical-center black">
+        <div className="jumbotron vertical-center black " style={{border:"3px solid #42a5f5"}}>
 
           <Tab></Tab>
           <br></br>

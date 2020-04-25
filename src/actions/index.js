@@ -131,9 +131,11 @@ export const fetchQues = () => async dispatch => {
 
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }
+
 export const editTest=(id)=>{
   return{ type: CURRENT_TEST, payload:id }
 }
+
 export const updateTest=(data)=>async dispatch=>{
   console.log(data);
  await postDataApi.put(`login/teacher/updateTest/${data.id}`,data)

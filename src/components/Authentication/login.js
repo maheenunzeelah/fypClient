@@ -72,7 +72,7 @@ class Login extends Component {
    <MDBCol md="3"></MDBCol>
    <MDBCol md="6">
      <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" style={{ color:" white"}}>
-       <p className="h4 text-center" style={{ marginTop:"50px", marginBottom:"-60px"}} >LOG IN</p>
+       <p className="h4 text-center pink-text font-weight-bold " style={{ marginTop:"50px", marginBottom:"-60px"}} >LOG IN</p>
        <div style={{textAlign:"left"}}>
          
          <Field name="email" type="email" component={renderField} label="Email"  />
@@ -90,10 +90,10 @@ class Login extends Component {
      <Field name="role" component={renderError} />
    </div>
        <div className="text-center mt-4">
-         <MDBBtn  id="StuNext" className="pink lighten-2" type="submit" style={{marginBottom:"74px" }} disabled={this.state.nextisDisabled}>
+         <MDBBtn  id="StuNext" className="pink accent-2" type="submit" style={{marginBottom:"74px" }} disabled={this.state.nextisDisabled}>
            Next
          </MDBBtn>
-         <MDBBtn className="pink lighten-2" type="submit" style={{marginBottom:"74px"}} disabled={this.state.registerisDisabled}>
+         <MDBBtn className="pink accent-2" type="submit" style={{marginBottom:"74px"}} disabled={this.state.registerisDisabled}>
            Login
          </MDBBtn>
        </div>

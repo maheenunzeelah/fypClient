@@ -1,14 +1,8 @@
 
-#maindiv_style{
-    background-color:#003566;
-    font-family: "Signika";
-    color:lightblue
-    
+.introPara{
+    line-height: 1.5em;
+    font-size: 15px;
 }
-
- #hsty{
-     text-align: center;
- }
 
 .imgAnim{
     animation-duration: 4s ;
@@ -18,7 +12,7 @@
     right:-40%;
     top:-10%;
     animation-duration: 4s ;
-  
+   
 }
  .img2Pos{
     position:relative;
@@ -28,4 +22,9 @@
     z-index: 1;  
     animation-duration: 4s ;   
        
+}
+.list{
+    list-style:none;
+    padding-left:0px;
+    float: left;
 }

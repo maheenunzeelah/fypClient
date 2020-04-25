@@ -1,26 +1,81 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
+import Editor from './Editor';
+import QuesType from './QuesType';
+import TestWindow from '../TestWindow';
+import { Field, reduxForm, isPristine } from 'redux-form';
+import renderField from '../renderField';
+import { connect } from 'react-redux';
+import { addQues, quesType } from '../../actions';
+import { func } from 'prop-types';
+import _ from 'lodash';
 
+let cAns = [];
 class EditQues extends Component {
     state={
         data: {
-            testId: this.props.location.state.id,
-            test: this.props.location.state.testName,
-            course: this.props.location.state.course
+          
           }
     }
+    
+
+    state = {
+        // type: "T/F",
+        show: false, 
+        ans: '',
+        availAnsOpt: 3 // default ans options for MCQs
+    }
+   
+    corrAnsFunction = (ans, val) => {
+        this.setState({ show: val })
+        this.setState({ ans })
+        // cAns=[...cAns,ans]
+    }
+    handleSubmit = (formValues) => {
+        var answers=[]
+        var partial={}
+       for(var x in formValues){
+           // searches in formValue object for answer keys
+            if(x.includes("answer")){
+                // answer array or objects in which each obj containes answer key/value pair
+             answers= [...answers,{[x]:formValues[x]}]
+            }
+            else{
+                //rest of the values of formValue object are inserted into partial object
+            partial={...partial,[x]:formValues[x]}
+            }
+        }
+        //concatenate partial object and answer array into single object
+     partial={...partial,answers}
+     console.log(partial)
+        {/*Spread operator will add corr ans*/}
+        cAns = [...cAns, this.state.ans]
+        // Insert corrAns value in partial object
+        partial = { ...partial, corr: cAns }
+        
+        //Send complete partial object that contains all form values into action creator
+        this.props.addQues(partial)
+    }
+
+    availAns = (e) => {
+    // Number of options for MCQs answers selected by user from drop down
+        let sel = document.getElementById('ansOptions');
+        let sv = sel.options[sel.selectedIndex].value;
+        // setting that number in state
+        this.setState({
+            availAnsOpt: sv
+        })
+    }
     render() {
+         
         return (
             <div>
                 {/* For breadcrumbs */}
-                <TestWindow to={this.props.match.url} label="Add Questions" separator=' > ' />
+                <TestWindow to={this.props.match.url} label="Edit Questions" separator=' > ' />
 
                 <form onSubmit={this.props.handleSubmit(this.handleSubmit)} style={{ margin: "100px" }}>
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-8">
-                                <h3 className="white-text">Select Question Type</h3><br />
-                                <QuesType parentFunction={this.callbackFunction} /><br />
-                            </div>
+                            
                             {this.state.type === "MCQs" ? (
                                 /*If MCQs select how many options should be there for answers*/
                                 <div className="col-md-3">
@@ -79,6 +134,9 @@ class EditQues extends Component {
     }
 }
 
-}
+const formWrapped = reduxForm({
+    form: 'Question',
 
-export default EditQues
+})(EditQues);
+
+export default connect(null, { addQues, quesType })(formWrapped);

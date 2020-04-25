@@ -165,7 +165,7 @@ let corrAns;
                  <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="pink-text font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                 
                 {/*Edit Question button*/}
-                <li ><Link to={{ pathname: '/dashboard/addQues' }}  className="pink-text  font-weight-bold"><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
+                <li ><Link to={{ pathname: '/dashboard/editQues' , state: { question: qu.question, answers: qu.answers, quesId: qu._id ,type:qu.type} }}  className="pink-text  font-weight-bold"><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
 
                 {/*Used In button show us test in which question is used*/}
                  <li><a href={`#used${qu._id}`} className="pink-text  font-weight-bold" data-toggle="collapse"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
@@ -186,7 +186,7 @@ let corrAns;
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
-    <div className="jumbotron vertical-center black"> 
+    <div className="jumbotron vertical-center black" style={{border:"3px solid #42a5f5"}}> 
 
 <Tab></Tab>
 <br></br>
