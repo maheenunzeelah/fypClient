@@ -110,7 +110,8 @@ class EditQues extends Component {
                             this.state.data.answers.map((answer, index) => {
                                 return <div>
                                     <h3 className="white-text">{`Answer ${index+1}`}</h3>
-                                    <Editor name={`answer${index}`} corrAns={this.corrAnsFunction} />
+                                    {/*Passing values of answers of object for auto filling feilds in editing questions*/}
+                                    <Editor name={`answer${index}`} answer={Object.values(answer)} corrAns={this.corrAnsFunction} />
                                 </div>
                             })
                         ) :
