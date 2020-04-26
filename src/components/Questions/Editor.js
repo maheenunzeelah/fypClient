@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm ,change} from 'redux-form'
 class Editor extends Component {
   state={
     ischecked:false
 
+  }
+  componentDidMount(){
+      
+    this.props.dispatch(change('Editor',this.props.name,this.props.defaultQues));
   }
   handleClick = (e) => {
    if(e.target.checked==true){
@@ -20,43 +24,51 @@ class Editor extends Component {
   }
   render() {
 
-    if (!this.props.question) {
+    if (this.props.question) {
       return (
         <div className="Editor">
+        <div>
+
           <div>
-
-
-          <div >
-            <Field
-            checked={this.state.ischecked}
-              component="input"
-              type="checkbox"
-              onClick={this.handleClick}
-            />&nbsp;&nbsp;
-         <label className="text-info">This is the correct answer</label>
-         </div>
-            <div>
-              <Field name={this.props.name} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
-            </div>
+            <Field name={this.props.name} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
           </div>
-
-
         </div>
+
+
+      </div>
+        
       );
     }
     else {
       return (
         <div className="Editor">
+        <div>
+
+
+        <div >
+          <Field
+          checked={this.state.ischecked}
+            component="input"
+            type="checkbox"
+            onClick={this.handleClick}
+          />&nbsp;&nbsp;
+       <label className="text-info">This is the correct answer</label>
+       </div>
           <div>
-
-            <div>
-              <Field name={this.props.name} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
-            </div>
+            <Field name={this.props.name} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
           </div>
+        </div>
 
 
-        </div>)
+      </div>
+
+
+
+      )
     }
   }
 }
-export default Editor;
+export default reduxForm({
+  form: 'Editor'
+
+})(Editor);

@@ -16,6 +16,7 @@ class EditTest extends Component {
     isOpen: false
   };
   componentDidMount() {
+    {/*Auto filling testName and course feilds on page load*/}
     this.props.dispatch(change('EDIT_TESTS', 'testName', this.state.data.test));
     this.props.dispatch(change('EDIT_TESTS', 'course', this.state.data.course));
   }
@@ -29,7 +30,7 @@ class EditTest extends Component {
     this.props.editTest(id)
    } 
   render() {
-    console.log(this.state.value)
+    console.log(this.props.location)
     return (
       <div>
 

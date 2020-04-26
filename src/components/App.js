@@ -15,7 +15,7 @@ import Dashboard from './Dashboard';
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 import setAuthToken from '../utils/setAuthToken';
-
+import ScrollToTop from './scrollToTop';
 
 
  axios.defaults.headers.common['authorization'] = localStorage.getItem('jwtToken');
@@ -51,18 +51,19 @@ axios.interceptors.response.use(function (response) {
 function App() {
   return (
   
-
-   <BrowserRouter>
-   <div className="App">
+   <BrowserRouter >
+    
+    <div className="App">
      <Switch>
-     <Route   path="/dashboard" component={PrivateLayout} />
+     <Route path="/dashboard" component={PrivateLayout} />
       <Route  path="/" component={PublicLayout} /> 
               
-      </Switch>                                                      
-  </div>
+      </Switch>     
+    </div>      
+                                
   </BrowserRouter>
  
-
+ 
   
   );
 }
