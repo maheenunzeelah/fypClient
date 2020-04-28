@@ -20,7 +20,8 @@ class EditQues extends Component {
             quesId: this.props.location.state.quesId,
             question: this.props.location.state.question,
             answers: this.props.location.state.answers,
-            type: this.props.location.state.type
+            type: this.props.location.state.type,
+            corrAnswer:this.props.location.state.corr
         }
     }
 
@@ -111,7 +112,7 @@ class EditQues extends Component {
                                 return <div>
                                     <h3 className="white-text">{`Answer ${index+1}`}</h3>
                                     {/*Passing values of answers of object for auto filling feilds in editing questions*/}
-                                    <Editor name={`answer${index}`} answer={Object.values(answer)} corrAns={this.corrAnsFunction} />
+                                    <Editor name={`answer${index}`} answer={Object.values(answer)} corr={this.state.data.corrAnswer} corrAns={this.corrAnsFunction} />
                                 </div>
                             })
                         ) :
@@ -134,7 +135,7 @@ class EditQues extends Component {
                             )
                     }
                     <button type="submit" className="btn btn-primary">
-                        Save
+                        Save Changes
             </button>
                 </form>
             </div>

@@ -6,12 +6,19 @@ class Editor extends Component {
 
   }
   componentDidMount() {
-    console.log(this.props.answer)
+    const {corr}=this.props
     //For Editing Questions
-    //Autofill the feilds with question and respective answers of the question being edited
-    //If question feild then value of question and if answers feild then values of answers
-    this.props.name === "question" ? this.props.dispatch(change('Editor', this.props.name, this.props.defaultQues)) :
+    //Autofill the fields with question and respective answers of the question being edited
+    //If question field then value of question and if answers field then values of answers
+    this.props.name === "question" ? this.props.dispatch(change('Editor', this.props.name, this.props.defaultQues)) :(
       this.props.dispatch(change('Editor', this.props.name, this.props.answer))
+      // this.props.dispatch(change('Editor', this.props.name, this.props.answer))
+    )
+    console.log(this.props.corr)
+    corr.map(corr=>{
+      console.log(corr)
+      corr===this.props.name?this.setState({ischecked:true}):this.setState({ischecked:false})
+    })
   }
   handleClick = (e) => {
     if (e.target.checked == true) {
@@ -27,7 +34,7 @@ class Editor extends Component {
 
   }
   render() {
-
+    console.log(this.props.corr)
     if (this.props.question) {
       return (
         <div className="Editor">
@@ -44,6 +51,7 @@ class Editor extends Component {
       );
     }
     else {
+      
       return (
         <div className="Editor">
           <div>
