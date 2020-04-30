@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Editor from './Editor';
 import QuesType from './QuesType';
 import TestWindow from '../TestWindow';
-import { Field, reduxForm, isPristine } from 'redux-form';
+import { Field, reduxForm, isPristine,getFormValues } from 'redux-form';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
 import { addQues, quesType } from '../../actions';
@@ -35,8 +35,12 @@ class AddQues extends Component {
         // cAns=[...cAns,ans]
     }
     handleSubmit = (formValues) => {
+      
+        console.log(formValues)
         var answers=[]
         var partial={}
+        if(this.state.type==='MCQs'){
+            const {formValues}=this.props
        for(var x in formValues){
            // searches in formValue object for answer keys
             if(x.includes("answer")){
@@ -50,11 +54,16 @@ class AddQues extends Component {
         }
         //concatenate partial object and answer array into single object
      partial={...partial,answers}
+      {/*Spread operator will add corr ans*/}
+      cAns = [...cAns, this.state.ans]
+      // Insert corrAns value in partial object
+      partial = { ...partial, corr: cAns }
+    
+    }
+     else{partial=formValues}
+
      console.log(partial)
-        {/*Spread operator will add corr ans*/}
-        cAns = [...cAns, this.state.ans]
-        // Insert corrAns value in partial object
-        partial = { ...partial, corr: cAns }
+       
         
         //Send complete partial object that contains all form values into action creator
         this.props.addQues(partial)
@@ -101,7 +110,7 @@ class AddQues extends Component {
                     </div>
 
                     <h3 className="white-text">Question 1</h3><br />
-                    <Editor name={"question"} question />
+                    <Editor name="question" question />
 
                     {
                         // When Ques Type is MCQs
@@ -140,10 +149,15 @@ class AddQues extends Component {
         );
     }
 }
-
+function mapStateToProps(state) {
+    return {
+        //getting all Field Values from Editor form
+         formValues: getFormValues('Editor')(state) // here 'form' is the name you have given your redux form 
+    }
+}
 const formWrapped = reduxForm({
     form: 'Question',
-
+    pristine: isPristine('Question')
 })(AddQues);
 
 export default connect(null, { addQues, quesType })(formWrapped);

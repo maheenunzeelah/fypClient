@@ -120,6 +120,19 @@ export const deleteQuestion=(id)=>async dispatch=>{
   })
 
 }
+export const editQues=(data)=>async dispatch=>{
+  console.log(data);
+  await postDataApi.put(`login/teacher/updateQues/${data.id}`,data)
+   .then(response=>{
+     alert(response.data)
+ 
+   })
+   .catch(err => {
+     if (err.response.data.test !== undefined)
+       alert(err.response.data.test);})
+}
+
+
 export const fetchTests = () => async dispatch => {
   const response = await postDataApi.get('login/teacher/tests');
 

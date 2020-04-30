@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Editor from './Editor';
 import QuesType from './QuesType';
 import TestWindow from '../TestWindow';
-import { Field, reduxForm, isPristine } from 'redux-form';
+import { Field, reduxForm, isPristine, getFormValues } from 'redux-form';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
-import { addQues, quesType } from '../../actions';
+import { editQues, quesType } from '../../actions';
 import { func } from 'prop-types';
 import _ from 'lodash';
 
@@ -21,8 +21,10 @@ class EditQues extends Component {
             question: this.props.location.state.question,
             answers: this.props.location.state.answers,
             type: this.props.location.state.type,
-            corrAnswer:this.props.location.state.corr
-        }
+            corrAnswer: this.props.location.state.corr
+        },
+        show: false,
+        ans:this.props.location.state.corr.map(corr=>({ans:corr}))
     }
 
 
@@ -36,32 +38,40 @@ class EditQues extends Component {
     corrAnsFunction = (ans, val) => {
         this.setState({ show: val })
         this.setState({ ans })
+        console.log(ans)
         // cAns=[...cAns,ans]
     }
     handleSubmit = (formValues) => {
+     
+  
         var answers = []
         var partial = {}
-        for (var x in formValues) {
-            // searches in formValue object for answer keys
-            if (x.includes("answer")) {
-                // answer array or objects in which each obj containes answer key/value pair
-                answers = [...answers, { [x]: formValues[x] }]
+        if (this.state.data.type === 'MCQs') {
+            const { formValues } = this.props
+            for (var x in formValues) {
+
+                // searches in formValue object for answer keys
+                if (x.includes("answer")) {
+                    // answer array or objects in which each obj containes answer key/value pair
+                    answers = [...answers, { [x]: formValues[x] }]
+                }
+                else {
+                    //rest of the values of formValue object are inserted into partial object
+                    partial = { ...partial, [x]: formValues[x] }
+                }
             }
-            else {
-                //rest of the values of formValue object are inserted into partial object
-                partial = { ...partial, [x]: formValues[x] }
-            }
-        }
-        //concatenate partial object and answer array into single object
-        partial = { ...partial, answers }
+            //concatenate partial object and answer array into single object
+            partial = { ...partial, answers }
+            {/*Spread operator will add corr ans*/ }
+            cAns = [...cAns, this.state.ans]
+            // Insert corrAns value in partial object
+            partial = { ...partial, corr: cAns }
+        } else { partial = formValues }
         console.log(partial)
-        {/*Spread operator will add corr ans*/ }
-        cAns = [...cAns, this.state.ans]
-        // Insert corrAns value in partial object
-        partial = { ...partial, corr: cAns }
+
 
         //Send complete partial object that contains all form values into action creator
-        this.props.addQues(partial)
+        this.props.editQues({ id: this.state.data.quesId, ...partial })
     }
 
     availAns = (e) => {
@@ -102,7 +112,7 @@ class EditQues extends Component {
                     </div>
 
                     <h3 className="white-text">Question 1</h3><br />
-                    <Editor name={"question"} question defaultQues={this.state.data.question}/>
+                    <Editor name="question" question defaultQues={this.state.data.question} />
                     {/* <Editor name={`answer${i+1}`} corrAns={this.corrAnsFunction} />  */}
                     {
                         // When Ques Type is MCQs
@@ -110,9 +120,9 @@ class EditQues extends Component {
                         this.state.data.type === "MCQs" ? (
                             this.state.data.answers.map((answer, index) => {
                                 return <div>
-                                    <h3 className="white-text">{`Answer ${index+1}`}</h3>
+                                    <h3 className="white-text">{`Answer ${index + 1}`}</h3>
                                     {/*Passing values of answers of object for auto filling feilds in editing questions*/}
-                                    <Editor name={`answer${index}`} answer={Object.values(answer)} corr={this.state.data.corrAnswer} corrAns={this.corrAnsFunction} />
+                                    <Editor name={`answer${index + 1}`} answer={Object.values(answer)} corr={this.state.data.corrAnswer} corrAns={this.corrAnsFunction} />
                                 </div>
                             })
                         ) :
@@ -142,11 +152,15 @@ class EditQues extends Component {
         );
     }
 }
-
+const mapStateToProps = (state) => {
+    return {
+        //getting all Field Values from Editor form
+        formValues: getFormValues('Editor')(state) // here 'form' is the name you have given your redux form 
+    }
+}
 let formWrapped = reduxForm({
-    form: 'EDIT_QUES',
-    pristine: isPristine('EDIT_QUES'),
+    form: 'EDIT_QUES'
 
 })(EditQues);
 
-export default connect(null, { addQues, quesType })(formWrapped);
+export default connect(mapStateToProps, { editQues })(formWrapped);
