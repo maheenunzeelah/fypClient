@@ -8,6 +8,7 @@ class Editor extends Component {
   }
   componentDidMount() {
     const {corr}=this.props
+    console.log(corr)
     //For Editing Questions
     //Autofill the fields with question and respective answers of the question being edited
     //If question field then value of question and if answers field then values of answers
@@ -16,30 +17,37 @@ class Editor extends Component {
       // this.props.dispatch(change('Editor', this.props.name, this.props.answer))
     ))
 if(corr!=undefined){
-    corr.map(corr=>{
-      console.log(this.props.name)
+    for(let i=0;i<corr.length;i++)
+    {
+      console.log(corr[i],this.props.name)
+      if(corr[i]===this.props.name){this.setState({ischecked:true})
+       break}
+       else { this.setState({ischecked:false})}
 
-      corr===this.props.name?this.setState({ischecked:true}):this.setState({ischecked:false})
-    })
+    }
   }}
   handleClick = (e) => {
     if (e.target.checked == true) {
-      this.setState({ ischecked: true })
-      { this.props.corrAns(this.props.name, this.state.ischecked) }
+    // send corr ans in callback function
+    //state change happens asynchronously ,if we want to access our new state after it has been updated, we can optionally add a callback as a second argument to the this.setState() function
+      this.setState({ischecked: true},() => this.props.corrAns(this.props.name, this.state.ischecked) )
+
     }
+    
     else {
-      this.setState({
+      console.log(e.target.checked)
+      this.setState({...this.state,
         ischecked: false
-      })
-      { this.props.corrAns('', this.state.ischecked) }
+      },() => this.props.corrAns(this.props.name, this.state.ischecked))
+     
+     
     }
+  
 
   }
-  handleChange=(e)=>{
-    console.log(e.target.value)
-  }
+
   render() {
-   console.log(this.props.name)
+ 
     if (!this.props.question) {
       return (
         <div className="Editor">
@@ -72,7 +80,7 @@ if(corr!=undefined){
         <div>
 
           <div>
-            <Field name={this.props.name} onChange={(e)=>this.handleChange(e)} value={this.props.defaultQues} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
+            <Field name={this.props.name}  value={this.props.defaultQues} component="textarea" style={{ width: "650px", height: "180px", margin: "20px" }} />
           </div>
         </div>
 

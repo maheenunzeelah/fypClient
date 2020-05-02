@@ -9,7 +9,7 @@ import { editQues, quesType } from '../../actions';
 import { func } from 'prop-types';
 import _ from 'lodash';
 
-let cAns = [];
+
 class EditQues extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -24,7 +24,8 @@ class EditQues extends Component {
             corrAnswer: this.props.location.state.corr
         },
         show: false,
-        ans:this.props.location.state.corr.map(corr=>({ans:corr}))
+        ans: this.props.location.state.corr,
+       
     }
 
 
@@ -37,17 +38,32 @@ class EditQues extends Component {
 
     corrAnsFunction = (ans, val) => {
         this.setState({ show: val })
-        this.setState({ ans })
-        console.log(ans)
-        // cAns=[...cAns,ans]
+        var answer
+       // if box is unchecked means and is incorrect then remove that ans from ans array 
+       //in state
+        if(val===false && this.state.ans.length>0){
+             answer=this.state.ans.filter(an=>{
+                return an!==ans
+            })  
+            this.setState({ans:answer},()=> console.log(this.state.ans))
+        }
+        //if box checked means ans is correct then add that in ans array in state
+        else{
+    
+            this.setState({ans:[...this.state.ans,ans]},()=> console.log(this.state.ans))
+        }
+     
+        
+      
     }
     handleSubmit = (formValues) => {
      
-  
         var answers = []
         var partial = {}
         if (this.state.data.type === 'MCQs') {
-            const { formValues } = this.props
+
+            const { formValues } = this.props //From mapStateToProps
+
             for (var x in formValues) {
 
                 // searches in formValue object for answer keys
@@ -62,11 +78,13 @@ class EditQues extends Component {
             }
             //concatenate partial object and answer array into single object
             partial = { ...partial, answers }
-            {/*Spread operator will add corr ans*/ }
-            cAns = [...cAns, this.state.ans]
+           
             // Insert corrAns value in partial object
-            partial = { ...partial, corr: cAns }
-        } else { partial = formValues }
+            partial = { ...partial, corr: this.state.ans }
+        } 
+        else { 
+            partial = formValues 
+        }
         console.log(partial)
 
 
@@ -84,7 +102,7 @@ class EditQues extends Component {
         })
     }
     render() {
-        console.log(this.state.data.type)
+   
         return (
             <div>
                 {/* For breadcrumbs */}

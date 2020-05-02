@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Editor from './Editor';
 import QuesType from './QuesType';
 import TestWindow from '../TestWindow';
-import { Field, reduxForm, isPristine,getFormValues } from 'redux-form';
+import { Field, reduxForm, isPristine, getFormValues } from 'redux-form';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
 import { addQues, quesType } from '../../actions';
@@ -18,7 +18,7 @@ class AddQues extends Component {
     }
     state = {
         type: "T/F",
-        show: false, 
+        show: false,
         ans: '',
         availAnsOpt: 3 // default ans options for MCQs
     }
@@ -31,46 +31,57 @@ class AddQues extends Component {
     }
     corrAnsFunction = (ans, val) => {
         this.setState({ show: val })
-        this.setState({ ans })
-        // cAns=[...cAns,ans]
-    }
-    handleSubmit = (formValues) => {
-      
-        console.log(formValues)
-        var answers=[]
-        var partial={}
-        if(this.state.type==='MCQs'){
-            const {formValues}=this.props
-       for(var x in formValues){
-           // searches in formValue object for answer keys
-            if(x.includes("answer")){
-                // answer array or objects in which each obj containes answer key/value pair
-             answers= [...answers,{[x]:formValues[x]}]
-            }
-            else{
-                //rest of the values of formValue object are inserted into partial object
-            partial={...partial,[x]:formValues[x]}
-            }
-        }
-        //concatenate partial object and answer array into single object
-     partial={...partial,answers}
-      {/*Spread operator will add corr ans*/}
-      cAns = [...cAns, this.state.ans]
-      // Insert corrAns value in partial object
-      partial = { ...partial, corr: cAns }
+        var answer
+        if(val===false && this.state.ans.length>0){
+            answer=this.state.ans.filter(an=>{
+               return an!==ans
+           })  
+           this.setState({ans:answer},()=> console.log(this.state.ans))
+       }
+       else{
+   
+           this.setState({ans:[...this.state.ans,ans]},()=> console.log(this.state.ans))
+       }
     
     }
-     else{partial=formValues}
+    handleSubmit = (formFields) => {
+        console.log(this.props.formValues)
+        var answers = [] //For all answers
+        var partial = {} 
+        const { formValues } = this.props
+        if (this.state.type === 'MCQs') {
+            //Getting form values from Editor through mapStateToProps
+           
+     
+            for (var x in formValues) {
+                // searches in formValue object for answer keys
+                if (x.includes("answer")) {
+                    // answer array or objects in which each obj containes answer key/value pair
+                    answers = [...answers, { [x]: formValues[x] }]
+                }
+                else {
+                    //rest of the values of formValue object are inserted into partial object
+                    partial = { ...partial, [x]: formValues[x] }
+                }
+            }
+            //concatenate partial object and answer array into single object
+            partial = { ...partial, answers }
+            
+            // Insert corrAns value in partial object
+            partial = { ...partial, corr: this.state.ans }
 
-     console.log(partial)
-       
-        
+        }
+        else { 
+            partial ={...formValues,...formFields}
+          } //for T/F
+
+console.log(partial)
         //Send complete partial object that contains all form values into action creator
         this.props.addQues(partial)
     }
 
     availAns = (e) => {
-    // Number of options for MCQs answers selected by user from drop down
+        // Number of options for MCQs answers selected by user from drop down
         let sel = document.getElementById('ansOptions');
         let sv = sel.options[sel.selectedIndex].value;
         // setting that number in state
@@ -116,30 +127,30 @@ class AddQues extends Component {
                         // When Ques Type is MCQs
 
                         this.state.type === "MCQs" ? (
-                     
-                      _.times(this.state.availAnsOpt,(i)=> <div>
-                       <h3 className="white-text">{`Answer${i+1}`}</h3>
 
-                          {/*Using loadash library _.times to repeat component n times*/}
-                       <Editor name={`answer${i+1}`} corrAns={this.corrAnsFunction} /> 
-                         </div>)   )  : 
+                            _.times(this.state.availAnsOpt, (i) => <div>
+                                <h3 className="white-text">{`Answer${i + 1}`}</h3>
 
-                        // When Ques Type is True/False
-                        (<div>
-                            <h3 className="white-text">Answer </h3>
-                            <div className="jumbotron" style={{ width: "650px", height: "180px", margin: "20px" }}>
-                                <p className="lead">This is the correct answer</p>
-                                <label>
-                                    <Field type="radio" name="answer" component="input" value="true" />
-                                    True
+                                {/*Using loadash library _.times to repeat component n times*/}
+                                <Editor name={`answer${i + 1}`} corrAns={this.corrAnsFunction} />
+                            </div>)) :
+
+                            // When Ques Type is True/False
+                            (<div>
+                                <h3 className="white-text">Answer </h3>
+                                <div className="jumbotron" style={{ width: "650px", height: "180px", margin: "20px" }}>
+                                    <p className="lead">This is the correct answer</p>
+                                    <label>
+                                        <Field type="radio" name="answer" component="input" value="true" />
+                                        True
                 </label><br />
-                                <label>
-                                    <Field type="radio" name="answer" component="input" value="false" />
-                                    False
+                                    <label>
+                                        <Field type="radio" name="answer" component="input" value="false" />
+                                        False
                 </label>
+                                </div>
                             </div>
-                        </div>
-                        )
+                            )
                     }
                     <button type="submit" className="btn btn-primary">
                         Save
@@ -149,10 +160,10 @@ class AddQues extends Component {
         );
     }
 }
-function mapStateToProps(state) {
+const mapStateToProps=(state)=> {
     return {
         //getting all Field Values from Editor form
-         formValues: getFormValues('Editor')(state) // here 'form' is the name you have given your redux form 
+        formValues: getFormValues('Editor')(state) // here 'form' is the name you have given your redux form 
     }
 }
 const formWrapped = reduxForm({
@@ -160,4 +171,4 @@ const formWrapped = reduxForm({
     pristine: isPristine('Question')
 })(AddQues);
 
-export default connect(null, { addQues, quesType })(formWrapped);
+export default connect(mapStateToProps, { addQues, quesType })(formWrapped);

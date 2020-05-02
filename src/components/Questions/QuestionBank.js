@@ -5,18 +5,22 @@ import Tab from '../Tab.js'
 import TestWindow from '../TestWindow';
 import { Link , withRouter } from 'react-router-dom' ;
 import {connect} from 'react-redux';
-import {fetchQues,deleteQuestion} from '../../actions';
+import {fetchQues,deleteQuestion,editTest} from '../../actions';
 
 let corrAnsStyle="";
 let corrAns;
  class QuestionBank extends Component{
 
-  handleDelete=(id)=>{
-  this.props.deleteQuestion(id);
-  }    
+ 
  componentDidMount(){
          this.props.fetchQues();
  }
+ handleDelete=(id)=>{
+        this.props.deleteQuestion(id);
+        }    
+handleClick=(id)=>{
+        this.props.editTest(id)
+}        
  renderList=()=>{
          console.log(this.props.ques)
         return this.props.ques.map(que=>{
@@ -165,7 +169,7 @@ let corrAns;
                  <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="pink-text font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                 
                 {/*Edit Question button*/}
-                <li ><Link to={{ pathname: '/dashboard/editQues' , state: { question: qu.question, answers: qu.answers, quesId: qu._id ,type:qu.type, corr:qu.corr} }}  className="pink-text  font-weight-bold"><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
+                <li ><Link to={{ pathname: '/dashboard/editQues' , state: { question: qu.question, answers: qu.answers, quesId: qu._id ,type:qu.type, corr:qu.corr} }}  className="pink-text  font-weight-bold" onClick={()=>{this.handleClick(qu.test)}}><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
 
                 {/*Used In button show us test in which question is used*/}
                  <li><a href={`#used${qu._id}`} className="pink-text  font-weight-bold" data-toggle="collapse"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
@@ -305,4 +309,4 @@ const mapStateToProps=(state)=>{
 }
 }
 
-export default connect(mapStateToProps,{fetchQues,deleteQuestion})(QuestionBank);
+export default connect(mapStateToProps,{fetchQues,deleteQuestion,editTest})(QuestionBank);

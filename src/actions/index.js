@@ -120,16 +120,18 @@ export const deleteQuestion=(id)=>async dispatch=>{
   })
 
 }
-export const editQues=(data)=>async dispatch=>{
+export const editQues=(data)=>async (dispatch,getState)=>{
   console.log(data);
+  const currTest = getState().currentTest;
+  data={ ...data, test: currTest }
   await postDataApi.put(`login/teacher/updateQues/${data.id}`,data)
    .then(response=>{
      alert(response.data)
- 
+     window.location.replace("/dashboard/QuestionBank")
    })
    .catch(err => {
-     if (err.response.data.test !== undefined)
-       alert(err.response.data.test);})
+     if (err.response.data.question !== undefined)
+       alert(err.response.data.question);})
 }
 
 
