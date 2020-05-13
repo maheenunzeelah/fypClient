@@ -20,11 +20,26 @@ let corrAns;
         }    
 handleClick=(id)=>{
         this.props.editTest(id)
-}        
+}      
+DynamicButtons=()=>{
+       return this.props.ques.map(que=>
+                <section className="pagin">
+                  {que.currentPage!=1 && que.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchQues(1)}>1</a>:null}
+                  {que.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.previousPage)}>{que.previousPage}</a>:null}
+                   <a  className="white-text" onClick={()=>this.props.fetchQues(que.currentPage)}>{que.currentPage}</a>
+                  
+                   {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage)}>{que.nextPage}</a>:null}
+                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage)}>{que.lastPage}</a></span>:null
+                }
+                
+                </section>     
+                )
+                
+}  
  renderList=()=>{
-         console.log(this.props.ques)
-    
+       
         return this.props.ques.map(que=>{
+            
                 return que.ques.map(((qu,index)=>{
                         console.log(qu)
                         return(
@@ -299,11 +314,10 @@ handleClick=(id)=>{
    </div>
 </div>
 </div>
+{
+ this.DynamicButtons()
+}
 
-<section className="pagin">
-  <a className="white-text" onClick={()=>this.props.fetchQues(1)}>1</a>
-  <a  className="white-text" onClick={()=>this.props.fetchQues(2)}>2</a>
-</section>     
 </div>
 </div>)
   
@@ -311,7 +325,8 @@ handleClick=(id)=>{
 const mapStateToProps=(state)=>{
         console.log(state.questions.question)
         return{
-                ques:Object.values(state.questions)
+                ques:Object.values(state.questions),
+             
 }
 }
 
