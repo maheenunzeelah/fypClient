@@ -29,7 +29,7 @@ DynamicButtons=()=>{
                    <a  className="white-text" onClick={()=>this.props.fetchQues(que.currentPage)}>{que.currentPage}</a>
                   
                    {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage)}>{que.nextPage}</a>:null}
-                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage)}>{que.lastPage}</a></span>:null
+                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.lastPage)}>{que.lastPage}</a></span>:null
                 }
                 
                 </section>     
@@ -39,14 +39,15 @@ DynamicButtons=()=>{
  renderList=()=>{
        
         return this.props.ques.map(que=>{
-            
-                return que.ques.map(((qu,index)=>{
+                   let quesNo=((que.currentPage-1)*que.ques_per_page)+1
+
+                return que.ques.map(((qu)=>{
                         console.log(qu)
                         return(
          
          <div>     
         <div className="blue lighten-5" id="Qheading">
-        <span> Question {index+1}</span>
+        <span> Question {quesNo++}</span>
        
             <ul class="float-right">
             <li>Generic</li>
