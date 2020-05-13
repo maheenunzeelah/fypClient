@@ -13,7 +13,7 @@ let corrAns;
 
  
  componentDidMount(){
-         this.props.fetchQues();
+         this.props.fetchQues(1);
  }
  handleDelete=(id)=>{
         this.props.deleteQuestion(id);
@@ -23,8 +23,9 @@ handleClick=(id)=>{
 }        
  renderList=()=>{
          console.log(this.props.ques)
+    
         return this.props.ques.map(que=>{
-                return que.map(((qu,index)=>{
+                return que.ques.map(((qu,index)=>{
                         console.log(qu)
                         return(
          
@@ -298,6 +299,11 @@ handleClick=(id)=>{
    </div>
 </div>
 </div>
+
+<section className="pagin">
+  <a className="white-text" onClick={()=>this.props.fetchQues(1)}>1</a>
+  <a  className="white-text" onClick={()=>this.props.fetchQues(2)}>2</a>
+</section>     
 </div>
 </div>)
   

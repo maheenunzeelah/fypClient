@@ -127,4 +127,18 @@ margin-top: -20px;
         cursor: pointer;
         background-color: none;
       }
-        
+.pagin{
+    text-align: center;
+    margin-top:2rem;
+}     
+.pagin a{
+ text-decoration: none;
+ margin:0 1rem;
+ border:1px solid rgb(37, 150, 255);
+ padding: 0.5rem
+}
+.pagin a:hover,
+.pagin a:active{
+    background: rgb(37, 150, 255);
+    color: white
+}

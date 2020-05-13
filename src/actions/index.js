@@ -141,9 +141,9 @@ export const fetchTests = () => async dispatch => {
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
 
-export const fetchQues = () => async dispatch => {
-  const response = await postDataApi.get('login/teacher/readQues');
-
+export const fetchQues = (page) => async dispatch => {
+  const response = await postDataApi.get(`login/teacher/readQues/${page}`);
+   console.log(response.data)
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }
 

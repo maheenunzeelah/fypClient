@@ -115,7 +115,9 @@ class Test extends Component {
 
     }
   }
-
+ categoryList=()=>{
+ 
+}
   render() {
     return (
       <div className="container">
@@ -139,13 +141,18 @@ class Test extends Component {
                   <input class="w3-input w3-border" type="text" placeholder=" Search test name" value={this.state.search} onChange={this.updateSearch}></input>
                 </div>
 
-                <div class="w3-quarter">
-                  <select class="w3-input w3-border" placeholder="Category Filter">
+                <div className="w3-quarter">
+                
+                   <select className="w3-input w3-border" placeholder="Category Filter">
                     <option>-All-</option>
-                    <option>generic</option>
+                    {this.props.tests.map(test=>{
+                      return test.map(tes=>{
+                     return<option>{tes.course}</option>
+                  })}) }
                   </select>
+              
                 </div>
-
+ 
                 <div class="w3-quarter w3-right" >
                   <Link to='/dashboard/newTest' class="w3-button w3-dark-grey">New Test +</Link></div>
               </div>
