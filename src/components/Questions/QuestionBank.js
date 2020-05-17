@@ -172,7 +172,9 @@ DynamicButtons=()=>{
          <div id={`used${qu._id}`} className="container collapse " style={{marginTop:"20px"}} >
           <div className="black-text w3-grey border border-dark" >
           <ul style={{paddingTop:"10px"}}>Test in which this question is used
-          <li>{qu.test.testName}</li>
+          {qu.test!=null?
+          <li>{qu.test.testName}</li>:null
+          }
           </ul> 
           </div>
          </div>
@@ -203,7 +205,16 @@ DynamicButtons=()=>{
        }))
 }) 
  }
-        render(){
+   render(){
+                let categoryList;
+
+                this.props.ques.map(que=>{
+                        return categoryList=[...new Set(que.ques.map(qu=>{
+                               return qu.test.course
+                              })
+                        )]
+                })
+                              console.log(categoryList)
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
@@ -242,7 +253,11 @@ DynamicButtons=()=>{
                                 <label>Category  </label>
                                 <select class="w3-input w3-border">
                                 <option> All</option>
-                                <option> Generic</option>
+                                 {categoryList!=undefined?categoryList.map(category=>{
+                                         console.log(category)
+                                      return<option>{category}</option>
+                                      }):null
+                                   } 
                                 </select>
                         </div>
 

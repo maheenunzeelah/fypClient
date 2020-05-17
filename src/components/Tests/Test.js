@@ -116,9 +116,16 @@ class Test extends Component {
     }
   }
  categoryList=()=>{
- 
+
 }
   render() {
+    let categoryList
+(this.props.tests.map(test=>{
+  return categoryList=[...new Set(
+   test.map(tes=>{
+     return tes.course
+}))]}) )
+
     return (
       <div className="container">
         <div ><TestWindow /></div>
@@ -145,10 +152,10 @@ class Test extends Component {
                 
                    <select className="w3-input w3-border" placeholder="Category Filter">
                     <option>-All-</option>
-                    {this.props.tests.map(test=>{
-                      return test.map(tes=>{
-                     return<option>{tes.course}</option>
-                  })}) }
+                    {categoryList!=undefined?categoryList.map(category=>{
+                     return<option>{category}</option>
+                    }):null
+                }
                   </select>
               
                 </div>
