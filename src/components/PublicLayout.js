@@ -11,6 +11,7 @@ import Contact from './PublicPages/contact';
 import NavbarPage from'./PublicPages/Navbar';
 import Main from './PublicPages/Main';
 import signupFirst from './Authentication/signupFirst';
+import {pageNotFound} from './404page'
 
 function PublicLayout(props){
 return(
@@ -27,6 +28,7 @@ return(
      <Route path="/overview" component={Overview}></Route>
      <Route path="/quizSettings" component={Quizsettings}></Route>
      <Route exact path="/" component={Main}></Route>
+     <Route component={pageNotFound} />    
      </Switch>
      <FooterPage />
      </div>

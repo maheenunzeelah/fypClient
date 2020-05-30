@@ -57,7 +57,7 @@ function App() {
      <Switch>
      <Route path="/dashboard" component={PrivateLayout} />
       <Route  path="/" component={PublicLayout} /> 
-              
+          
       </Switch>     
     </div>      
                                 

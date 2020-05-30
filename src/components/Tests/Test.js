@@ -115,9 +115,9 @@ class Test extends Component {
 
     }
   }
- categoryList=()=>{
+  categoryList=()=>{
 
-}
+  }
   render() {
     let categoryList
 (this.props.tests.map(test=>{

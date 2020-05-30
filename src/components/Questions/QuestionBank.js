@@ -5,15 +5,30 @@ import Tab from '../Tab.js'
 import TestWindow from '../TestWindow';
 import { Link , withRouter } from 'react-router-dom' ;
 import {connect} from 'react-redux';
-import {fetchQues,deleteQuestion,editTest} from '../../actions';
+import {fetchQues,deleteQuestion,editTest,fetchCourseList} from '../../actions';
 
 let corrAnsStyle="";
 let corrAns;
- class QuestionBank extends Component{
+let isQues;
 
+class QuestionBank extends Component{
+
+state={
+     option:''   
+} 
  
  componentDidMount(){
          this.props.fetchQues(1);
+         this.props.fetchCourseList()
+ }
+ handleChange=(e)=>{
+        let sel = document.getElementById('coursesOpt');
+        let sv = sel.options[sel.selectedIndex].value;
+        // setting that number in state
+        this.setState({
+            option: sv
+        })
+
  }
  handleDelete=(id)=>{
         this.props.deleteQuestion(id);
@@ -24,24 +39,30 @@ handleClick=(id)=>{
 DynamicButtons=()=>{
        return this.props.ques.map(que=>
                 <section className="pagin">
-                  {que.currentPage!=1 && que.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchQues(1)}>1</a>:null}
-                  {que.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.previousPage)}>{que.previousPage}</a>:null}
+                  {que.currentPage!=1 && que.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchQues(1,this.state.option)}>1</a>:null}
+                  {que.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.previousPage,this.state.option)}>{que.previousPage}</a>:null}
                    <a  className="white-text" onClick={()=>this.props.fetchQues(que.currentPage)}>{que.currentPage}</a>
                   
-                   {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage)}>{que.nextPage}</a>:null}
-                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.lastPage)}>{que.lastPage}</a></span>:null
+                   {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage,this.state.option)}>{que.nextPage}</a>:null}
+                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.lastPage,this.state.option)}>{que.lastPage}</a></span>:null
                 }
                 
                 </section>     
                 )
                 
 }  
+handleSubmit=(e)=>{
+       e.preventDefault()
+        console.log(this.state.option)
+ this.props.fetchQues(1,this.state.option)
+}
  renderList=()=>{
        
         return this.props.ques.map(que=>{
                    let quesNo=((que.currentPage-1)*que.ques_per_page)+1
-
-                return que.ques.map(((qu)=>{
+                   console.log(que.ques)
+                  return que.ques.length>0? (
+                    que.ques.map(((qu)=>{
                         console.log(qu)
                         return(
          
@@ -202,19 +223,12 @@ DynamicButtons=()=>{
    <br></br>
      </div>
      </div> )
-       }))
-}) 
+       }))      
+                   ):<div><h1 className="text-pink">No Question Found</h1></div>
+} ) 
  }
    render(){
-                let categoryList;
-
-                this.props.ques.map(que=>{
-                        return categoryList=[...new Set(que.ques.map(qu=>{
-                               return qu.test.course
-                              })
-                        )]
-                })
-                              console.log(categoryList)
+         
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
@@ -224,20 +238,20 @@ DynamicButtons=()=>{
 <br></br>
 
 <div className="container"  >
-    <div className="w3-container w3-padding-16  w3-border-blue w3-leftbar blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
+    <form onSubmit={(e)=>this.handleSubmit(e)}  className="w3-container w3-padding-16  w3-border-blue w3-leftbar blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
         
             <h5><strong>Filters:</strong></h5>
            <br></br>
 
             <div class="w3-row-padding">
-                <div class="w3-quarter">
+                {/* <div class="w3-quarter">
                         <label>Status</label>  
                         <select class="w3-input w3-border">
                                 <option> All</option>
                                 <option> Used</option>
                                 <option> Unused</option>
                         </select>
-                </div>
+                </div> */}
                 
                 <div class="w3-quarter">  
                         <label> Question Type  </label>
@@ -250,12 +264,12 @@ DynamicButtons=()=>{
                         
 
                         <div class="w3-quarter">  
-                                <label>Category  </label>
-                                <select class="w3-input w3-border">
-                                <option> All</option>
-                                 {categoryList!=undefined?categoryList.map(category=>{
-                                         console.log(category)
-                                      return<option>{category}</option>
+                                <label>Category </label>
+                                <select className="w3-input w3-border" id="coursesOpt" onChange={this.handleChange}>
+                                <option > All</option>
+                                 {this.props.courses!=undefined?this.props.courses.map(category=>{
+                                     console.log(category)
+                                      return<option value={category}>{category}</option>
                                       }):null
                                    } 
                                 </select>
@@ -266,14 +280,14 @@ DynamicButtons=()=>{
                                 <input class="w3-input w3-border" type="text" ></input>
                         </div>
 
-                        <div class="w3-third" >
+                        <div className="w3-third" >
                                 <br></br>
-                        <button class="w3-button w3-dark-grey" id="btn">Go</button>
+                        <button className="w3-button w3-dark-grey" type="submit" id="btn">Go</button>
                         </div>
                 
           </div>
 
-   </div>
+   </form>
 <br></br>
  
    <div className="w3-container w3-padding-16 w3-border-blue w3-leftbar blue lighten-4 " id="Questions" style={{color:"#1C2331"}}>
@@ -322,7 +336,6 @@ DynamicButtons=()=>{
 <div className="container">
     
 
-
    {this.renderList()}
      
     <br></br>
@@ -330,20 +343,26 @@ DynamicButtons=()=>{
    </div>
 </div>
 </div>
-{
- this.DynamicButtons()
+  {this.props.ques.map(que=>{
+
+                   isQues=que.ques.length
+                })
 }
+{isQues!=0?this.DynamicButtons():null}
+
 
 </div>
 </div>)
   
 }}
 const mapStateToProps=(state)=>{
-        console.log(state.questions.question)
+      console.log(state.courses)
+
         return{
                 ques:Object.values(state.questions),
+                courses:state.courses
              
 }
 }
 
-export default connect(mapStateToProps,{fetchQues,deleteQuestion,editTest})(QuestionBank);
+export default connect(mapStateToProps,{fetchQues,deleteQuestion,editTest,fetchCourseList})(QuestionBank);

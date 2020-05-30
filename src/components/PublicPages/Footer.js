@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import '../../css/footer.css';
 
 class FooterPage extends Component {
  
@@ -13,8 +14,8 @@ class FooterPage extends Component {
     
     render() {
   return (
-    <MDBFooter color="mdb-color" >
-      <MDBContainer fluid className="text-center text-md-left">
+    <MDBFooter className="main_div" color="mdb-color" >
+      <MDBContainer className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="4">
             <ul>

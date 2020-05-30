@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -13,7 +13,7 @@ function onClick(){
 
 //TEACHER PANEL ACTION CREATORS
 export const teacherSignup = (formValues) => async (dispatch, getState) => {
-
+  console.log(formValues)
   await postDataApi.post('/signup', formValues)
     .then(response => {
 
@@ -134,6 +134,10 @@ export const editQues=(data)=>async (dispatch,getState)=>{
        alert(err.response.data.question);})
 }
 
+export const fetchCourseList=()=>async dispatch=>{
+  const response=await postDataApi.get('login/teacher/test/course');
+  dispatch({type: FETCH_COURSES ,payload:response.data})
+}
 
 export const fetchTests = () => async dispatch => {
   const response = await postDataApi.get('login/teacher/tests');
@@ -141,8 +145,9 @@ export const fetchTests = () => async dispatch => {
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
 
-export const fetchQues = (page) => async dispatch => {
-  const response = await postDataApi.get(`login/teacher/readQues/${page}`);
+export const fetchQues = (page,course='') => async dispatch => {
+ console.log(course)
+  const response = await postDataApi.get(`login/teacher/readQues/${page}?course=${course}`);
    console.log(response.data)
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }

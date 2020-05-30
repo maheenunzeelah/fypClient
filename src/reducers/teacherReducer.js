@@ -36,6 +36,16 @@ export const addQuesReducer=(state={},action)=>{
         return state;
     }
 }
+export const fetchCourses=(state=[],action)=>{
+    switch(action.type){
+       
+        case 'FETCH_COURSES':
+        return action.payload
+        
+        default:
+        return state
+    }
+}
 
 export const fetchTestReducer=(state={},action)=>{
     switch(action.type){

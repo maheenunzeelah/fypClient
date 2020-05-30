@@ -36,10 +36,10 @@ class SignupFirst extends Component {
       })
     }
   }
-  handleSubmit = (e,formValues) => {
-   e.preventDefault();
+  handleSubmit = (formValues) => {
+  
    console.log(formValues)
-   if(e.target.id=="StuNext")
+   if(formValues.role=="student")
     this.props.studentSignup(formValues)
     else
     this.props.teacherSignup(formValues);
