@@ -14,5 +14,5 @@ export default combineReducers({
     currentUser:authReducer,
     currentTest:currentTestReducer,
     student:studentSignupReducer,
-    courses:fetchCourses
+    filterQues:fetchCourses
 })

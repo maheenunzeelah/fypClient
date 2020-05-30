@@ -136,6 +136,7 @@ export const editQues=(data)=>async (dispatch,getState)=>{
 
 export const fetchCourseList=()=>async dispatch=>{
   const response=await postDataApi.get('login/teacher/test/course');
+  console.log(response.data)
   dispatch({type: FETCH_COURSES ,payload:response.data})
 }
 
@@ -145,9 +146,9 @@ export const fetchTests = () => async dispatch => {
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
 
-export const fetchQues = (page,course='') => async dispatch => {
- console.log(course)
-  const response = await postDataApi.get(`login/teacher/readQues/${page}?course=${course}`);
+export const fetchQues = (page,filterQues={course:'',type:'',search:''}) => async dispatch => {
+  console.log(filterQues)
+  const response = await postDataApi.get(`login/teacher/readQues/${page}?course=${filterQues.course}&&type=${filterQues.type}&&search=${filterQues.search}`);
    console.log(response.data)
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }

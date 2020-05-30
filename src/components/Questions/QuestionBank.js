@@ -14,21 +14,35 @@ let isQues;
 class QuestionBank extends Component{
 
 state={
-     option:''   
+     course:''   ,
+     type:'',
+     search:''
 } 
  
  componentDidMount(){
          this.props.fetchQues(1);
          this.props.fetchCourseList()
  }
- handleChange=(e)=>{
+ updateSearch = (e) => {
+        this.setState({
+          search: e.target.value
+        })
+      }
+ handleCourseChange=(e)=>{
         let sel = document.getElementById('coursesOpt');
         let sv = sel.options[sel.selectedIndex].value;
         // setting that number in state
         this.setState({
-            option: sv
+            course: sv
         })
 
+ }
+ handleTypeChange=()=>{
+         let sel=document.getElementById('quesTypeOpt');
+         let sv= sel.options[sel.selectedIndex].value;
+         this.setState({
+                 type:sv
+         })
  }
  handleDelete=(id)=>{
         this.props.deleteQuestion(id);
@@ -39,12 +53,12 @@ handleClick=(id)=>{
 DynamicButtons=()=>{
        return this.props.ques.map(que=>
                 <section className="pagin">
-                  {que.currentPage!=1 && que.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchQues(1,this.state.option)}>1</a>:null}
-                  {que.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.previousPage,this.state.option)}>{que.previousPage}</a>:null}
-                   <a  className="white-text" onClick={()=>this.props.fetchQues(que.currentPage)}>{que.currentPage}</a>
+                  {que.currentPage!=1 && que.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchQues(1,this.state)}>1</a>:null}
+                  {que.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.previousPage,this.state)}>{que.previousPage}</a>:null}
+                   <a  className="white-text" onClick={()=>this.props.fetchQues(que.currentPage,this.state)}>{que.currentPage}</a>
                   
-                   {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage,this.state.option)}>{que.nextPage}</a>:null}
-                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.lastPage,this.state.option)}>{que.lastPage}</a></span>:null
+                   {que.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchQues(que.nextPage,this.state)}>{que.nextPage}</a>:null}
+                  { (que.lastPage!=que.currentPage && que.nextPage!=que.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchQues(que.lastPage,this.state)}>{que.lastPage}</a></span>:null
                 }
                 
                 </section>     
@@ -53,8 +67,7 @@ DynamicButtons=()=>{
 }  
 handleSubmit=(e)=>{
        e.preventDefault()
-        console.log(this.state.option)
- this.props.fetchQues(1,this.state.option)
+      this.props.fetchQues(1,this.state)
 }
  renderList=()=>{
        
@@ -71,7 +84,7 @@ handleSubmit=(e)=>{
         <span> Question {quesNo++}</span>
        
             <ul class="float-right">
-            <li>Generic</li>
+            <li>{qu.test.course}</li>
             <li>1 pt</li>
         </ul>
         
@@ -255,18 +268,19 @@ handleSubmit=(e)=>{
                 
                 <div class="w3-quarter">  
                         <label> Question Type  </label>
-                        <select class="w3-input w3-border">
-                                <option> Multiple Choice</option>
-                                <option> Multiple Response</option>
-                                <option> True/False</option>
+                        <select className="w3-input w3-border" id="quesTypeOpt" onChange={this.handleTypeChange}>
+                             <option value=''>Both</option>
+                                {this.props.quesType!=undefined?this.props.quesType.map(type=>{
+                                        return <option value={type}>{type}</option>
+                                }):null}
                         </select>
                 </div>
                         
 
                         <div class="w3-quarter">  
                                 <label>Category </label>
-                                <select className="w3-input w3-border" id="coursesOpt" onChange={this.handleChange}>
-                                <option > All</option>
+                                <select className="w3-input w3-border" id="coursesOpt" onChange={this.handleCourseChange}>
+                                <option value=''> All</option>
                                  {this.props.courses!=undefined?this.props.courses.map(category=>{
                                      console.log(category)
                                       return<option value={category}>{category}</option>
@@ -277,7 +291,7 @@ handleSubmit=(e)=>{
 
                         <div class="w3-quarter">  
                                 <label>Search  </label>
-                                <input class="w3-input w3-border" type="text" ></input>
+                                <input class="w3-input w3-border" type="text" onChange={this.updateSearch} value={this.state.search}></input>
                         </div>
 
                         <div className="w3-third" >
@@ -356,11 +370,12 @@ handleSubmit=(e)=>{
   
 }}
 const mapStateToProps=(state)=>{
-      console.log(state.courses)
+      console.log(state.filterQues)
 
         return{
                 ques:Object.values(state.questions),
-                courses:state.courses
+                courses:state.filterQues.course,
+                quesType:state.filterQues.quesType
              
 }
 }
