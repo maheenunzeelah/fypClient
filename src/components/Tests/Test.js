@@ -5,7 +5,7 @@ import Buttontest from './Buttontest';
 import Tab from '../Tab.js'
 import TestWindow from '../TestWindow';
 import { connect } from 'react-redux';
-import { fetchTests } from '../../actions';
+import { fetchTests,fetchCourseList } from '../../actions';
 import Newtest from './Newtest';
 import AddQues from '../Questions/AddQues';
 import EditTest from './EditTest';
@@ -16,12 +16,13 @@ class Test extends Component {
 
   state = {
     search: '',
-    filteredTests: {}
+    filteredTests: {},
+    course:''
   }
 
   componentDidMount() {
-    this.props.fetchTests();
-
+    this.props.fetchTests(1);
+    this.props.fetchCourseList();
   }
 
   updateSearch = (e) => {
@@ -29,7 +30,34 @@ class Test extends Component {
       search: e.target.value
     })
   }
+  handleChange=()=>{
+    let sel = document.getElementById('courseOpt');
+  
+    let sv = sel.options[sel.selectedIndex].value;
+    // setting that number in state
+    this.setState({
+        course: sv
+    },()=> this.props.fetchTests(1,this.state.course))
+  
+  }
+  DynamicButtons=()=>{
+    return this.props.tests.map(test=>
+             <section className="pagin">
+               {test.currentPage!=1 && test.previousPage!=1?<a className="white-text" onClick={()=>this.props.fetchTests(1,this.state.course)}>1</a>:null}
+               {test.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.fetchTests(test.previousPage,this.state.course)}>{test.previousPage}</a>:null}
+                <a  className="white-text" onClick={()=>this.props.fetchTests(test.currentPage,this.state.course)}>{test.currentPage}</a>
+               
+                {test.hasNextPage?<a  className="white-text" onClick={()=>this.props.fetchTests(test.nextPage,this.state.course)}>{test.nextPage}</a>:null}
+               { (test.lastPage!=test.currentPage && test.nextPage!=test.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.fetchTests(test.lastPage,this.state.course)}>{test.lastPage}</a></span>:null
+             }
+             
+             </section>     
+             )
+             
+}  
+
   filteredList = (test, index) => {
+  
     return (
       <div className="container">
         {/*  */}
@@ -82,7 +110,7 @@ class Test extends Component {
   renderList = () => {
     let filtered
     this.props.tests.filter(test => {
-      filtered = test.filter(tes => {
+      filtered = test.test.filter(tes => {
         //If value in searched bar matches the value of testname
         return (tes.testName.indexOf(this.state.search) !== -1)
       })
@@ -91,9 +119,9 @@ class Test extends Component {
     
     // When component will render first time
     if (filtered == undefined) {
-
+    
       return this.props.tests.map(test => {
-        return test.map((test, index) => {
+        return test.test.map((test, index) => {
           return <div>
             {/* For preventing code replication function is called*/}
             {this.filteredList(test, index)}
@@ -119,13 +147,9 @@ class Test extends Component {
 
   }
   render() {
-    let categoryList
-(this.props.tests.map(test=>{
-  return categoryList=[...new Set(
-   test.map(tes=>{
-     return tes.course
-}))]}) )
 
+   
+    
     return (
       <div className="container">
         <div ><TestWindow /></div>
@@ -150,10 +174,10 @@ class Test extends Component {
 
                 <div className="w3-quarter">
                 
-                   <select className="w3-input w3-border" placeholder="Category Filter">
-                    <option>-All-</option>
-                    {categoryList!=undefined?categoryList.map(category=>{
-                     return<option>{category}</option>
+                   <select className="w3-input w3-border" placeholder="Category Filter" id='courseOpt' onChange={this.handleChange}>
+                    <option value=''>-All-</option>
+                    {this.props.courses!=undefined?this.props.courses.map(category=>{
+                     return<option value={category}>{category}</option>
                     }):null
                 }
                   </select>
@@ -174,7 +198,7 @@ class Test extends Component {
           </div>
 
 
-
+        {this.DynamicButtons()}
 
         </div>
       </div>
@@ -183,10 +207,10 @@ class Test extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.tests.testName)
+  console.log(state.tests.tests)
   return {
-
-    tests: Object.values(state.tests)
+  tests: Object.values(state.tests),
+  courses:state.filter.course
   }
 }
-export default connect(mapStateToProps, { fetchTests })(Test);
+export default connect(mapStateToProps, { fetchTests ,fetchCourseList})(Test);

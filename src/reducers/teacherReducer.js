@@ -51,7 +51,7 @@ export const fetchTestReducer=(state={},action)=>{
     switch(action.type){
        
         case 'FETCH_TESTS':
-        return {...state, testName:action.payload}
+        return {...state, tests:action.payload}
         
         default:
         return state

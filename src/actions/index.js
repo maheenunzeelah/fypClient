@@ -140,9 +140,10 @@ export const fetchCourseList=()=>async dispatch=>{
   dispatch({type: FETCH_COURSES ,payload:response.data})
 }
 
-export const fetchTests = () => async dispatch => {
-  const response = await postDataApi.get('login/teacher/tests');
-
+export const fetchTests = (page,course='') => async dispatch => {
+  console.log(course)
+  const response = await postDataApi.get(`login/teacher/tests/${page}?course=${course}`);
+  console.log(response.data)
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
 

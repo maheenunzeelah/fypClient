@@ -370,12 +370,12 @@ handleSubmit=(e)=>{
   
 }}
 const mapStateToProps=(state)=>{
-      console.log(state.filterQues)
+      console.log(state.filter)
 
         return{
                 ques:Object.values(state.questions),
-                courses:state.filterQues.course,
-                quesType:state.filterQues.quesType
+                courses:state.filter.course,
+                quesType:state.filter.quesType
              
 }
 }
