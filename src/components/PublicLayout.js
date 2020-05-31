@@ -1,15 +1,17 @@
 import React from 'react';
 import {BrowserRouter, Route , Switch} from 'react-router-dom';
-import TourPage from './TourPage';
-import Quizsettings from './QuizSettings';
-import Overview from './Overview';
-import FooterPage from './Footer';
-import Signup from './signup';
-import SignupSecond from './signupSecond'
-import Login from './login';
-import Contact from './contact';
-import NavbarPage from'./Navbar';
-import Main from './Main';
+import TourPage from './PublicPages/TourPage';
+import Quizsettings from './PublicPages/QuizSettings';
+import Overview from './PublicPages/Overview';
+import FooterPage from './PublicPages/Footer';
+import Signup from './Authentication/Signup';
+import SignupSecond from './Authentication/signupSecond'
+import Login from './Authentication/login';
+import Contact from './PublicPages/contact';
+import NavbarPage from'./PublicPages/Navbar';
+import Main from './PublicPages/Main';
+import signupFirst from './Authentication/signupFirst';
+import {pageNotFound} from './404page'
 
 function PublicLayout(props){
 return(
@@ -19,13 +21,14 @@ return(
    
     <Switch>
      
-      <Route  path="/signup" component={SignupSecond}></Route>
+      <Route exact path="/signup" component={Signup}></Route>
       <Route  path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>
      <Route path="/overview" component={Overview}></Route>
      <Route path="/quizSettings" component={Quizsettings}></Route>
      <Route exact path="/" component={Main}></Route>
+     <Route component={pageNotFound} />    
      </Switch>
      <FooterPage />
      </div>

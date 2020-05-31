@@ -2,13 +2,15 @@ import React from 'react';
 
 
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, label,type, meta: { touched, error } }) => (
     
-  <div>
+  <div >
+    
     <label>{label}</label>
     <div>
-      <input {...input}  type={type} />
+      <input {...input}  type={type} style={{backgroundColor: "#fce4ec"}} />
       {touched && error && <span className="ui error message">{error}</span>}
+      
     </div>
   </div>
 )

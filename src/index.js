@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import App from './components/App';
+import ScrollToTop from './components/scrollToTop'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -20,9 +21,13 @@ import {BrowserRouter , Route,Switch} from 'react-router-dom';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(applyMiddleware(thunk))); 
 
-ReactDOM.render(
+ReactDOM.render( 
 <Provider store={store}>
+<BrowserRouter>
+<ScrollToTop />
 <App/> 
+
+</BrowserRouter>
 </Provider>, document.getElementById('root'));
 
 

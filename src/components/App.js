@@ -1,21 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 import '../css/card.css';
-import Main from './Main';
-import NavbarPage from'./Navbar';
+import Main from './PublicPages//Main';
+import NavbarPage from'./PublicPages//Navbar';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import TourPage from './TourPage';
-import Quizsettings from './QuizSettings';
-import Overview from './Overview';
-import FooterPage from './Footer';
-import Signup from './signup';
-import Login from './login';
-import Contact from './contact';
+import TourPage from './PublicPages//TourPage';
+import Quizsettings from './PublicPages//QuizSettings';
+import Overview from './PublicPages/Overview';
+import FooterPage from './PublicPages/Footer';
+import Signup from './Authentication/Signup';
+import Login from './Authentication/login';
+import Contact from './PublicPages//contact';
 import Dashboard from './Dashboard';
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 import setAuthToken from '../utils/setAuthToken';
-
+import ScrollToTop from './scrollToTop';
 
 
  axios.defaults.headers.common['authorization'] = localStorage.getItem('jwtToken');
@@ -51,18 +51,19 @@ axios.interceptors.response.use(function (response) {
 function App() {
   return (
   
-
-   <BrowserRouter>
-   <div className="App">
+   <BrowserRouter >
+    
+    <div className="App">
      <Switch>
-     <Route   path="/dashboard" component={PrivateLayout} />
+     <Route path="/dashboard" component={PrivateLayout} />
       <Route  path="/" component={PublicLayout} /> 
-              
-      </Switch>                                                      
-  </div>
+          
+      </Switch>     
+    </div>      
+                                
   </BrowserRouter>
  
-
+ 
   
   );
 }

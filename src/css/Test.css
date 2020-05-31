@@ -15,18 +15,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   color: red;
 }
 
-.collapsible {
-  background-color: #fff!important;
-  color: black;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
-
 /* .active, .collapsible:hover {
   background-color: #555;
 } */
@@ -47,17 +35,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   }
 
   #Test{
-
+    background-color: #fce4ec;
     margin-top:-20px;
     border: 1px gray solid;
-        border-radius: 10px;
+    border-radius: 10px;
   }
-
-  #Test1{
-
-      background-color: snow;
-        border-radius: 10px;
-  }
+ .Test1{
+  margin-bottom: 15px; 
+  
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  border-radius: 10px;
+ }
 
 #Links .Link{
 margin-right: 20px;

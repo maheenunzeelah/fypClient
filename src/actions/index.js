@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -10,8 +10,10 @@ import React from 'react';
 function onClick(){
   alert("hello")
 }
-export const teacherSignup = (formValues) => async (dispatch, getState) => {
 
+//TEACHER PANEL ACTION CREATORS
+export const teacherSignup = (formValues) => async (dispatch, getState) => {
+  console.log(formValues)
   await postDataApi.post('/signup', formValues)
     .then(response => {
 
@@ -90,6 +92,7 @@ export const quesType = (quesType) => {
     payload: quesType
   }
 }
+
 export const addQues = (formValues) => async (dispatch, getState) => {
   const val = getState().ques;
   const currTest = getState().currentTest;
@@ -98,7 +101,7 @@ export const addQues = (formValues) => async (dispatch, getState) => {
     .then(response => {
       
       alert(response.data);
-        window.location.reload();    
+        window.location.replace('/dashboard/addQues');    
 
     })
     .catch(err => {
@@ -107,23 +110,97 @@ export const addQues = (formValues) => async (dispatch, getState) => {
 
     })
 }
+// delete question action creators
+export const deleteQuestion=(id)=>async dispatch=>{
+  console.log(id)
+  await postDataApi.delete(`login/teacher/delQues/${id}`)
+  .then(response=>{
+    alert(response.data)
+    window.location.replace("/dashboard/QuestionBank")
+  })
 
-export const fetchTests = () => async dispatch => {
-  const response = await postDataApi.get('login/teacher/tests');
+}
+export const editQues=(data)=>async (dispatch,getState)=>{
+  console.log(data);
+  const currTest = getState().currentTest;
+  data={ ...data, test: currTest }
+  await postDataApi.put(`login/teacher/updateQues/${data.id}`,data)
+   .then(response=>{
+     alert(response.data)
+     window.location.replace("/dashboard/QuestionBank")
+   })
+   .catch(err => {
+     if (err.response.data.question !== undefined)
+       alert(err.response.data.question);})
+}
 
+export const fetchCourseList=()=>async dispatch=>{
+  const response=await postDataApi.get('login/teacher/test/course');
+  console.log(response.data)
+  dispatch({type: FETCH_COURSES ,payload:response.data})
+}
+
+export const fetchTests = (page,course='') => async dispatch => {
+  console.log(course)
+  const response = await postDataApi.get(`login/teacher/tests/${page}?course=${course}`);
+  console.log(response.data)
   dispatch({ type: FETCH_TESTS, payload: response.data })
 }
 
-export const fetchQues = () => async dispatch => {
-  const response = await postDataApi.get('login/teacher/readQues');
-
+export const fetchQues = (page,filterQues={course:'',type:'',search:''}) => async dispatch => {
+  console.log(filterQues)
+  const response = await postDataApi.get(`login/teacher/readQues/${page}?course=${filterQues.course}&&type=${filterQues.type}&&search=${filterQues.search}`);
+   console.log(response.data)
   dispatch({ type: FETCH_QUESTIONS, payload: response.data })
 }
 
-export const sendVoice=(msg)=>async dispatch =>{
- 
-  await postDataApi.post('login/student',msg)
-   .then(response=>{
-     console.log(response)
-   })
+export const editTest=(id)=>{
+  return{ type: CURRENT_TEST, payload:id }
 }
+
+export const updateTest=(data)=>async dispatch=>{
+  console.log(data);
+ await postDataApi.put(`login/teacher/updateTest/${data.id}`,data)
+  .then(response=>{
+    alert(response.data)
+
+  })
+  .catch(err => {
+    if (err.response.data.test !== undefined)
+      alert(err.response.data.test);})
+}
+export const deleteTest=(id)=>async dispatch=>{
+  await postDataApi.delete(`login/teacher/deleteTest/${id}`)
+   .then(response=>{
+     alert(response.data)
+     window.location.replace('/dashboard')
+   })
+   .then()
+}
+
+//STUDENT PANEL ACTION CREATORS
+export const sendVoice=(msg)=>async (dispatch,getState) =>{
+ 
+  var studentData=getState().student;
+  await postDataApi.post('signup/student',msg)
+  .then(response => {
+
+    localStorage.setItem('jwtToken', response.data);
+    alert("Student Registered");
+    window.location.replace('/signup');
+  })
+  .catch(err => {
+    alert(err.response.data.email);
+    window.location.reload();
+  })
+   
+}
+export const studentSignup = (formValues)  => {
+  console.log(formValues)
+ return ({
+    type:"STUDENT_DATA",
+    payload:formValues
+ })
+    
+}
+

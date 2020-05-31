@@ -2,7 +2,7 @@ import React from 'react'
 
 const Breadcrumb = ({ children }) => {
     
-  return <div>{children}</div>
+  return <div style={{color:"#ffbb33"}}>{children}</div>
 }
 
 export default Breadcrumb
