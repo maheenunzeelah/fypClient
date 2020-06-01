@@ -39,8 +39,10 @@ class SignupFirst extends Component {
   handleSubmit = (formValues) => {
   
    console.log(formValues)
-   if(formValues.role=="student")
+   if(formValues.role=="student"){
     this.props.studentSignup(formValues)
+    this.props.onNext()
+   }
     else
     this.props.teacherSignup(formValues);
     
@@ -54,7 +56,7 @@ class SignupFirst extends Component {
         <MDBRow>
           <MDBCol md="3"></MDBCol>
           <MDBCol md="6">
-            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error">
+            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" encType=  'multipart/form-data'>
               <p className="h4 text-center" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
               <div style={{ textAlign: "left" }}>
                 <Field name="firstName" type="text" component={renderField} label="First Name" />
@@ -74,9 +76,7 @@ class SignupFirst extends Component {
                   <Field name="role" component={renderError} />
                 </div>
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} onClick={(e)=>{
-                    this.props.onNext();
-                    this.props.handleSubmit(this.handleSubmit);}}>
+                  <MDBBtn id="StuNext" type="submit" className="default-color"  style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} >
                     Next
               </MDBBtn>
                   <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
@@ -108,4 +108,4 @@ const formWrapped = reduxForm({
   validate
 })(SignupFirst);
 
-export default connect(mapStateToProps, { teacherSignup })(formWrapped); 
+export default connect(mapStateToProps, { teacherSignup ,studentSignup})(formWrapped); 

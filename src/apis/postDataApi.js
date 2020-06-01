@@ -5,6 +5,7 @@ export default axios.create({
     baseURL:'http://localhost:3001',
     headers:{
         authorization:localStorage.getItem('jwtToken'),
-        // 'content-type': 'multipart/form-data'
+        'Accept': 'application/json',
+            // 'Content-Type': 'multipart/form-data',
     }
 })
