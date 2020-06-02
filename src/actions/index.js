@@ -183,18 +183,27 @@ export const deleteTest=(id)=>async dispatch=>{
 export const sendVoice=(msg)=>async (dispatch,getState) =>{
  
   var studentData=getState().student;
-  const data={...studentData,msg}
-  await postDataApi.post('signup/student',data)
-  // .then(response => {
   
-  //   localStorage.setItem('jwtToken', response.data);
-  //   alert("Student Registered");
-  //   window.location.replace('/signup');
-  // })
-  // .catch(err => {
-  //   alert(err.response.data.email);
-  //   window.location.reload();
-  // })
+  await postDataApi.post('signup/student',studentData)
+
+  .then(response => {
+  
+    localStorage.setItem('jwtToken', response.data);
+(async function signup2(){
+   
+    await postDataApi.post('signup/studentVoice',msg)
+    .then(response=>{
+      alert(response.data)
+      window.location.replace('/signup');
+    })
+  })()
+  
+  
+  })
+  .catch(err => {
+    alert(err.response.data.email);
+    window.location.reload();
+  })
    
 }
 export const studentSignup = (formValues)  => {
