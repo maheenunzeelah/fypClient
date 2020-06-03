@@ -10,6 +10,7 @@ var rec;
 let formatData;
 let blob;
 var FD;
+let arrVoices=[];
 class SignupSecond extends Component {
     state = {
         isRecording: false,
@@ -43,11 +44,15 @@ class SignupSecond extends Component {
                 const blobURL = URL.createObjectURL(blob)
                 console.log(blobURL)
                 this.setState({ blobURL, isRecording: false });
-                let formatData = new FormData();
-                formatData.append('data', blob);
-    
-                
-                this.props.sendVoice(formatData);
+                formatData = new FormData();
+                // formatData.append('data', blob);
+                arrVoices.push(blob)
+                // for (var value of formatData.values()) {
+                //     console.log(value); 
+                //  }
+                 console.log(arrVoices)
+                 if(arrVoices.length===5)
+                 this.props.sendVoice(arrVoices);
             },
            
             ).catch((e) => console.log(e));
@@ -61,25 +66,25 @@ class SignupSecond extends Component {
     //   console.log(FD)
     //   this.props.sendVoice(FD)
     // }
-    handlerFunction=(stream)=> {
-        rec = new MediaRecorder(stream);
-        rec.ondataavailable = e => {
-          audioChunks.push(e.data);
-          if (rec.state == "inactive"){
-            blob = new Blob(audioChunks,{type:'audio/mpeg-3'});
-            const blobURL = URL.createObjectURL(blob)
-            // recordedAudio.src = URL.createObjectURL(blob);
-            // recordedAudio.controls=true;
-            // recordedAudio.autoplay=true;
-             formatData = new FormData();
-            formatData.append('data', blob);
+    // handlerFunction=(stream)=> {
+    //     rec = new MediaRecorder(stream);
+    //     rec.ondataavailable = e => {
+    //       audioChunks.push(e.data);
+    //       if (rec.state == "inactive"){
+    //         blob = new Blob(audioChunks,{type:'audio/mpeg-3'});
+    //         const blobURL = URL.createObjectURL(blob)
+    //         // recordedAudio.src = URL.createObjectURL(blob);
+    //         // recordedAudio.controls=true;
+    //         // recordedAudio.autoplay=true;
+    //          formatData = new FormData();
+    //         formatData.append('data', blob);
 
             
-            this.props.sendVoice(formatData);
-            // var file=new File([blob],"recording.wav",{type:blob.type})
-          }
-        }
-      }
+    //         this.props.sendVoice(formatData);
+    //         // var file=new File([blob],"recording.wav",{type:blob.type})
+    //       }
+    //     }
+    //   }
     //   blobToFile=(theblob)=>{
     //   const fd=new FormData();
     //   fd.set('a',theblob)
@@ -107,7 +112,7 @@ class SignupSecond extends Component {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
-                    <h3 style={{ margin: "22px" }}>Say Something</h3>
+                    <h3 style={{ margin: "22px" }}>Say Something </h3>
 
                     <audio src={this.state.blobURL} controls="controls" />
                     <button className="btn btn-lg btn-primary float-right" onClick={this.start} disabled={this.state.isRecording}>
@@ -122,8 +127,8 @@ class SignupSecond extends Component {
                   <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }}  onClick={this.props.previousPage}>
                     Previous
               </MDBBtn>
-                  <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} onClick={this.props.onSubmit}>
-                    Register
+                  <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} onClick={this.props.onNext}>
+                    Next
               </MDBBtn>
                 </div>
             </div>

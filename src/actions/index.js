@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import React from 'react';
-import postFilApi from '../apis/postFilApi';
+
 
 
 function onClick(){
@@ -181,7 +181,14 @@ export const deleteTest=(id)=>async dispatch=>{
 
 //STUDENT PANEL ACTION CREATORS
 export const sendVoice=(msg)=>async (dispatch,getState) =>{
- 
+ console.log(msg)
+ let formData=new FormData();
+  msg.map(form=>{
+      formData.append('data',form)
+  })
+//   for (var value of msg.values()) {
+//     console.log(value); 
+//  }
   var studentData=getState().student;
   
   await postDataApi.post('signup/student',studentData)
@@ -191,7 +198,7 @@ export const sendVoice=(msg)=>async (dispatch,getState) =>{
     localStorage.setItem('jwtToken', response.data);
 (async function signup2(){
    
-    await postDataApi.post('signup/studentVoice',msg)
+    await postDataApi.post('signup/studentVoice',formData)
     .then(response=>{
       alert(response.data)
       window.location.replace('/signup');
