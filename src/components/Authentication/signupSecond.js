@@ -51,7 +51,7 @@ class SignupSecond extends Component {
                 //     console.log(value); 
                 //  }
                  console.log(arrVoices)
-                 if(arrVoices.length===5)
+                 if(arrVoices.length===2)
                  this.props.sendVoice(arrVoices);
             },
            
