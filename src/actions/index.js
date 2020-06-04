@@ -218,7 +218,7 @@ export const sendVoice = (msg) => async (dispatch, getState) => {
     })
 
 }
-export const studentSignup = (formValues) => {
+export const studentAuth = (formValues) => {
   console.log(formValues)
   return ({
     type: "STUDENT_DATA",
@@ -227,3 +227,41 @@ export const studentSignup = (formValues) => {
 
 }
 
+export const studentLogin=(formValues) => async dispatch => {
+  await postDataApi.post('/login/student', formValues)
+    .then(response => {
+
+      console.log(response.data)
+      if(response.data==="Student Exists"){
+        (async function voiceAuth() {
+          msg.map(form => {
+            form.id = response.data.id
+            formData.append('data', form,form.id)
+          })
+         
+          await postDataApi.post('login/studenetVoiceAuth', formData)
+            .then(response => {
+              // alert(response.data)
+              window.location.replace('/signup');
+            })
+        })()
+      }
+      // saving token in response in localStorage
+      localStorage.setItem('jwtToken', response.data);
+
+
+      // //Decoding token
+      // const decoded=jwt_decode(response.data);
+      // dispatch(setCurrentUser(decoded));
+      alert("login");
+      window.location.replace("/dashboard");
+    })
+    .catch(err => {
+      if (err.response.data.email === undefined)
+        alert(err.response.data.password)
+      if (err.response.data.email !== undefined)
+        alert(err.response.data.email)
+      window.location.reload();
+    })
+
+}

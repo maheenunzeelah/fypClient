@@ -28,6 +28,7 @@ class SignupSecond extends Component {
                 .start()
                 .then(() => {
                     this.setState({ isRecording: true });
+                    
                 }).catch((e) => console.error(e));
         }
         // this.setState({ isRecording: true })
@@ -51,7 +52,7 @@ class SignupSecond extends Component {
                 //     console.log(value); 
                 //  }
                  console.log(arrVoices)
-                 if(arrVoices.length===2)
+                 if(arrVoices.length===this.props.RecNo)
                  this.props.sendVoice(arrVoices);
             },
            
