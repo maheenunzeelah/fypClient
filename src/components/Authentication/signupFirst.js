@@ -41,7 +41,8 @@ class SignupFirst extends Component {
    console.log(formValues)
    if(formValues.role=="student"){
     this.props.studentSignup(formValues)
-    this.props.onNext()
+    this.props.onNext();
+    
    }
     else
     this.props.teacherSignup(formValues);
