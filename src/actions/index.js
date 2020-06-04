@@ -184,7 +184,7 @@ export const sendVoice=(msg)=>async (dispatch,getState) =>{
  
   var studentData=getState().student;
   const data={...studentData,msg}
-  await postDataApi.post('signup/student',data)
+  await postDataApi.post('signup/student',msg)
   // .then(response => {
   
   //   localStorage.setItem('jwtToken', response.data);
