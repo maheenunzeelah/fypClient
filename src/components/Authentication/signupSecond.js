@@ -2,7 +2,7 @@ import MicRecorder from 'mic-recorder-to-mp3';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import {sendVoice} from '../../actions'; 
+// import {sendVoice} from '../../actions'; 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
 var audioChunks;
@@ -53,7 +53,7 @@ class SignupSecond extends Component {
                 //  }
                  console.log(arrVoices)
                  if(arrVoices.length===this.props.RecNo)
-                 this.props.sendVoice(arrVoices);
+                 this.props.actionCreator(arrVoices);
             },
            
             ).catch((e) => console.log(e));
@@ -138,4 +138,4 @@ class SignupSecond extends Component {
 
 }
 
-export default connect(null,{sendVoice})(SignupSecond);
+export default connect(null)(SignupSecond);
