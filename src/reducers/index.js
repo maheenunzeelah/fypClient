@@ -13,6 +13,6 @@ export default combineReducers({
     login:loginReducer,
     currentUser:authReducer,
     currentTest:currentTestReducer,
-    student:studentSignupReducer,
+    student:studentReducer,
     filter:fetchCourses
 })

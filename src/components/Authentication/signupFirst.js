@@ -5,7 +5,7 @@ import { Field, reduxForm, isPristine } from 'redux-form';
 import validate from '../validate';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
-import { teacherSignup,studentSignup } from '../../actions';
+import { teacherSignup,studentAuth } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
 
@@ -40,8 +40,9 @@ class SignupFirst extends Component {
   
    console.log(formValues)
    if(formValues.role=="student"){
-    this.props.studentSignup(formValues)
-    this.props.onNext()
+    this.props.studentAuth(formValues)
+    this.props.onNext();
+    
    }
     else
     this.props.teacherSignup(formValues);
@@ -108,4 +109,4 @@ const formWrapped = reduxForm({
   validate
 })(SignupFirst);
 
-export default connect(mapStateToProps, { teacherSignup ,studentSignup})(formWrapped); 
+export default connect(mapStateToProps, { teacherSignup ,studentAuth})(formWrapped); 

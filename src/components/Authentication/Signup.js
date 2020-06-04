@@ -35,9 +35,9 @@ class Signup extends Component {
     return (
       <div>
         {page === 1 && <SignupFirst onNext={this.nextPage} />}
-        {page === 2 && (<SignupSecond 
+        {page === 2 && (<SignupSecond actionCreator={} RecNo={10}
               previousPage={this.previousPage}
-              onNext={this.onSubmit}
+              onNext={this.nextPage}
               />
         //   <WizardFormSecondPage
         //     previousPage={this.previousPage}
