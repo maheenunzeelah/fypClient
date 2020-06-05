@@ -183,7 +183,7 @@ export const deleteTest = (id) => async dispatch => {
 }
 
 //STUDENT PANEL ACTION CREATORS
-export const sendVoice = (msg) => async (dispatch, getState) => {
+export const studentSignup = (msg) => async (dispatch, getState) => {
 
   let formData = new FormData();
 
@@ -197,7 +197,7 @@ export const sendVoice = (msg) => async (dispatch, getState) => {
     .then(response => {
       console.log(response.data)
       localStorage.setItem('jwtToken', response.data.token);
-      (async function signup2() {
+      (async function voiceSignup() {
         msg.map(form => {
           form.id = response.data.id
           formData.append('data', form,form.id)
@@ -227,19 +227,22 @@ export const studentAuth = (formValues) => {
 
 }
 
-export const studentLogin=(formValues) => async dispatch => {
-  await postDataApi.post('/login/student', formValues)
+export const studentLogin=(msg) => async (dispatch,getState) => {
+  let formData = new FormData();
+  var studentData = getState().student;
+  await postDataApi.post('/login/student', studentData)
     .then(response => {
 
       console.log(response.data)
-      if(response.data==="Student Exists"){
+      if(response.data.id){
         (async function voiceAuth() {
           msg.map(form => {
             form.id = response.data.id
+            console.log(form)
             formData.append('data', form,form.id)
           })
          
-          await postDataApi.post('login/studenetVoiceAuth', formData)
+          await postDataApi.post('login/studentVoiceAuth', formData)
             .then(response => {
               // alert(response.data)
               window.location.replace('/signup');
@@ -253,8 +256,7 @@ export const studentLogin=(formValues) => async dispatch => {
       // //Decoding token
       // const decoded=jwt_decode(response.data);
       // dispatch(setCurrentUser(decoded));
-      alert("login");
-      window.location.replace("/dashboard");
+   
     })
     .catch(err => {
       if (err.response.data.email === undefined)

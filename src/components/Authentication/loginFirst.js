@@ -45,7 +45,7 @@ class LoginFirst extends Component {
      this.props.studentAuth(formValues)
      this.props.onNext();
     }
-
+   else
     this.props.teacherLogin(formValues);
   
   //  e.preventDefault();

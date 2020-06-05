@@ -35,7 +35,7 @@ class Signup extends Component {
     return (
       <div>
         {page === 1 && <SignupFirst onNext={this.nextPage} />}
-        {page === 2 && (<SignupSecond actionCreator={} RecNo={10}
+        {page === 2 && (<SignupSecond actionCreator={this.props.studentSignup} RecNo={2}
               previousPage={this.previousPage}
               onNext={this.nextPage}
               />
