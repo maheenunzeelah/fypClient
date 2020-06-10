@@ -198,10 +198,11 @@ export const studentSignup = (msg) => async (dispatch, getState) => {
       console.log(response.data)
       localStorage.setItem('jwtToken', response.data.token);
       (async function voiceSignup() {
+        console.log(msg)
         msg.map((form,index) => {
           form.id = response.data.id
           formData.append('data', form,form.id)
-          formData.append('uploadName',index)
+        
         })
        
         await postDataApi.post('signup/studentVoice', formData)

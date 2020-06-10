@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SignupFirst from './signupFirst'
+import SignupThird from './signupThird'
 import Tests from '../Tests/Newtest';
 import SignupSecond from './signupSecond';
 import { connect } from 'react-redux';
@@ -35,7 +36,7 @@ class Signup extends Component {
     return (
       <div>
         {page === 1 && <SignupFirst onNext={this.nextPage} />}
-        {page === 2 && (<SignupSecond actionCreator={this.props.studentSignup} RecNo={2}
+        {page === 2 && (<SignupThird actionCreator={this.props.studentSignup} RecNo={2}
               previousPage={this.previousPage}
               onNext={this.nextPage}
               />
