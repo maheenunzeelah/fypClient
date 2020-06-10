@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 // import {sendVoice} from '../../actions'; 
-const Mp3Recorder = new MicRecorder({ bitRate: 128 });
+const Mp3Recorder = new MicRecorder({ bitRate: 8 });
 
 var audioChunks;
 var rec;
