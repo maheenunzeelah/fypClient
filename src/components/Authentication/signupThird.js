@@ -42,7 +42,9 @@ class SignupThird extends Component{
               onData={this.onData}
               strokeColor="black"
               backgroundColor="white"
-              mimeType="audio/wav"   />
+              mimeType="audio/wav"  
+              bitRate={24000}  
+              />
             <button onClick={this.startRecording} type="button">Start</button>
             <button onClick={this.stopRecording} type="button">Stop</button>
           </div>
