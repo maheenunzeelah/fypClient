@@ -247,7 +247,7 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
           await postDataApi.post('login/studentVoiceAuth', formData)
             .then(response => {
               // alert(response.data)
-              window.location.replace('/signup');
+              window.location.replace('/login');
             })
         })()
       }
