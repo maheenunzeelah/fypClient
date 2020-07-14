@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SignupFirst from './signupFirst'
-import SignupThird from './signupThird'
 import Tests from '../Tests/Newtest';
 import SignupSecond from './signupSecond';
 import { connect } from 'react-redux';

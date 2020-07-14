@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, HashRouter, Route , Switch, Link} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route , Switch, Link,Router} from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Test from './Tests/Test';
 import ScrollToTop from './scrollToTop'
@@ -10,31 +10,34 @@ import EditTest from './Tests/EditTest';
 import QuestionBank from './Questions/QuestionBank';
 import New_Group from './Groups/New_Group';
 import Group from './Groups/Group';
+import createHistory from './history';
+import PrivateRoute from './privateRoute';
 
 
 function PrivateLayout(){
     return(
         
-        <BrowserRouter>
+        <Router history={createHistory}>
            
         <div>
         
          <Dashboard />
          
          <Switch>
-           <Route exact path="/dashboard/addQues" component={AddQues}></Route>
-           <Route path="/dashboard/editQues" component={EditQues} ></Route>
-           <Route exact path="/dashboard/newTest" exact component={Newtest}></Route>
-           <Route exact path="/dashboard/editTest" component={EditTest}></Route>
-           <Route path="/group" component={Group}></Route>
-           <Route path="/newGroup" component={New_Group}></Route>
-           <Route exact path="/dashboard/QuestionBank" component={QuestionBank}></Route>
-           <Route exact path ="/dashboard" component={Test}></Route>
+         <PrivateRoute exact path ="/dashboard" component={Test}></PrivateRoute>
+           <PrivateRoute  path="/dashboard/addQues" component={AddQues}></PrivateRoute>
+           <PrivateRoute path="/dashboard/editQues" component={EditQues} ></PrivateRoute>
+           <PrivateRoute  path="/dashboard/newTest" exact component={Newtest}></PrivateRoute>
+           <PrivateRoute  path="/dashboard/editTest" component={EditTest}></PrivateRoute>
+           <PrivateRoute path="/group" component={Group}></PrivateRoute>
+           <PrivateRoute path="/newGroup" component={New_Group}></PrivateRoute>
+           <PrivateRoute path="/dashboard/QuestionBank" component={QuestionBank}></PrivateRoute>
+          
            </Switch>
         
          </div>
          
-         </BrowserRouter>
+         </Router>
     );
 }
 export default PrivateLayout;

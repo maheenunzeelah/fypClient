@@ -11,24 +11,27 @@ import Contact from './PublicPages/contact';
 import NavbarPage from'./PublicPages/Navbar';
 import Main from './PublicPages/Main';
 import signupFirst from './Authentication/signupFirst';
-import {pageNotFound} from './404page'
+import {pageNotFound} from './404page';
+import PrivateRoute from './privateRoute';
+import PrivateLayout from './PrivateLayout';
 
 function PublicLayout(props){
 return(
     <BrowserRouter>
     <div className="PublicLayout">
+    
     <NavbarPage />
    
     <Switch>
-     
-      <Route exact path="/signup" component={Signup}></Route>
-      <Route  path="/login" component={Login}></Route>
+     <Route exact path="/" component={Main}></Route>
+     <Route path="/signup" component={Signup}></Route>
+     <Route path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>
      <Route path="/overview" component={Overview}></Route>
      <Route path="/quizSettings" component={Quizsettings}></Route>
-     <Route exact path="/" component={Main}></Route>
-     <Route component={pageNotFound} />    
+     
+      <Route component={pageNotFound} />    
      </Switch>
      <FooterPage />
      </div>

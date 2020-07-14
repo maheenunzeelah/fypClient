@@ -16,48 +16,23 @@ import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 import setAuthToken from '../utils/setAuthToken';
 import ScrollToTop from './scrollToTop';
+import PrivateRoute from './privateRoute';
+import createHistory from './history';
+import { Router } from 'react-router';
 
 
- axios.defaults.headers.common['authorization'] = localStorage.getItem('jwtToken');
-axios.interceptors.request.use(function (config) {
-  // spinning start to show
-  const token = localStorage.getItem("jwtToken");
-  if (token) {
-     config.headers.Authorization = token
-     
-  }
-  return config
-}, function (error) {
-  return Promise.reject(error);
-});
-
-axios.interceptors.response.use(function (response) {
-
-  return response;
-
-}, function (error) {
-
-  if (401 === error.response.status) {
-     window.location='http://localhost:3000';
-
-  } else {
-
-      return Promise.reject(error);
-
-  }
-
-});
 
 function App() {
   return (
   
-   <BrowserRouter >
+   <BrowserRouter>
     
     <div className="App">
      <Switch>
-     <Route path="/dashboard" component={PrivateLayout} />
-      <Route  path="/" component={PublicLayout} /> 
-          
+    
+     <PrivateRoute  path="/dashboard" component={PrivateLayout} />
+     <Route  path="/" component={PublicLayout} /> 
+    
       </Switch>     
     </div>      
                                 

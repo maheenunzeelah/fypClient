@@ -43,14 +43,15 @@ export const teacherLogin = (formValues) => async dispatch => {
       // saving token in response in localStorage
       localStorage.setItem('jwtToken', response.data);
 
-
+      setAuthtoken(response.data)
       // //Decoding token
-      // const decoded=jwt_decode(response.data);
-      // dispatch(setCurrentUser(decoded));
+      const decoded=jwt_decode(response.data);
+      dispatch(setCurrentUser(decoded));
       alert("login");
-      window.location.replace("/dashboard");
+      // window.location.replace("/dashboard");
     })
     .catch(err => {
+      console.log(err)
       if (err.response.data.email === undefined)
         alert(err.response.data.password)
       if (err.response.data.email !== undefined)
@@ -269,3 +270,10 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
     })
 
 }
+
+// logout
+ export const logout=()=>dispatch=>{
+   localStorage.removeItem('jwtToken')
+   setAuthtoken(false)
+   dispatch(setCurrentUser({}))
+ }
