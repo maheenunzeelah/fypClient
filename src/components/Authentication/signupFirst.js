@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Field, reduxForm, isPristine } from 'redux-form';
 import validate from '../validate';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
-import { teacherSignup,studentAuth } from '../../actions';
+import { teacherSignup, studentAuth } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
-
+import PropTypes from 'prop-types';
 
 class SignupFirst extends Component {
   constructor(props) {
@@ -18,7 +18,23 @@ class SignupFirst extends Component {
       registerisDisabled: true
     }
   }
-
+  componentDidMount(){
+    if(this.props.auth.isAuthenticatedTeacher){
+      window.location.replace('/dashboard')
+    }
+    else if(this.props.auth.isAuthenticatedStudent){
+      window.location.replace('/dashboard/addQues')
+    }
+    }
+    componentWillReceiveProps(nextProps){
+  
+     if(nextProps.auth.isAuthenticatedTeacher){
+      window.location.replace('/dashboard')
+     }
+     else if(nextProps.auth.isAuthenticatedStudent){
+      window.location.replace('/dashboard/addQues')
+    }
+    }
 
   buttonEnable = (e) => {
     if (e.target.value === 'student') {
@@ -37,16 +53,16 @@ class SignupFirst extends Component {
     }
   }
   handleSubmit = (formValues) => {
-  
-   console.log(formValues)
-   if(formValues.role=="student"){
-    this.props.studentAuth(formValues)
-    this.props.onNext();
-    
-   }
+
+    console.log(formValues)
+    if (formValues.role == "student") {
+      this.props.studentAuth(formValues)
+      this.props.onNext();
+
+    }
     else
-    this.props.teacherSignup(formValues);
-    
+      this.props.teacherSignup(formValues);
+
   }
 
 
@@ -57,7 +73,7 @@ class SignupFirst extends Component {
         <MDBRow>
           <MDBCol md="3"></MDBCol>
           <MDBCol md="6">
-            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" encType=  'multipart/form-data' style={{ color:" white"}}>
+            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" encType='multipart/form-data' style={{ color: " white" }}>
               <p className="h4 text-center pink-text font-weight-bold" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
               <div style={{ textAlign: "left" }}>
                 <Field name="firstName" type="text" component={renderField} label="First Name" />
@@ -67,7 +83,7 @@ class SignupFirst extends Component {
                 <label>Register as a:</label>
                 <div>
                   <label>
-                    <Field  name="role" component="input" type="radio" value="teacher" onClick={this.buttonEnable} />
+                    <Field name="role" component="input" type="radio" value="teacher" onClick={this.buttonEnable} />
                     Teacher
           </label><br />
                   <label>
@@ -77,10 +93,10 @@ class SignupFirst extends Component {
                   <Field name="role" component={renderError} />
                 </div>
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" type="submit" className="pink accent-2"  style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} >
+                  <MDBBtn id="StuNext" type="submit" className="pink accent-2" style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} >
                     Next
               </MDBBtn>
-                  <MDBBtn className="pink accent-2"  type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
+                  <MDBBtn className="pink accent-2" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
                     Register
               </MDBBtn>
                 </div>
@@ -95,11 +111,16 @@ class SignupFirst extends Component {
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span className="ui error message">{error}</span> : false
 
+SignupFirst.protoTypes = {
+  auth: PropTypes.object.isRequired
+}
+
 const mapStateToProps = (state, ownProps) => {
   //console.log(state.formInp);
 
   return {
     signup: state.signup,
+    auth:state.auth
     //formInp:state.formInp 
   }
 }
@@ -109,4 +130,4 @@ const formWrapped = reduxForm({
   validate
 })(SignupFirst);
 
-export default connect(mapStateToProps, { teacherSignup ,studentAuth})(formWrapped); 
+export default connect(mapStateToProps, { teacherSignup, studentAuth })(formWrapped); 

@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_USER, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES } from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -46,7 +46,8 @@ export const teacherLogin = (formValues) => async dispatch => {
       setAuthtoken(response.data)
       // //Decoding token
       const decoded=jwt_decode(response.data);
-      dispatch(setCurrentUser(decoded));
+      console.log(decoded)
+      dispatch(setCurrentTeacher(decoded));
       alert("login");
       // window.location.replace("/dashboard");
     })
@@ -82,9 +83,9 @@ export const createTest = (testName) => async dispatch => {
     })
 
 }
-export const setCurrentUser = decoded => {
+export const setCurrentTeacher = decoded => {
   return {
-    type: SET_CURRENT_USER,
+    type: SET_CURRENT_TEACHER,
     payload: decoded
   }
 
@@ -180,10 +181,37 @@ export const deleteTest = (id) => async dispatch => {
       alert(response.data)
       window.location.replace('/dashboard')
     })
-    .then()
+    
+}
+// Groups
+export const createGroup=(groupName)=>async dispatch=>{
+ await postDataApi.post('login/teacher/createGroup',groupName)
+  .then(response => {
+    //var result =window.confirm(response.data)
+
+
+    if (response.data === "Enter Group name")
+      alert(response.data)
+    else {
+      alert("Group created");
+      
+    }
+  })
+  .catch(err => {
+    if (err.response.data.group !== undefined)
+      alert(err.response.data.group);
+
+  })
 }
 
 //STUDENT PANEL ACTION CREATORS
+export const setCurrentStudent = decoded => {
+  return {
+    type: SET_CURRENT_STUDENT,
+    payload: decoded
+  }
+}
+
 export const studentSignup = (msg) => async (dispatch, getState) => {
 
   let formData = new FormData();
@@ -235,8 +263,7 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
   var studentData = getState().student;
   await postDataApi.post('/login/student', studentData)
     .then(response => {
-
-      console.log(response.data)
+      const token=response.data.token
       if(response.data.id){
         (async function voiceAuth() {
           msg.map(form => {
@@ -247,13 +274,20 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
          
           await postDataApi.post('login/studentVoiceAuth', formData)
             .then(response => {
-              // alert(response.data)
-              window.location.replace('/login');
+              // saving token in response in localStorage
+              localStorage.setItem('jwtToken', token);
+        
+              setAuthtoken(token)
+              // //Decoding token
+              const decoded=jwt_decode(token);
+              console.log(decoded)
+              dispatch(setCurrentStudent(decoded));
+              alert("login");
             })
         })()
       }
       // saving token in response in localStorage
-      localStorage.setItem('jwtToken', response.data);
+      // localStorage.setItem('jwtToken', response.data);
 
 
       // //Decoding token
@@ -275,5 +309,6 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
  export const logout=()=>dispatch=>{
    localStorage.removeItem('jwtToken')
    setAuthtoken(false)
-   dispatch(setCurrentUser({}))
+   dispatch(setCurrentTeacher({}))
+   dispatch(setCurrentStudent({}))
  }

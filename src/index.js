@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import {BrowserRouter , Route,Switch} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import {setCurrentUser} from './actions'
+import {setCurrentTeacher,setCurrentStudent} from './actions'
 import setAuthToken from './utils/setAuthToken';
   
 
@@ -30,7 +30,8 @@ if(localStorage.jwtToken){
     setAuthToken(localStorage.jwtToken)
     //decode token and get user
     const decoded=jwt_decode(localStorage.jwtToken)
-    store.dispatch(setCurrentUser(decoded))
+    decoded.teacherid?(store.dispatch(setCurrentTeacher(decoded))):(store.dispatch(setCurrentStudent(decoded)))
+  
   }
 ReactDOM.render( 
 <Provider store={store}>

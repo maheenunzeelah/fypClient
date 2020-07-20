@@ -12,8 +12,8 @@ import NavbarPage from'./PublicPages/Navbar';
 import Main from './PublicPages/Main';
 import signupFirst from './Authentication/signupFirst';
 import {pageNotFound} from './404page';
-import PrivateRoute from './privateRoute';
 import PrivateLayout from './PrivateLayout';
+
 
 function PublicLayout(props){
 return(
@@ -30,7 +30,6 @@ return(
      <Route path="/contact" component={Contact}></Route>
      <Route path="/overview" component={Overview}></Route>
      <Route path="/quizSettings" component={Quizsettings}></Route>
-     
       <Route component={pageNotFound} />    
      </Switch>
      <FooterPage />

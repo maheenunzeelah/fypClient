@@ -18,7 +18,7 @@ class Dashboard extends Component {
     
     render() {
 
-      const {isAuthentication,user}=this.props.auth;
+      const {isAuthenticationTeacher,isAuthenticationStudent,user}=this.props.auth;
 
         return(
             <MDBNavbar style={{backgroundColor:"rgb(47, 156, 181)"}} dark expand="md">

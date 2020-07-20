@@ -29,10 +29,10 @@ function PrivateLayout(){
            <PrivateRoute path="/dashboard/editQues" component={EditQues} ></PrivateRoute>
            <PrivateRoute  path="/dashboard/newTest" exact component={Newtest}></PrivateRoute>
            <PrivateRoute  path="/dashboard/editTest" component={EditTest}></PrivateRoute>
-           <PrivateRoute path="/group" component={Group}></PrivateRoute>
-           <PrivateRoute path="/newGroup" component={New_Group}></PrivateRoute>
+           <PrivateRoute path="/dashboard/group" component={Group}></PrivateRoute>
+           <PrivateRoute path="/dashboard/newGroup" component={New_Group}></PrivateRoute>
            <PrivateRoute path="/dashboard/QuestionBank" component={QuestionBank}></PrivateRoute>
-          
+           
            </Switch>
         
          </div>

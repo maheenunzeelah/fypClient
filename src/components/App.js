@@ -17,6 +17,8 @@ import PrivateLayout from './PrivateLayout';
 import setAuthToken from '../utils/setAuthToken';
 import ScrollToTop from './scrollToTop';
 import PrivateRoute from './privateRoute';
+import PrivateStudentRoute from './privateStudentRoutes'
+import PrivateStudentLayout from './PrivateStudentLayout'
 import createHistory from './history';
 import { Router } from 'react-router';
 
@@ -29,7 +31,7 @@ function App() {
     
     <div className="App">
      <Switch>
-    
+    <PrivateStudentRoute path='/student' component={PrivateStudentLayout} />
      <PrivateRoute  path="/dashboard" component={PrivateLayout} />
      <Route  path="/" component={PublicLayout} /> 
     

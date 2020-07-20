@@ -20,16 +20,21 @@ class LoginFirst extends Component {
     }
   }
   componentDidMount(){
-  if(this.props.auth.isAuthenticated){
+  if(this.props.auth.isAuthenticatedTeacher){
     window.location.replace('/dashboard')
+  }
+  else if(this.props.auth.isAuthenticatedStudent){
+    window.location.replace('/student/quiz')
   }
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    console.log(this.props.history)
-   if(nextProps.auth.isAuthenticated){
+
+   if(nextProps.auth.isAuthenticatedTeacher){
     window.location.replace('/dashboard')
    }
+   else if(nextProps.auth.isAuthenticatedStudent){
+    window.location.replace('/student/quiz')
+  }
   }
   buttonEnable=(e)=>{
     if(e.target.value==='student'){
