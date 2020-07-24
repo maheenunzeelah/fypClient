@@ -7,7 +7,7 @@ import Account from '../Account';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import validate from '../validate';
-import renderField from '../renderField';
+import {renderField} from '../renderField';
 import {teacherLogin,studentAuth} from '../../actions'; 
 import PropTypes from 'prop-types';
 
