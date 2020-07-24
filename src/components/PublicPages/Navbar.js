@@ -32,7 +32,7 @@ render() {
             <a className="navbar-brand white-text" href="/login">Login</a>
             </MDBNavItem>
             <MDBNavItem>
-            <a className="navbar-brand white-text" href="/signup">Sign Up</a>
+            <a className="navbar-brand white-text" href="/signupas">Sign Up</a>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
