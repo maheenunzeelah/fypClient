@@ -9,7 +9,7 @@ import { teacherSignup, studentAuth } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
 import PropTypes from 'prop-types';
-import { Card, CardContent ,Select,MenuItem,FormControl,InputLabel} from '@material-ui/core';
+import { Card, CardContent ,Select,MenuItem,FormControl,InputLabel,Button} from '@material-ui/core';
 
 class SignupFirst extends Component {
   constructor(props) {
@@ -94,9 +94,16 @@ class SignupFirst extends Component {
                   <div className='col-sm-6'>
                 <Field name="password" type="password" component={renderField} label="Password" />
                 </div>
-                <div className='col-sm-6'>
-                <Field name="department" type="text" component={renderField} label="Department" />
-                </div>
+                <div className="col-sm-6">
+                <label>Department</label>
+                
+          <Field name="favoriteColor" component="select" style={{border:'solid 1px #1C2331'}}>
+            <option></option>
+            <option value="#ff0000">Red</option>
+            <option value="#00ff00">Green</option>
+            <option value="#0000ff">Blue</option>
+          </Field>
+        </div>
                 </div>
                 {this.props.role==='student'?(
                 <div>
@@ -111,12 +118,12 @@ class SignupFirst extends Component {
         </div>
  
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" type="submit" className="unique-color-dark" style={{ marginBottom: "74px" }} >
+                  <Button id="StuNext" type="submit" className="unique-color-dark white-text btn btn-lg" style={{ marginBottom: "74px" }} >
                     Next
-              </MDBBtn>
+              </Button>
               </div>
               </div>):(<div>
-                  <MDBBtn className="unique-color-dark" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
+                  <MDBBtn className="unique-color-dark " type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
                     Register
               </MDBBtn>
                 </div>)}
