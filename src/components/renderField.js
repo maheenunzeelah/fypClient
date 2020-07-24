@@ -6,9 +6,9 @@ export const renderField = ({ input, label,type, meta: { touched, error } }) => 
     
   <div >
     
-    <label>{label}</label>
+    <label style={{marginTop:'6px'}}>{label}</label>
     <div>
-      <input {...input}   type={type} style={{backgroundColor: "white" ,border:'solid 1px #1C2331'}} />
+      <input {...input}   type={type} style={{backgroundColor: "white",border:'solid 1px #1C2331'}} />
       {touched && error && <span className="ui error message">{error}</span>}
       
     </div>
@@ -17,13 +17,4 @@ export const renderField = ({ input, label,type, meta: { touched, error } }) => 
 
 
 
-export const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
-  <Select
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}
-    {...custom}/>
-)
 

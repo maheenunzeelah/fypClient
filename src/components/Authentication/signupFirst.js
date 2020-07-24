@@ -77,7 +77,7 @@ class SignupFirst extends Component {
           <MDBCol md="3"></MDBCol>
           <MDBCol md="6" >
             <Card className="m-5 mdb-color lighten-5">
-              <CardContent>
+              <CardContent >
             <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error " encType='multipart/form-data' style={{ color: " #1C2331" }}>
               <p className="h4 text-center   font-weight-bold" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
               <div style={{ textAlign: "left" }}>
@@ -100,9 +100,9 @@ class SignupFirst extends Component {
                 </div>
                 {this.props.role==='student'?(
                 <div>
-                   <label>Favorite Color</label>
+                   <label>Batch</label>
         <div>
-          <Field name="favoriteColor" component="select">
+          <Field name="favoriteColor" component="select" style={{border:'solid 1px #1C2331'}}>
             <option></option>
             <option value="#ff0000">Red</option>
             <option value="#00ff00">Green</option>
