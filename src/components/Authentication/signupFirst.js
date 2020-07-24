@@ -15,7 +15,9 @@ class SignupFirst extends Component {
     super(props);
     this.state = {
       nextisDisabled: true,
-      registerisDisabled: true
+      registerisDisabled: true,
+  
+   
     }
   }
   componentDidMount(){
@@ -67,7 +69,7 @@ class SignupFirst extends Component {
 
 
   render() {
-    //console.log(this.props)
+    console.log(this.props.role)
     return (
       <MDBContainer >
         <MDBRow>
@@ -80,26 +82,18 @@ class SignupFirst extends Component {
                 <Field name="lastName" type="text" component={renderField} label="Last Name" />
                 <Field name="email" type="email" component={renderField} label="Email" />
                 <Field name="password" type="password" component={renderField} label="Password" />
-                <label>Register as a:</label>
-                <div>
-                  <label>
-                    <Field name="role" component="input" type="radio" value="teacher" onClick={this.buttonEnable} />
-                    Teacher
-          </label><br />
-                  <label>
-                    <Field name="role" component="input" type="radio" value="student" onClick={this.buttonEnable} />
-                    Student
-          </label>
-                  <Field name="role" component={renderError} />
-                </div>
+                <Field name="department" type="text" component={renderField} label="Department" />
+                {this.props.role==='student'?(<div><select><option>2016-17</option></select>
                 <div className="text-center mt-4">
                   <MDBBtn id="StuNext" type="submit" className="pink accent-2" style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} >
                     Next
               </MDBBtn>
+              </div>
+              </div>):(<div>
                   <MDBBtn className="pink accent-2" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
                     Register
               </MDBBtn>
-                </div>
+                </div>)}
               </div>
             </form>
           </MDBCol>

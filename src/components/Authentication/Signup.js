@@ -30,12 +30,12 @@ class Signup extends Component {
   }
 
   render() {
-    
+    console.log(this.props.location.state)
     const { page } = this.state
     const {onSubmit}=this.props
     return (
       <div>
-        {page === 1 && <SignupFirst onNext={this.nextPage} />}
+        {page === 1 && <SignupFirst role={this.props.location.state.role} onNext={this.nextPage} />}
         {page === 2 && (<SignupSecond actionCreator={this.props.studentSignup} RecNo={5}
               previousPage={this.previousPage}
               onNext={this.nextPage}

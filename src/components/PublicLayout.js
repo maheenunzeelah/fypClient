@@ -5,6 +5,7 @@ import Quizsettings from './PublicPages/QuizSettings';
 import Overview from './PublicPages/Overview';
 import FooterPage from './PublicPages/Footer';
 import Signup from './Authentication/Signup';
+import RoleSelection from './Authentication/roleSelection';
 import SignupSecond from './Authentication/signupSecond'
 import Login from './Authentication/login';
 import Contact from './PublicPages/contact';
@@ -25,6 +26,7 @@ return(
     <Switch>
      <Route exact path="/" component={Main}></Route>
      <Route path="/signup" component={Signup}></Route>
+     <Route path="/signupas" component={RoleSelection}></Route>
      <Route path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
      <Route path="/contact" component={Contact}></Route>
