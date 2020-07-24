@@ -3,12 +3,13 @@ import axios from 'axios';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Field, reduxForm, isPristine } from 'redux-form';
 import validate from '../validate';
-import renderField from '../renderField';
+import {renderField} from '../renderField';
 import { connect } from 'react-redux';
 import { teacherSignup, studentAuth } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { async } from 'q';
 import PropTypes from 'prop-types';
+import { Card, CardContent ,Select,MenuItem,FormControl,InputLabel} from '@material-ui/core';
 
 class SignupFirst extends Component {
   constructor(props) {
@@ -74,28 +75,55 @@ class SignupFirst extends Component {
       <MDBContainer >
         <MDBRow>
           <MDBCol md="3"></MDBCol>
-          <MDBCol md="6">
-            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" encType='multipart/form-data' style={{ color: " white" }}>
-              <p className="h4 text-center pink-text font-weight-bold" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
+          <MDBCol md="6" >
+            <Card className="m-5 mdb-color lighten-5">
+              <CardContent>
+            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error " encType='multipart/form-data' style={{ color: " #1C2331" }}>
+              <p className="h4 text-center   font-weight-bold" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
               <div style={{ textAlign: "left" }}>
-                <Field name="firstName" type="text" component={renderField} label="First Name" />
-                <Field name="lastName" type="text" component={renderField} label="Last Name" />
+                <div className="row">
+                  <div className="col-sm-6">
+                <Field name="firstName" type="text" component={renderField}  label="First Name" />
+                </div>
+                <div className="col-sm-6">
+                <Field name="lastName" type="text" component={renderField}  label="Last Name" />
+                </div>
+                </div>
                 <Field name="email" type="email" component={renderField} label="Email" />
+                <div className="row">
+                  <div className='col-sm-6'>
                 <Field name="password" type="password" component={renderField} label="Password" />
+                </div>
+                <div className='col-sm-6'>
                 <Field name="department" type="text" component={renderField} label="Department" />
-                {this.props.role==='student'?(<div><select><option>2016-17</option></select>
+                </div>
+                </div>
+                {this.props.role==='student'?(
+                <div>
+                   <label>Favorite Color</label>
+        <div>
+          <Field name="favoriteColor" component="select">
+            <option></option>
+            <option value="#ff0000">Red</option>
+            <option value="#00ff00">Green</option>
+            <option value="#0000ff">Blue</option>
+          </Field>
+        </div>
+ 
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" type="submit" className="pink accent-2" style={{ marginBottom: "74px" }} disabled={this.state.nextisDisabled} >
+                  <MDBBtn id="StuNext" type="submit" className="unique-color-dark" style={{ marginBottom: "74px" }} >
                     Next
               </MDBBtn>
               </div>
               </div>):(<div>
-                  <MDBBtn className="pink accent-2" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
+                  <MDBBtn className="unique-color-dark" type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
                     Register
               </MDBBtn>
                 </div>)}
               </div>
             </form>
+            </CardContent>
+            </Card>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

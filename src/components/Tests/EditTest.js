@@ -3,7 +3,7 @@ import TestWindow from '../TestWindow';
 import { Link } from 'react-router-dom';
 import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
-import renderField from '../renderField';
+import {renderField} from '../renderField';
 import { updateTest, deleteTest, editTest } from '../../actions'
 
 class EditTest extends Component {
