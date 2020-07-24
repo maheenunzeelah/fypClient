@@ -16,6 +16,7 @@ class Login extends Component {
       page: 1
     }
   }
+  
   nextPage() {
   
     this.setState({ page: this.state.page + 1 })

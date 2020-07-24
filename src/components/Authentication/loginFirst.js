@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import {Link, NavLink, BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Link, NavLink, BrowserRouter, Route, Switch,withRouter} from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import Dashboard from '../Dashboard';
 import Account from '../Account';
@@ -9,7 +9,7 @@ import {Field, reduxForm} from 'redux-form';
 import validate from '../validate';
 import renderField from '../renderField';
 import {teacherLogin,studentAuth} from '../../actions'; 
-
+import PropTypes from 'prop-types';
 
 class LoginFirst extends Component {
   constructor(){
@@ -19,10 +19,23 @@ class LoginFirst extends Component {
       registerisDisabled:true
     }
   }
-  componentDidMount(formValues){
-  
+  componentDidMount(){
+  if(this.props.auth.isAuthenticatedTeacher){
+    window.location.replace('/dashboard')
   }
+  else if(this.props.auth.isAuthenticatedStudent){
+    window.location.replace('/student/quiz')
+  }
+  }
+  componentWillReceiveProps(nextProps){
 
+   if(nextProps.auth.isAuthenticatedTeacher){
+    window.location.replace('/dashboard')
+   }
+   else if(nextProps.auth.isAuthenticatedStudent){
+    window.location.replace('/student/quiz')
+  }
+  }
   buttonEnable=(e)=>{
     if(e.target.value==='student'){
     
@@ -111,9 +124,14 @@ class LoginFirst extends Component {
 const renderError = ({ meta: { touched, error } }) =>
 touched && error ? <span className="ui error message">{error}</span> : false
 
+LoginFirst.protoTypes={
+auth:PropTypes.object.isRequired
+}
 const mapStateToProps=(state)=>{
 
-return {login: state.login}
+return {login: state.login,
+auth:state.auth
+}
 } 
 
 const formWrapped= reduxForm({
@@ -121,4 +139,4 @@ form: 'Login',
 validate
 })(LoginFirst);
 
-export default connect(mapStateToProps,{teacherLogin,studentAuth})(formWrapped); 
+export default withRouter(connect(mapStateToProps,{teacherLogin,studentAuth})(formWrapped)); 

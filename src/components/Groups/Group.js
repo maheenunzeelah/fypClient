@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{Component} from 'react'
 import '../../css/Group.css'
 import { Link } from 'react-router-dom' 
 import TestWindow from '../TestWindow'
-const Group = () =>{
 
+
+class Group extends Component{
+ render(){
     return(
     
-<div class="Conatainer">  
+<div className="container">  
     
 {/* main page*/}
 <div class="jumbotron vertical-center"> 
@@ -56,7 +58,7 @@ const Group = () =>{
                           <input class="w3-input w3-border" type="text" placeholder=" Search Group name"></input>
                           </div>
                           <div class="w3-quarter w3-right" >
-                          <Link to='/newGroup' class="w3-button w3-black">New Group +</Link>
+                          <Link to='/dashboard/newGroup' class="w3-button w3-black">New Group +</Link>
                           </div>
 
                     </div>
@@ -161,6 +163,7 @@ const Group = () =>{
 </div>
 )
   
+}
 }
 
 export default Group;

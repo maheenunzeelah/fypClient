@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { MDBNavbar,MDBNavbarToggler, MDBCollapse, MDBNavbarNav, MDBIcon, MDBBtn , MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
-
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux'
+import {logout} from './../actions'
 class Dashboard extends Component {
     state = {
       isOpen: false
@@ -10,11 +12,14 @@ class Dashboard extends Component {
       this.setState({ isOpen: !this.state.isOpen });
     }
      handleClick=(e)=>{
-      localStorage.removeItem('jwtToken');
-      window.location='http://localhost:3000/login';
+       e.preventDefault()
+     this.props.logout()
   }
     
     render() {
+
+      const {isAuthenticationTeacher,isAuthenticationStudent,user}=this.props.auth;
+
         return(
             <MDBNavbar style={{backgroundColor:"rgb(47, 156, 181)"}} dark expand="md">
             <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -109,5 +114,12 @@ class Dashboard extends Component {
   );
         }
     }
+  Dashboard.propTypes={
+    logout:PropTypes.func.isRequired,
+    auth:PropTypes.object.isRequired
+  }
+    const mapStateToProps=(state)=>({
+      auth:state.auth
+    })
   
-    export default Dashboard;
+    export default connect(mapStateToProps,{logout})(Dashboard);

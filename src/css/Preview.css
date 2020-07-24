@@ -1,0 +1,56 @@
+.test_nav{
+  background-color: black;
+  text-emphasis-color: aliceblue;
+  margin: 5%;
+}
+
+#main_nav{
+  
+  background-color: black;
+  color: azure;
+  font-size: 20px;
+  margin: 1%;
+}
+
+#Assign_page{
+  margin: 5%;
+
+}
+
+#Assign_content{
+  border: 1px rgb(132, 138, 134) solid;
+  border-radius: 10px;
+  padding:3%;
+}
+
+#g_assign{
+  background-color: whitesmoke;
+  font-size: 13px;
+  border-right: 1px rgb(218, 240, 225) solid;
+  
+}
+
+#l_assign{
+  background-color: whitesmoke;
+  font-size: 13px;
+}
+
+#main_ass{
+  background-color:whitesmoke;
+}
+
+#OR{
+
+  margin-top: 10%;
+  font-size: 20px;
+  color: aliceblue;
+}
+
+#OR center{
+  background-color: black;
+  border-radius: 100px;
+  width: 70px;
+  height: 70px;
+ margin-left: 3px;
+ padding-top: 10px;
+}

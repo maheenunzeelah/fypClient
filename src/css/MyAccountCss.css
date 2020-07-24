@@ -1,0 +1,71 @@
+.sub_container{
+    
+    font-size: 15px;
+    background-color : whitesmoke;
+    border: rgb(182, 165, 165) ridge 1px;
+    border-radius: 5px;
+    padding: 1.5%;
+    margin-top: 1%;
+    cursor: pointer;
+    margin-right: 12%;
+}
+
+
+
+.fa-caret-down{
+    float: right;
+}
+
+.sub-detail{
+
+    font-size: 12px;
+    padding-left: 20px ;
+}
+
+.side-box{
+
+    border: rgb(182, 165, 165) ridge 1px;
+    border-radius: 5px;
+    padding: 6%;
+    background-color : whitesmoke;
+    margin-top: 2%;
+}
+
+
+.table{
+
+    border:none;
+    
+}
+
+.links{
+
+    color: brown;
+    
+}
+
+
+.by-group{
+
+    border-left:brown solid 1px;
+    padding-left: 2px;
+}
+
+
+
+.sub-collapse{
+
+    padding: 5%;
+
+}
+
+.delete{
+    border:brown solid 1px;
+    color: brown;
+    border-radius: 5px;
+
+}
+
+
+
+

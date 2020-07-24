@@ -11,6 +11,11 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import {BrowserRouter , Route,Switch} from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import {setCurrentTeacher,setCurrentStudent} from './actions'
+import setAuthToken from './utils/setAuthToken';
+  
+
 
 // import Main from './Main';
 // import Overview from './Overview';
@@ -21,6 +26,13 @@ import {BrowserRouter , Route,Switch} from 'react-router-dom';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(applyMiddleware(thunk))); 
 
+if(localStorage.jwtToken){
+    setAuthToken(localStorage.jwtToken)
+    //decode token and get user
+    const decoded=jwt_decode(localStorage.jwtToken)
+    decoded.teacherid?(store.dispatch(setCurrentTeacher(decoded))):(store.dispatch(setCurrentStudent(decoded)))
+  
+  }
 ReactDOM.render( 
 <Provider store={store}>
 <BrowserRouter>
