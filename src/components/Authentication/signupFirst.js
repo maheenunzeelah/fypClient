@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Field, reduxForm, isPristine } from 'redux-form';
 import validate from '../validate';
-import {renderField} from '../renderField';
+import {renderField,renderDepartField,renderBatchField} from '../renderField';
 import { connect } from 'react-redux';
 import { teacherSignup, studentAuth } from '../../actions';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
@@ -17,26 +17,24 @@ class SignupFirst extends Component {
     this.state = {
       nextisDisabled: true,
       registerisDisabled: true,
-  
-   
     }
   }
   componentDidMount(){
     if(this.props.auth.isAuthenticatedTeacher){
       window.location.replace('/dashboard')
     }
-    else if(this.props.auth.isAuthenticatedStudent){
-      window.location.replace('/dashboard/addQues')
-    }
+    // else if(this.props.auth.isAuthenticatedStudent){
+    //   window.location.replace('/dashboard/addQues')
+    // }
     }
     componentWillReceiveProps(nextProps){
   
      if(nextProps.auth.isAuthenticatedTeacher){
       window.location.replace('/dashboard')
      }
-     else if(nextProps.auth.isAuthenticatedStudent){
-      window.location.replace('/dashboard/addQues')
-    }
+    //  else if(nextProps.auth.isAuthenticatedStudent){
+    //   window.location.replace('/dashboard/addQues')
+    //}
     }
 
   buttonEnable = (e) => {
@@ -58,7 +56,7 @@ class SignupFirst extends Component {
   handleSubmit = (formValues) => {
 
     console.log(formValues)
-    if (formValues.role == "student") {
+    if (this.props.role == "student") {
       this.props.studentAuth(formValues)
       this.props.onNext();
 
@@ -96,36 +94,23 @@ class SignupFirst extends Component {
                 </div>
                 <div className="col-sm-6">
                 <label>Department</label>
-                
-          <Field name="favoriteColor" component="select" style={{border:'solid 1px #1C2331'}}>
-            <option></option>
-            <option value="#ff0000">Red</option>
-            <option value="#00ff00">Green</option>
-            <option value="#0000ff">Blue</option>
-          </Field>
-        </div>
+                <Field name="department" component={renderDepartField} />
+                </div>
                 </div>
                 {this.props.role==='student'?(
                 <div>
                    <label>Batch</label>
-        <div>
-          <Field name="favoriteColor" component="select" style={{border:'solid 1px #1C2331'}}>
-            <option></option>
-            <option value="#ff0000">Red</option>
-            <option value="#00ff00">Green</option>
-            <option value="#0000ff">Blue</option>
-          </Field>
-        </div>
+                  <Field name="batch" component={renderBatchField}  />
  
                 <div className="text-center mt-4">
                   <Button id="StuNext" type="submit" className="unique-color-dark white-text btn btn-lg" style={{ marginBottom: "74px" }} >
                     Next
               </Button>
               </div>
-              </div>):(<div>
-                  <MDBBtn className="unique-color-dark " type="submit" style={{ marginBottom: "74px" }} disabled={this.state.registerisDisabled} >
+              </div>):(<div className="text-center mt-5">
+                  <Button className="unique-color-dark white-text btn btn-lg " type="submit" style={{ marginBottom: "74px" }}>
                     Register
-              </MDBBtn>
+              </Button>
                 </div>)}
               </div>
             </form>

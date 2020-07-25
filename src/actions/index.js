@@ -39,13 +39,13 @@ export const teacherLogin = (formValues) => async dispatch => {
   await postDataApi.post('/login', formValues)
     .then(response => {
 
-      console.log(response.data)
+      console.log(response.data.token)
       // saving token in response in localStorage
-      localStorage.setItem('jwtToken', response.data);
+      localStorage.setItem('jwtToken', response.data.token);
 
-      setAuthtoken(response.data)
+      setAuthtoken(response.data.token)
       // //Decoding token
-      const decoded=jwt_decode(response.data);
+      const decoded=jwt_decode(response.data.token);
       console.log(decoded)
       dispatch(setCurrentTeacher(decoded));
       alert("login");
@@ -187,14 +187,12 @@ export const deleteTest = (id) => async dispatch => {
 export const createGroup=(groupName)=>async dispatch=>{
  await postDataApi.post('login/teacher/createGroup',groupName)
   .then(response => {
-    //var result =window.confirm(response.data)
-
 
     if (response.data === "Enter Group name")
       alert(response.data)
     else {
       alert("Group created");
-      
+       window.location.replace('/dashboard/editGroup')      
     }
   })
   .catch(err => {
