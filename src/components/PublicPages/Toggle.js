@@ -2,13 +2,13 @@ import React from 'react';
 
 function Toggle(props){
     return(
-      <div className="Toggle">
-       <div className="container" style={{marginTop:"30px", textAlign:"left"}}>
-            <h4>{props.heading}</h4>
+      <div className="Toggle ">
+       <div className="container " style={{marginTop:"30px", textAlign:"left"}}>
+            <h4 >{props.heading}</h4>
         
             {/*availablility*/}
            <div className="input-group mb3">
-            <div className="custom-select " data-toggle="collapse" href={`#${props.label}`} aria-expanded="false" aria-controls="collapseExample">
+            <div className="custom-select grey lighten-3 mb-5" data-toggle="collapse" href={`#${props.label}`} aria-expanded="false" aria-controls="collapseExample">
              {props.label}
             </div>
                 {/* <div className="input-group-append">

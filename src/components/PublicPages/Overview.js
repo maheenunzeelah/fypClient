@@ -10,10 +10,10 @@ function Overview(){
     <div className="Overview" >
     <Card />
       <div className="container" >
-        <div className="jumbotron" style={{border:"solid #1a6365", marginTop:"30px",backgroundColor:"rgb(183, 240, 240)"}}>
+        <div className="jumbotron" style={{border:"solid pink", marginTop:"30px",backgroundColor:"rgb(1, 4, 20)", color:'pink'}}>
           <div style={{textAlign:"left"}}>
               <div className="row">
-               <div className="col-lg-12">
+               <div className="col-lg-12" style={{ marginbOttom:'30px'}}>
                 <h4>Create Test</h4>
                 </div>
                </div>

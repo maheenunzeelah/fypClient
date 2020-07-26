@@ -6,9 +6,9 @@ function QuizSettings(){
    
 
     return(
-      <div className="QuizSettings">
+      <div className="QuizSettings pink-text">
       <Card />
-      <Toggle heading="Test Access" label="Availibilty">
+      <Toggle heading="Test Access" label="Availibilty" style={{backgroundColor:'pink'}}>
        <span> <input type="radio" name="Availability"  value="Available" /> Available <br/></span>
        <span><input type="radio" name="Availability" value="Not Available"/> Not Available<br /></span> 
       </Toggle>
