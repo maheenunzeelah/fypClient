@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import React from 'react';
+import Axios from 'axios';
 
 
 
@@ -18,7 +19,7 @@ export const teacherSignup = (formValues) => async (dispatch, getState) => {
   await postDataApi.post('/signup', formValues)
     .then(response => {
 
-      localStorage.setItem('jwtToken', response.data);
+      localStorage.setItem('jwtToken', response.data.token);
       alert("Teacher Registered");
       window.location.reload();
     })
@@ -200,6 +201,12 @@ export const createGroup=(groupName)=>async dispatch=>{
       alert(err.response.data.group);
 
   })
+}
+//fetch student list
+export const fetchStudents=()=>async dispatch=>{
+ const response= await postDataApi.get(`login/teacher/fetchStudents`)
+ console.log(response.data)
+  dispatch({type:'FETCH_STUDENTS',payload:response.data})
 }
 
 //STUDENT PANEL ACTION CREATORS
