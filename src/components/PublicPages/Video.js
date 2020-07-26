@@ -6,7 +6,7 @@ class Video extends Component{
     render()
     {
         return <div id="hsty">
-             <h4>E-Catechism Demo</h4>
+             <h2 className="pink-text font-weight-bold mt-r pb-3">E-Catechism Demo</h2>
         <video  width= "550px" height="200px" controls src={video} type="video/mp4"></video>
      
         </div>

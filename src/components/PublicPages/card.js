@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch , withRouter} from 'react-router-dom';
 
 function Card(){
 return(
-    <div className="card pink-text " style={{backgroundColor:"rgb(1, 4, 20)" }}>
+    <div className="card pink-text font-weight-bold " style={{backgroundColor:"rgb(1, 4, 20)" }}>
      <div className="row">
      <div className="col-lg-1"></div>
      <div className="col-lg-4">
