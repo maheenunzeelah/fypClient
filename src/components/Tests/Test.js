@@ -148,7 +148,7 @@ class Test extends Component {
   }
   render() {
 
-   
+   let isTest
     
     return (
       <div className="container">
@@ -196,9 +196,11 @@ class Test extends Component {
             </div>
 
           </div>
+{this.props.tests.map(test=>{
+  isTest=test.test.length>0
+})}
 
-
-        {this.DynamicButtons()}
+        {isTest?this.DynamicButtons():null}
 
         </div>
       </div>

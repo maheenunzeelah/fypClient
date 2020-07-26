@@ -4,7 +4,7 @@ import { isEmpty} from '../validation/is-empty';
 const initialState ={
     isAuthenticatedTeacher :false,
     isAuthenticatedStudent:false,
-    userId: {}
+    user: {}
 };
 
 export const authReducer=(state=initialState, action)=>{
@@ -13,13 +13,13 @@ export const authReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 isAuthenticatedTeacher:!isEmpty(action.payload),
-                userId:action.payload
+                user:action.payload
             }
          case SET_CURRENT_STUDENT:
             return{
                 ...state,
                 isAuthenticatedStudent:!isEmpty(action.payload),
-                userId:action.payload
+                user:action.payload
             }   
             default:
                     return state

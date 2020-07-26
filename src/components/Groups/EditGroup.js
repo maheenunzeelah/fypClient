@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import TestWindow from '../TestWindow';
 import '../../css/EditGroup.css'
 import {Card,CardContent,Box} from '@material-ui/core'
+import { fetchStudents } from '../../actions';
+import {connect} from 'react-redux'
+import { isEmpty} from '../../validation/is-empty';
 
 class EditGroup extends Component {
+    componentDidMount(){
+     this.props.fetchStudents()
+    }
     render() {
         return (
             <div style={{ width: '100%' }}>
@@ -20,9 +26,14 @@ class EditGroup extends Component {
                 <div className="row">
                     <div className="col">
                         <div className="collapse multi-collapse" id="multiCollapseExample1">
-                            <div className="w-200">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                            </div>
+                           
+                           {!isEmpty(this.props.studentList)?this.props.studentList.map(stud=>{
+                             return <div className="w-200">
+                               
+                              </div>  
+                           }
+                           ):<></>}
+                            
                         </div>
                     </div>
 
@@ -35,5 +46,9 @@ class EditGroup extends Component {
         )
     }
 }
-
-export default EditGroup;
+const mapStateToProps=(state)=>{
+ return{
+   studentList:state.studentList
+ }
+}
+export default connect(mapStateToProps,{fetchStudents})(EditGroup);
