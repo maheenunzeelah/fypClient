@@ -29,7 +29,7 @@ class EditGroup extends Component {
                            
                            {!isEmpty(this.props.studentList)?this.props.studentList.map(stud=>{
                              return <div className="w-200">
-                               
+                           <ul><ol>{stud.firstName}</ol></ul>
                               </div>  
                            }
                            ):<></>}
