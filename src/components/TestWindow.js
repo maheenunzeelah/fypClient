@@ -41,13 +41,13 @@ class TestWindow extends Component {
                 <div className="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-7" id="links">
 
                       {/* Test Icon */}
-                    <Link to="/dashboard" style={{color:"#ff4081"}}><i className="fa fa-file fa-2x " aria-hidden="true"><p>Tests</p></i></Link>
+                    <Link to="/dashboard" style={{color:"#ff4081"}}><i className="fa fa-file fa-2x " aria-hidden="true"><p className="small mr-3">Tests</p></i></Link>
 
                       {/*  Groups Icon */}
-                    <Link to="/dashboard/group" style={{color:"#ff4081"}}><i className="fa fa-users fa-2x" aria-hidden="true"><p>Groups</p></i></Link>
+                    <Link to="/dashboard/group" style={{color:"#ff4081"}}><i className="fa fa-users fa-2x" aria-hidden="true"><p className="small mr-3">Groups</p></i></Link>
 
                     {/*  Links Icon */}
-                    <Link style={{color:"#ff4081"}}><i className="fa fa-link fa-2x" aria-hidden="true"><p>Links</p></i></Link>
+                    <Link style={{color:"#ff4081"}}><i className="fa fa-link fa-2x" aria-hidden="true"><p className="small mr-3">Links</p></i></Link>
 
                 </div>
 

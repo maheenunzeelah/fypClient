@@ -22,7 +22,7 @@ function Overview(){
         <TimelineContent className="m-5">
               <div className="row">
                <div className="col-lg-12" style={{ marginbOttom:'30px'}}>
-                <h4>Create Test</h4>
+                <h3 className="font-weight-bold amber-text">Create Test</h3>
                 </div>
                </div>
                <div className="row pt-3">
@@ -43,7 +43,7 @@ function Overview(){
         <TimelineContent className="m-5">
                <div className="row">
                 <div className="col-lg-12">
-                <h4>View Results</h4>
+                <h3 className="font-weight-bold amber-text">View Results</h3>
                 </div>
                 </div>
                 <div className="row pt-3">
@@ -64,7 +64,7 @@ function Overview(){
         <TimelineContent className="m-5">
               <div className="row">
                 <div className="col-lg-12">
-                <h4 className="pb-3">Analyse statistics</h4>
+                <h3 className="font-weight-bold amber-text">Analyse statistics</h3>
                 </div>
                 </div>
                 <div className="row align-item-center">

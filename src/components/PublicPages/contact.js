@@ -7,7 +7,7 @@ class Contact extends Component{
 	render(){
 	  return (
   
-		<div className="container" id="main">
+		<div className="container light-blue-text" id="main">
 		  <div className="row">
 			<div className="col-lg-1" />
 			<div className="col-lg-4 col-md-8 col-xs-8 col-sm-6" id="box1">
@@ -41,9 +41,9 @@ class Contact extends Component{
 			  <h5>Contact ClassMarker</h5>
 			  <p>ClassMarker offers Support 7 Days a Week</p>
 			  <form action="/action_page.php">
-				<div className="form-group">
+				<div className="form-group ">
 				  <label htmlFor="name">Your Name *</label>
-				  <input className="form-control" id="name" type="text" />
+				  <input className="form-control blue lighten-5" id="name" type="text" />
 				</div>
 				<div className="form-group">
 				  <label htmlFor="name">ClassMarker Username (If registered)</label>

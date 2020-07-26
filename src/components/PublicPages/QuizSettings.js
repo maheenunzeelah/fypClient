@@ -6,7 +6,7 @@ function QuizSettings(){
    
 
     return(
-      <div className="QuizSettings pink-text">
+      <div className="QuizSettings font-weight-bold amber-text">
       <Card />
       <Toggle heading="Test Access" label="Availibilty" >
        <span> <input type="radio" name="Availability"  value="Available" /> Available <br/></span>

@@ -6,7 +6,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import React from 'react';
 import Axios from 'axios';
-
+import Alert from '@material-ui/lab/Alert';
 
 
 function onClick() {
@@ -287,7 +287,8 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
               const decoded=jwt_decode(token);
               console.log(decoded)
               dispatch(setCurrentStudent(decoded));
-              alert("login");
+              alert('login')
+ 
             })
         })()
       }

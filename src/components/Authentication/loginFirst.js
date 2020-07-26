@@ -11,6 +11,7 @@ import {renderField} from '../renderField';
 import {teacherLogin,studentAuth} from '../../actions'; 
 import PropTypes from 'prop-types';
 
+
 class LoginFirst extends Component {
   constructor(){
     super();
@@ -33,7 +34,7 @@ class LoginFirst extends Component {
     window.location.replace('/dashboard')
    }
    else if(nextProps.auth.isAuthenticatedStudent){
-    window.location.replace('/student/quiz')
+    
   }
   }
   buttonEnable=(e)=>{

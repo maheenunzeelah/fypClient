@@ -8,7 +8,7 @@ function Toggle(props){
         
             {/*availablility*/}
            <div className="input-group mb3">
-            <div className="custom-select grey lighten-3 mb-5" data-toggle="collapse" href={`#${props.label}`} aria-expanded="false" aria-controls="collapseExample">
+            <div className="custom-select pink lighten-4 mb-5" data-toggle="collapse" href={`#${props.label}`} aria-expanded="false" aria-controls="collapseExample">
              {props.label}
             </div>
                 {/* <div className="input-group-append">
@@ -17,7 +17,7 @@ function Toggle(props){
             
             </div>
             <div className="collapse" id={props.label}>
-            <div className="card card-body">
+            <div className="card card-body pink lighten-5 " style={{color:"rgb(1, 4, 20)"}}>
           {props.children}
             </div>
          </div>

@@ -51,7 +51,7 @@ render() {
             <a className="nav-link white-text" href="/tourpage">Take a Tour</a>
             </MDBNavItem>
             <MDBNavItem>
-            <a className="nav-link white-text" href="/tourpage">FAQ</a>
+            <a className="nav-link white-text" href="#">FAQ</a>
             </MDBNavItem>
             <MDBNavItem>
             <a className="nav-link white-text" href="/contact">Contact Us</a>
