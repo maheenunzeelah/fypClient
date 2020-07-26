@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import '../../css/Main.css';
 import 'tachyons';
 import test1 from '../../images/test1.jpg';
@@ -24,7 +25,7 @@ class Main extends Component {
                                      paperwork and provide you easy way for creating and checking tests, preparing results and much more.
                                  </p>
 
-                                <div className='btn btn-lg pink lighten-4' ><a href="/signup"> Register Now </a></div>
+                                <div className='btn btn-lg pink lighten-4 pink-text' ><Link to="/signupas"> Register Now </Link></div>
 
                             </div>
                             <div>

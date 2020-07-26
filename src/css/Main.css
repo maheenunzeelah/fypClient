@@ -1,4 +1,6 @@
-
+a:link,a:visited,a:active,a:focus,a:hover{
+    text-decoration: none !important
+}
 .introPara{
     line-height: 1.5em;
     font-size: 15px;
