@@ -113,7 +113,7 @@ class SignupSecond extends Component {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
-                    <h3 style={{ margin: "22px" }}>Say Something </h3>
+                    <h5 style={{ margin: "22px" }}>Say Something for 5 seconds and give 5 samples   </h5>
 
                     <audio src={this.state.blobURL} controls="controls" />
                     <button className="btn btn-lg btn-primary float-right" onClick={this.start} disabled={this.state.isRecording}>

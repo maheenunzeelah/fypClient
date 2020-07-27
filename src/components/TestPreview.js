@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Preview.css'
+import '../css/Preview.css'
 import { Link } from 'react-router-dom'
 
 class Preview extends Component {
