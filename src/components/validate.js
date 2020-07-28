@@ -23,6 +23,9 @@ const validate = values => {
   if (!values.batch) {
     errors.batch = 'Required'
   }
+  if (!values.rollNo) {
+    errors.rollNo = 'Required'
+  }
   return errors
 }
 

@@ -31,7 +31,7 @@ class EditGroup extends Component {
                            
                            {!isEmpty(this.props.studentList)?this.props.studentList.map(stud=>{
                              return <div className="w-200">
-                           <ul><ol><Checkbox />{stud.firstName}</ol></ul>
+                           <ul><ol><Checkbox />{stud}</ol></ul>
                               </div>  
                            }
                            ):<></>}
@@ -65,6 +65,7 @@ class EditGroup extends Component {
     }
 }
 const mapStateToProps=(state)=>{
+    console.log(state.studentList)
  return{
    studentList:state.studentList
  }

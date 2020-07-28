@@ -98,15 +98,23 @@ class SignupFirst extends Component {
                 </div>
                 </div>
                 {this.props.role==='student'?(
-                <div>
+                  <div>
+                <div className="row">
+                 <div className="col-sm-6">
                    <label>Batch</label>
                   <Field name="batch" component={renderBatchField}  />
- 
+                  </div>
+                  <div className="col-sm-6">
+              <Field name="rollNo" type="number" component={renderField}  label="Roll No" />
+              </div>
+              </div>
                 <div className="text-center mt-4">
                   <Button id="StuNext" type="submit" className="unique-color-dark white-text btn btn-lg" style={{ marginBottom: "74px" }} >
                     Next
               </Button>
               </div>
+              
+             
               </div>):(<div className="text-center mt-5">
                   <Button className="unique-color-dark white-text btn btn-lg " type="submit" style={{ marginBottom: "74px" }}>
                     Register
