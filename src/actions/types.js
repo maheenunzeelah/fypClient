@@ -7,4 +7,5 @@ export const ADD_QUES='ADD_QUES';
 export const FETCH_TESTS='FETCH_TESTS';
 export const FETCH_QUESTIONS='FETCH_QUESTIONS';
 export const CURRENT_TEST="CURRENT_TEST";
-export const FETCH_COURSES="FETCH_COURSES"
+export const FETCH_COURSES="FETCH_COURSES";
+export const GROUP_LIST="GROUP_LIST";

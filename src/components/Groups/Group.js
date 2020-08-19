@@ -1,11 +1,36 @@
 import React,{Component} from 'react'
 import '../../css/Group.css'
 import { Link } from 'react-router-dom' 
-import TestWindow from '../TestWindow'
+import TestWindow from '../TestWindow';
+import {groupList} from '../../actions';
+import {connect} from 'react-redux';
+import {isEmpty} from '../../validation/is-empty'
 
 
 class Group extends Component{
+  componentDidMount(){
+    this.props.groupList(1)
+  }
+  DynamicButtons=()=>{
+    console.log(this.props.groups)
+    return this.props.groups.map(group=>
+             <section className="pagin">
+               {group.currentPage!=1 && group.previousPage!=1?<a className="white-text" onClick={()=>this.props.groupList(1)}>1</a>:null}
+               {group.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.groupList(group.previousPage)}>{group.previousPage}</a>:null}
+                <a  className="white-text" onClick={()=>this.props.groupList(group.currentPage)}>{group.currentPage}</a>
+               
+                {group.hasNextPage?<a  className="white-text" onClick={()=>this.props.groupList(group.nextPage)}>{group.nextPage}</a>:null}
+               { (group.lastPage!=group.currentPage && group.nextPage!=group.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.groupList(group.lastPage)}>{group.lastPage}</a></span>:null
+             }
+             
+             </section>     
+             )
+             
+}  
  render(){
+
+   
+      console.log(this.props.groups.group)
     return(
     
 <div >  
@@ -52,6 +77,7 @@ class Group extends Component{
               
             
               {/* Group1 container*/}
+             
               <div className="container amber-text">
               
               <button  className="collapsible btn btn-outline-pink" style={{textAlign:'left'}} id="Group1" data-toggle="collapse" data-target="#demo1"><i class="fa fa-users fa-2x "  aria-hidden="true"></i> Group One</button>
@@ -108,8 +134,15 @@ class Group extends Component{
 
 </div>
 )
-  
-}
+
 }
 
-export default Group;
+}
+const mapStateToProps=(state)=>{
+ console.log(state.groupsList)
+  return{
+    groups:state.groupsList
+  }
+}
+
+export default connect(mapStateToProps,{groupList})(Group);

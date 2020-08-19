@@ -80,6 +80,17 @@ export const currentTestReducer=(state={}, action)=>{
     }
 }
 
+export const groupListReducer=(state={}, action)=>{
+    
+    switch(action.type){
+       
+        case 'GROUP_LIST':
+        return action.payload   
+        
+        default:
+        return state
+    }
+}
 export const fetchStudentsReducer=(state={},action)=>{
     switch(action.type){
         case 'FETCH_STUDENTS':

@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -201,6 +201,12 @@ export const createGroup=(groupName)=>async dispatch=>{
       alert(err.response.data.group);
 
   })
+}
+//fetch Groups list
+export const groupList=(page)=>async dispatch=>{
+    const response=await postDataApi.get(`login/teacher/groupList/${page}`)
+    console.log(response.data)
+    dispatch({type:GROUP_LIST,payload:response.data})
 }
 //fetch student list
 export const fetchStudents=()=>async dispatch=>{
