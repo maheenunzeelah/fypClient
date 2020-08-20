@@ -21,21 +21,21 @@ class Group extends Component{
   }
 
   DynamicButtons=()=>{
-    return this.props.groups.group.map(group=>
-             <section className="pagin">
-               {group.currentPage!=1 && group.previousPage!=1?<a className="white-text" onClick={()=>this.props.groupList(1)}>1</a>:null}
+    const {groups}=this.props
+    return <section className="pagin">{console.log(groups)}
+               {groups.currentPage!=1 && groups.previousPage!=1?<a className="white-text" onClick={()=>this.props.groupList(1)}>1</a>:null}
 
-               {group.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.groupList(group.previousPage)}>{group.previousPage}</a>:null}
+               {groups.hasPreviousPage?<a  className="white-text" onClick={()=>this.props.groupList(groups.previousPage)}>{groups.previousPage}</a>:null}
 
-                <a  className="white-text" onClick={()=>this.props.groupList(group.currentPage)}>{group.currentPage}</a>
+                <a  className="white-text" onClick={()=>this.props.groupList(groups.currentPage)}>{groups.currentPage}</a>
                
-                {group.hasNextPage?<a  className="white-text" onClick={()=>this.props.groupList(group.nextPage)}>{group.nextPage}</a>:null}
+                {groups.hasNextPage?<a  className="white-text" onClick={()=>this.props.groupList(groups.nextPage)}>{groups.nextPage}</a>:null}
 
-               { (group.lastPage!=group.currentPage && group.nextPage!=group.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.groupList(group.lastPage)}>{group.lastPage}</a></span>:null
+               { (groups.lastPage!=groups.currentPage && groups.nextPage!=groups.lastPage)?<span className="white-text">...<a  className="white-text" onClick={()=>this.props.groupList(groups.lastPage)}>{groups.lastPage}</a></span>:null
              }
              
              </section>     
-             )
+             
              
 }  
 
@@ -90,22 +90,9 @@ renderList=()=>{
       // If value in searched bar matches the value of testname
       return (grp.groupName.indexOf(this.state.search) !== -1)
     })  
-  // When component will render first time
-  if (isEmpty(filtered)) {
-    console.log('empty')
-    return this.props.groups.group.map((grp,index) => {
-      // return test.test.map((test, index) => {
-        return <div>
-          {/* For preventing code replication function is called*/}
-          {this.filteredList(grp, index)}
-        </div>
-      // })
-      //   ;
-
-    })
-  }
+    console.log(filtered)
   // When we have list of filtered arry
-  else {
+ 
     return filtered.map((grp, index) => {
       return <div>
         {this.filteredList(grp, index)}
@@ -114,7 +101,7 @@ renderList=()=>{
       ;
 
 
-  }
+  
 }
  render(){
 
