@@ -20,7 +20,7 @@ class EditGroup extends Component {
             <div style={{ width: '100%' }}>
                 <TestWindow to="/dashboard/newGroup" label="Edit Group" separator=' > ' />
 
-                <Card style={{ margin: '50px' }}>
+                <Card style={{ margin: '50px', backgroundColor:'#fce4ec' }}>
                     <CardContent >
                         <p >
                             <a className="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Add Students</a>
@@ -30,13 +30,13 @@ class EditGroup extends Component {
                         </p>
 
                         <div className="row">
-                            <div className="col">
+                            <div className="col-md-4 container">
                                 <div className="collapse" id="multiCollapseExample1">
                                     <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-                                        <div>
-                                            <label>Select Batch</label>
-                                            <Field name="batch" component={renderBatchField} />
-                                            <button type="submit">Go</button>
+                                        <div className="input-group m-3">
+                                            <label className="pr-3">Select Batch</label>
+                                            <Field className="form-control" name="batch" component={renderBatchField} />
+                                            <button className="mt-5 btn btn-info btn-sm float-right" type="submit">Go</button>
                                         </div>
                                         
                                     </form>
