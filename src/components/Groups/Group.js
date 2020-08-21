@@ -65,7 +65,7 @@ filteredList=(grp,index)=>{
        <div className="w3-row" id="Links">
          
          <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Test' class="w3-btn" >Members (0) </Link></span>
-         <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/Test' class="w3-btn" >Assign </Link></span>
+         <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' class="w3-btn" >Assign </Link></span>
          <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
            <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">  Statistics  </button>
            <div class="dropdown-menu">

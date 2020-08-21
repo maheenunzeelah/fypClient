@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import TestWindow from '../TestWindow';
 import '../../css/EditGroup.css'
-import {Card,CardContent,Box,Checkbox} from '@material-ui/core'
+import {Card,CardContent,Box,Checkbox,TableRow,TableBody,TableHead ,TableCell} from '@material-ui/core'
 import { fetchStudents } from '../../actions';
 import {connect} from 'react-redux'
-import { isEmpty} from '../../validation/is-empty';
+import {isEmpty} from '../../validation/is-empty';
 import AssignTest from '../Assign'
 import TestPreview from '../TestPreview'
 class EditGroup extends Component {
@@ -28,10 +28,10 @@ class EditGroup extends Component {
                 <div className="row">
                     <div className="col">
                         <div className="collapse" id="multiCollapseExample1">
-                           
+                           {console.log(this.props.studentList)}
                            {!isEmpty(this.props.studentList)?this.props.studentList.map(stud=>{
                              return <div className="w-200">
-                           <ul><ol><Checkbox />{stud}</ol></ul>
+                           <ul><ol><Checkbox />{stud.firstName}</ol></ul>
                               </div>  
                            }
                            ):<></>}
