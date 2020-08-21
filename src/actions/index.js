@@ -209,8 +209,9 @@ export const groupList=(page)=>async dispatch=>{
     dispatch({type:GROUP_LIST,payload:response.data})
 }
 //fetch student list
-export const fetchStudents=()=>async dispatch=>{
- const response= await postDataApi.get(`login/teacher/fetchStudents`)
+export const fetchStudents=(value)=>async dispatch=>{
+  console.log(value.batch)
+ const response= await postDataApi.get(`login/teacher/fetchStudents/${value.batch}`)
  console.log(response.data)
   dispatch({type:'FETCH_STUDENTS',payload:response.data})
 }
