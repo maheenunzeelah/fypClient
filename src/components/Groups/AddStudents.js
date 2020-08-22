@@ -4,11 +4,15 @@ import {Box,Checkbox,TableRow,TableBody,TableHead ,TableCell,Paper} from '@mater
  export default class AddStudents extends Component{
    state={
        selectedStud:{},
-       checked:false,
+       checkedAll:false,
+       checked:[],
        numSelected:0
    }  
-   handleClick=()=>{
-    
+   handleClick=(e,stud,index)=>{
+       this.setState(prevState=>this.state.checked[index]=!prevState.checked[index])
+    return e.target.checked?(
+      this.setState({selectedStud:{studID:stud}},()=>console.log(this.state.selectedStud))
+    ):(null)
    }
    handleSubmit=()=>{
        console.log(this.state.selectedStud)
@@ -16,12 +20,12 @@ import {Box,Checkbox,TableRow,TableBody,TableHead ,TableCell,Paper} from '@mater
    selectAll=(e,studList)=>{
        if(e.target.checked){
          
-         this.setState({selectedStud:studList.map(stud=>stud._id),checked:true},()=>console.log(this.state))
+         this.setState(function(prevState){return {selectedStud:studList.map(stud=>{return{studID:stud._id}}),checkedAll:!prevState.checkedAll}},()=>console.log(this.state))
          
          return
        }
        else{
-           this.setState({selectedStud:[],checked:false},()=>console.log(this.state))
+           this.setState({selectedStud:[],checkedAll:false},()=>console.log(this.state))
        }
        
     
@@ -52,12 +56,12 @@ import {Box,Checkbox,TableRow,TableBody,TableHead ,TableCell,Paper} from '@mater
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {studList.map(student=>{
-                      return <TableRow>
+                    {studList.map((student,index)=>{
+                      return <TableRow >
                             <TableCell>
-                      <Checkbox padding="checkbox" name='studID' 
-                        checked={this.state.checked}
-                        onClick={this.handleClick}
+                      <Checkbox padding="checkbox"  onClick={(e)=>this.handleClick(e,student._id,index)}
+                        checked={this.state.checkedAll ||this.state.checked[index] } 
+                     
                       />
                     </TableCell>
                     <TableCell>

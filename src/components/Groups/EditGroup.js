@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TestWindow from '../TestWindow';
 import '../../css/EditGroup.css'
-import AddStudents from './AddStudents';
+import EnhancedTable from './AddStudents2';
 import { renderBatchField } from '../renderField';
 import { Field,reduxForm } from 'redux-form';
 import { Card, CardContent, Box, Checkbox, TableRow, TableBody, TableHead, TableCell } from '@material-ui/core'
@@ -30,7 +30,7 @@ class EditGroup extends Component {
                         </p>
 
                         <div className="row">
-                            <div className="col-md-4 container">
+                            <div className="col-md-6 container">
                                 <div className="collapse" id="multiCollapseExample1">
                                     <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
                                         <div className="input-group m-3">
@@ -47,7 +47,7 @@ class EditGroup extends Component {
                               </div>  
                            }
                            ):<></>} */}
-                                    {!isEmpty(this.props.studentList) ? <AddStudents studList={this.props.studentList} /> : null}
+                                    {!isEmpty(this.props.studentList) ? <EnhancedTable studList={this.props.studentList} /> : null}
                                 </div>
                             </div>
 
