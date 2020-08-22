@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import {AddStudents} from '../../actions';
+import {connect} from 'react-redux'
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,6 +20,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import FilterListIcon from '@material-ui/icons/FilterList';
 
@@ -53,8 +56,8 @@ const headCells = [
   { id: 'rollNo', numeric: false, disablePadding: true, label: 'Roll No' },
   { id: 'firstName', numeric: false, disablePadding: true, label: 'Fisrt Name' },
   { id: 'lastName', numeric: false, disablePadding: true, label: 'Last Name' },
-//   { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-//   { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  //   { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  //   { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
 function EnhancedTableHead(props) {
@@ -118,13 +121,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   title: {
     flex: '1 1 100%',
   },
@@ -145,10 +148,10 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Students
+          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+            Students
         </Typography>
-      )}
+        )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -157,12 +160,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            {/* <FilterListIcon /> */}
-          </IconButton>
-        </Tooltip>
-      )}
+          <Tooltip title="Filter list">
+            <IconButton aria-label="filter list">
+              {/* <FilterListIcon /> */}
+            </IconButton>
+          </Tooltip>
+        )}
     </Toolbar>
   );
 };
@@ -195,8 +198,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable(props) {
-  const {studList}=props
+function EnhancedTable(props) {
+  const { studList,groupId } = props
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -204,6 +207,14 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const handleSubmit=()=>{
+    console.log(groupId)
+  const arr=selected.map(select=>{
+    return {studentId:select,groupId:groupId}
+   })
+   props.AddStudents(arr)
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -278,20 +289,21 @@ export default function EnhancedTable(props) {
               rowCount={studList.length}
             />
             <TableBody>
+
               {stableSort(studList, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.firstName);
+                  const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.firstName)}
+                      onClick={(event) => handleClick(event, row._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.firstName}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -300,11 +312,11 @@ export default function EnhancedTable(props) {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                   
+
                       <TableCell align="left">{row.rollNo}</TableCell>
                       <TableCell align="left">{row.firstName}</TableCell>
                       <TableCell align="left">{row.lastName}</TableCell>
-                    
+
                     </TableRow>
                   );
                 })}
@@ -330,6 +342,16 @@ export default function EnhancedTable(props) {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <Button variant="contained" color="secondary" className="float-right" onClick={handleSubmit}>
+        Add Students
+      </Button>
     </div>
   );
 }
+const mapStateToProps=(state)=>{
+  console.log(state.currentGroup)
+     return{
+       groupId:state.currentGroup
+     }
+}
+export default connect(mapStateToProps,{AddStudents})(EnhancedTable)

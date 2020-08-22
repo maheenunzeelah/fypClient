@@ -14,6 +14,7 @@ class EditGroup extends Component {
     
     handleSubmit=(formValue)=>{
         this.props.fetchStudents(formValue)
+        
     }
     render() {
         return (
@@ -77,7 +78,7 @@ class EditGroup extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state.studentList)
+    
     return {
         studentList: state.studentList
     }

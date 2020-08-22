@@ -91,6 +91,17 @@ export const groupListReducer=(state={}, action)=>{
         return state
     }
 }
+export const currentGroupReducer=(state={}, action)=>{
+    
+    switch(action.type){
+       
+        case 'CURRENT_GROUP':
+        return action.payload   
+        
+        default:
+        return state
+    }
+}
 export const fetchStudentsReducer=(state={},action)=>{
     switch(action.type){
         case 'FETCH_STUDENTS':

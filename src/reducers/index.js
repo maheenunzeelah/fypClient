@@ -1,6 +1,6 @@
 import {reducer as formReducer} from 'redux-form';
 import {combineReducers} from 'redux';
-import {signupReducer, loginReducer, formInputReducer, addQuesReducer,fetchTestReducer,currentTestReducer, fetchQuesReducer,fetchCourses,fetchStudentsReducer,groupListReducer} from './teacherReducer';
+import {signupReducer, loginReducer, formInputReducer, addQuesReducer,fetchTestReducer,currentTestReducer, fetchQuesReducer,fetchCourses,fetchStudentsReducer,groupListReducer,currentGroupReducer} from './teacherReducer';
 import {studentReducer} from './studentReducer'
 import {authReducer} from './authReducer';
 export default combineReducers({
@@ -15,6 +15,7 @@ export default combineReducers({
     auth:authReducer,
     groupsList:groupListReducer,
     currentTest:currentTestReducer,
+    currentGroup:currentGroupReducer,
     student:studentReducer,
     filter:fetchCourses
 })

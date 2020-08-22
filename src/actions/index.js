@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST} from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -193,6 +193,7 @@ export const createGroup=(groupName)=>async dispatch=>{
       alert(response.data)
     else {
       alert("Group created");
+      dispatch({type:CURRENT_GROUP, payload:response.data._id})
        window.location.replace('/dashboard/editGroup')      
     }
   })
@@ -215,6 +216,20 @@ export const fetchStudents=(value)=>async dispatch=>{
  console.log(response.data)
   dispatch({type:'FETCH_STUDENTS',payload:response.data})
 }
+//Current Group
+export const editGroup = (id) => {
+  console.log(id)
+  return { type: CURRENT_GROUP, payload: id }
+}
+//add Students to group
+export const AddStudents=(value)=>async (dispatch,getState)=>{
+  console.log(value)
+ await postDataApi.post(`login/teacher/addStudents/`,value)
+ .then(response=>{
+   console.log(response.data)
+ })
+}
+//current Group
 
 //STUDENT PANEL ACTION CREATORS
 export const setCurrentStudent = decoded => {

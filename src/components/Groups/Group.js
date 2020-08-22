@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import '../../css/Group.css'
 import { Link } from 'react-router-dom' 
 import TestWindow from '../TestWindow';
-import {groupList} from '../../actions';
+import {groupList,editGroup} from '../../actions';
 import {connect} from 'react-redux';
 import {isEmpty} from '../../validation/is-empty'
 
@@ -65,7 +65,7 @@ filteredList=(grp,index)=>{
        <div className="w3-row" id="Links">
          
          <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Test' class="w3-btn" >Members (0) </Link></span>
-         <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' class="w3-btn" >Assign </Link></span>
+         <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' onClick={(grp_id)=>this.props.editGroup(grp._id)} class="w3-btn" >Assign </Link></span>
          <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
            <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">  Statistics  </button>
            <div class="dropdown-menu">
@@ -186,4 +186,4 @@ const mapStateToProps=(state)=>{
   }
 }
 
-export default connect(mapStateToProps,{groupList})(Group);
+export default connect(mapStateToProps,{groupList,editGroup})(Group);
