@@ -229,6 +229,14 @@ export const AddStudents=(value)=>async (dispatch,getState)=>{
    console.log(response.data)
  })
 }
+//assign test
+export const AssignTestApi=(value)=>async (dispatch,getState)=>{
+  console.log(value)
+ await postDataApi.post(`login/teacher/assignTests/`,value)
+ .then(response=>{
+   console.log(response.data)
+ })
+}
 //current Group
 
 //STUDENT PANEL ACTION CREATORS

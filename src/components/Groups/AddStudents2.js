@@ -181,7 +181,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     backgroundColor:'#ffe082',
-    border:"solid 2px #ffab00"
+    border:"solid 1px #ffab00"
   },
   paper: {
     width: '100%',
