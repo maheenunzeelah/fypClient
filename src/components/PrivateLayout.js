@@ -7,7 +7,7 @@ import Newtest from './Tests/Newtest';
 import AddQues from './Questions/AddQues';
 import EditQues from './Questions/EditQues';
 import EditTest from './Tests/EditTest';
-import EditGroup from './Groups/EditGroup';
+import EditGroup from './Groups/EditGroup2';
 import QuestionBank from './Questions/QuestionBank';
 import New_Group from './Groups/New_Group';
 import Group from './Groups/Group';

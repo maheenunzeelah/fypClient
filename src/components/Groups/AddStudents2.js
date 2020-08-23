@@ -21,6 +21,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
+import { borderColor } from '@material-ui/system';
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import FilterListIcon from '@material-ui/icons/FilterList';
 
@@ -117,6 +118,8 @@ const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
+    backgroundColor:"#ffe082",
+    border:'solid 2px #ffab00'
   },
   highlight:
     theme.palette.type === 'light'
@@ -177,6 +180,8 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    backgroundColor:'#ffe082',
+    border:"solid 2px #ffab00"
   },
   paper: {
     width: '100%',
@@ -214,6 +219,7 @@ function EnhancedTable(props) {
     return {studentId:select,groupId:groupId}
    })
    props.AddStudents(arr)
+   
   }
 
   const handleRequestSort = (event, property) => {
@@ -269,10 +275,10 @@ function EnhancedTable(props) {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, studList.length - page * rowsPerPage);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer className="amber lighten-4">
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
