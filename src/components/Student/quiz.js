@@ -44,7 +44,7 @@ constructor(props){
     }
 }
 componentDidMount(){
-
+   this.props.fetchQues()
 }
 render(){
     const {classes}=this.props
@@ -64,5 +64,9 @@ render(){
     )
 }
 }
-
+const mapStateToProps=(state)=>{
+   return{
+     
+   }
+}
 export default connect(null,{fetchQues})(withStyles(styles)(Quiz))
