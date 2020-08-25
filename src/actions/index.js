@@ -1,11 +1,11 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP} from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP, STUDENT_TEST} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
 
 
@@ -341,9 +341,21 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
 
 }
 //groups of Student
-export const StudentGroup=(id)=>async dispatch=>{
-  const response=await postDataApi.get(`login/student/studentGroup/:${id}`)
-}// logout
+export const groupTest=()=>async (dispatch,getState)=>{
+  const id=getState().auth.user.studentid
+  const response=await postDataApi.get(`/student/groupTest/${id}`)
+   dispatch({type:GROUP_LIST,payload:response.data})
+}
+
+//tests of Student
+export const studentTest=()=>async (dispatch,getState)=>{
+  const id=getState().auth.user.studentid
+  const response=await postDataApi.get(`/student/groupTest/${id}`)
+   dispatch({type:GROUP_LIST,payload:response.data})
+}
+
+ 
+// logout
  export const logout=()=>dispatch=>{
    localStorage.removeItem('jwtToken')
    setAuthtoken(false)

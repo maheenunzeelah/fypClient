@@ -6,3 +6,12 @@ export const studentReducer=(state={},action)=>{
         return state;
     }
 }
+
+export const studentTestReducer=(state={},action)=>{
+    switch(action.type){
+        case 'STUDENT_TEST':
+        return action.payload;
+        default:
+        return state;
+    }
+}
