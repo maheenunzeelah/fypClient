@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, HashRouter, Route , Switch, Link,Router} from 'react-router-dom';
 import Dashboard from './Dashboard';
-
+import Landing from './Student/landing'
 import Quiz from './Student/quiz'
 import createHistory from './history';
 import PrivateStudentRoute from './privateStudentRoutes';
@@ -17,8 +17,9 @@ function PrivateStudentLayout(){
          <Dashboard />
          
          <Switch>
+         <PrivateStudentRoute exact path ="/student" component={Landing} />
          <PrivateStudentRoute path ="/student/quiz" component={Quiz} />
-         
+       
            
            </Switch>
         

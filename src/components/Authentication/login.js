@@ -25,7 +25,15 @@ class Login extends Component {
   previousPage() {
     this.setState({ page: this.state.page - 1 })
   }
+  componentWillReceiveProps(nextProps){
 
+    if(nextProps.auth.isAuthenticatedTeacher){
+     window.location.replace('/dashboard')
+    }
+    else if(nextProps.auth.isAuthenticatedStudent){
+     window.location.replace('/student')
+   }
+   }
   handleSubmit=()=>{
     
   }

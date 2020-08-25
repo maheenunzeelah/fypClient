@@ -340,8 +340,10 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
     })
 
 }
-
-// logout
+//groups of Student
+export const StudentGroup=(id)=>async dispatch=>{
+  const response=await postDataApi.get(`login/student/studentGroup/:${id}`)
+}// logout
  export const logout=()=>dispatch=>{
    localStorage.removeItem('jwtToken')
    setAuthtoken(false)
