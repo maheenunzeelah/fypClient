@@ -19,7 +19,7 @@ class Dashboard extends Component {
     render() {
 
       const {isAuthenticationTeacher,isAuthenticationStudent,user}=this.props.auth;
-
+       if(isAuthenticationTeacher){
         return(
             <MDBNavbar style={{backgroundColor:"rgb(47, 156, 181)"}} dark expand="md">
             <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -111,7 +111,12 @@ class Dashboard extends Component {
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBNavbar>
-  );
+  );}
+  else if(isAuthenticationStudent){
+    return(
+      <div></div>
+    )
+  }
         }
     }
   Dashboard.propTypes={

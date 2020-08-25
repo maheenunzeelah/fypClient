@@ -65,8 +65,9 @@ render(){
 }
 }
 const mapStateToProps=(state)=>{
+  console.log(state.questions)
    return{
-     
+     questions:state.questions
    }
 }
-export default connect(null,{fetchQues})(withStyles(styles)(Quiz))
+export default connect(mapStateToProps,{fetchQues})(withStyles(styles)(Quiz))
