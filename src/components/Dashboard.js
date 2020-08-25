@@ -137,8 +137,8 @@ class Dashboard extends Component {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
       
           <MDBNavbarNav left>
-          <MDBBtn className="mr-auto" color="pink" >Tests</MDBBtn>
-          <MDBBtn className="mr-auto"  color="pink" >Groups</MDBBtn>
+          <a href="/student"><MDBBtn className="mr-auto" color="pink" >Tests</MDBBtn></a>
+          <a href="/student/quiz"><MDBBtn className="mr-auto"  color="pink" >Group</MDBBtn></a>
           </MDBNavbarNav>
 
         </MDBCollapse>
