@@ -17,7 +17,7 @@ function PrivateStudentLayout(){
          <Dashboard />
          
          <Switch>
-         <PrivateStudentRoute path ="/student/quiz" component={Quiz}></PrivateStudentRoute>
+         <PrivateStudentRoute path ="/student/quiz" component={Quiz} />
          
            
            </Switch>

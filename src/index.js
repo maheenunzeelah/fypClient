@@ -30,7 +30,13 @@ if(localStorage.jwtToken){
     setAuthToken(localStorage.jwtToken)
     //decode token and get user
     const decoded=jwt_decode(localStorage.jwtToken)
-    decoded.teacherid?(store.dispatch(setCurrentTeacher(decoded))):(store.dispatch(setCurrentStudent(null)))
+    if(decoded.teacherid)
+       store.dispatch(setCurrentTeacher(decoded))
+
+    
+    else if(decoded.studentid)
+       store.dispatch(setCurrentStudent(decoded))
+    
   
   }
 ReactDOM.render( 

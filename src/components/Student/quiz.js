@@ -49,17 +49,13 @@ componentDidMount(){
 render(){
     const {classes}=this.props
     return(
-        <div className={classNames(classes.root, "d-flex flex-col flex-auto flex-no-shrink align-items-center justify-center p-32")}>
+        <div >
         
-           <Card className={classNames(classes.card)} variant="outlined">
-      <CardContent className="flex flex-col items-center justify-center p-32">
-        <Typography variant="h6" className={classNames( "mt-16 mb-32")}>
-          Questions
-        </Typography>
-        
-      </CardContent>
-      
-    </Card>
+         <center>
+           <Card>
+             
+             </Card>
+         </center>
         </div>
     )
 }

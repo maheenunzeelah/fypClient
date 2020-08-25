@@ -25,6 +25,7 @@ class Login extends Component {
   previousPage() {
     this.setState({ page: this.state.page - 1 })
   }
+
   handleSubmit=()=>{
     
   }
@@ -59,5 +60,10 @@ class Login extends Component {
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
+const mapStateToProps=(state)=>{
 
-export default connect(null, {studentLogin})(Login); 
+  return {login: state.login,
+  auth:state.auth
+  }
+  } 
+export default connect(mapStateToProps, {studentLogin})(Login); 
