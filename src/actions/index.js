@@ -353,7 +353,16 @@ export const studentTest=()=>async (dispatch,getState)=>{
   const response=await postDataApi.get(`/student/groupTest/${id}`)
    dispatch({type:GROUP_LIST,payload:response.data})
 }
-
+//questions for student's test
+export const quesList=(id)=>async dispatch=>{
+await postDataApi.get(`/student/test/${id}`)
+.then(response=>{
+  console.log(response.data)
+  dispatch({type:FETCH_QUESTIONS,payload:response.data.question})
+  
+}
+)
+}
  
 // logout
  export const logout=()=>dispatch=>{

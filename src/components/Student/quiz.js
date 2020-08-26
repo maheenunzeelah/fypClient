@@ -6,24 +6,19 @@ import {fetchQues} from '../../actions';
 
 
 const styles=(themes)=>({
-    root: {
-        width:'100%',
-        margin:'0 auto'
-      },
-      bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-      },
-      title: {
-        fontSize: 14,
-      },
-      pos: {
-        marginBottom: 12,
-      },
-      card:{
-        marginTop:'100px'
-      },
+  root: {
+    display: 'flex',
+    width:'365px',
+    margin:'120px'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+     
 })
 class Quiz extends Component{
 constructor(props){
@@ -49,11 +44,20 @@ componentDidMount(){
 render(){
     const {classes}=this.props
     return(
-        <div >
+        <div className="container">
         
          <center>
-           <Card>
-             
+           <Card  className={classes.root}>
+           <div className={classes.details}>
+           <CardContent className={classes.content}>
+          <Typography component="h5" variant="h5">
+            Questions
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Mac Miller
+          </Typography>
+        </CardContent>
+        </div>
              </Card>
          </center>
         </div>
