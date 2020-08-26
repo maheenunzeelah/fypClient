@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card'
 import {connect} from 'react-redux';
 import {groupTest} from '../../actions'
 import { isEmpty } from '../../validation/is-empty';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   table: {
@@ -30,7 +31,8 @@ const useStyles = makeStyles({
  if(!isEmpty(props.groups)){
   return (
     <div className="container mt-5 mb-5">
-    {props.groups.map(group=>{
+    {props.groups.map((group,i)=>{
+      
      return <div className="mb-5">
      <p className="small pink-text " style={{fontSize:'17px',fontWeight:'bold'}}><i className="fa fa-users fa-2x pink-text pr-3" ></i>{group.groupId.groupName}</p>
      <TableContainer component={Paper}>
@@ -45,18 +47,25 @@ const useStyles = makeStyles({
           
            </TableRow>
          </TableHead>
-         <TableBody>
-           
-             <TableRow key={group.groupId._id}>
-               <TableCell component="th" scope="row">
-               {group.testId.testName}
-               </TableCell>
-               <TableCell align="left"></TableCell>
-               <TableCell align="left">{}</TableCell>
-             
-             </TableRow>
+         {group.testId.map(test=>{
+           return<TableBody>
           
-         </TableBody>
+           <TableRow key={test._id}>
+             <TableCell component="th" scope="row">
+             {test.testName}
+             </TableCell>
+             <TableCell align="left"></TableCell>
+             <TableCell align="left">{}</TableCell>
+            
+           </TableRow>
+           <TableRow>
+             <TableCell  align="left"><Button className="pink">Start</Button></TableCell>
+             
+           </TableRow>
+        
+       </TableBody>
+         })}
+        
        </Table>
      </TableContainer>
      </div>   
