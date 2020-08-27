@@ -24,10 +24,7 @@ const useStyles = makeStyles({
 
 
 function Landing(props) {
-  const handleClick=(id)=>{
-    props.quesList(id) 
-
-   }
+ 
   console.log(props.groups)
   const classes = useStyles();
   React.useEffect(() => {
@@ -64,7 +61,7 @@ function Landing(props) {
 
                     </TableRow>
                     <TableRow>
-                      <TableCell align="left"><><Button onClick={()=>handleClick(test._id)} className="pink">Start</Button></></TableCell>
+                      <TableCell align="left"><Link to={{pathname:'/student/settings', state:{id:test._id}}}><Button className="pink">Start</Button></Link></TableCell>
 
                     </TableRow>
 
@@ -88,4 +85,4 @@ const mapStateToProp = (state) => {
     groups: state.groupsList
   }
 }
-export default connect(mapStateToProp, { groupTest,quesList })(Landing);
+export default connect(mapStateToProp, { groupTest })(Landing);

@@ -358,7 +358,7 @@ export const quesList=(id)=>async dispatch=>{
 await postDataApi.get(`/student/test/${id}`)
 .then(response=>{
   console.log(response.data)
-  dispatch({type:FETCH_QUESTIONS,payload:response.data.question})
+  dispatch({type:FETCH_QUESTIONS,payload:response.data})
   
 }
 )

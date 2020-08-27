@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import {Card,Typography,Button,CardActions,CardContent,withStyles} from '@material-ui/core';
 import classNames from 'classnames';
 import {connect} from 'react-redux';
-import {fetchQues} from '../../actions'; 
+import {quesList} from '../../actions'; 
 
 
 const styles=(themes)=>({
@@ -31,7 +31,7 @@ constructor(props){
         answer:'',
         numOfQues:0,
         numOfAnsweredQues:0,
-        cureentQuesIndex:0,
+        currentQuesIndex:0,
         score:0,
         corrAnswers:0,
         wrongAnswers:0,
@@ -39,10 +39,13 @@ constructor(props){
     }
 }
 componentDidMount(){
-   this.props.fetchQues()
+  
+this.props.quesList(this.props.location.state.id)
 }
+
 render(){
     const {classes}=this.props
+    
     return(
         <div className="container">
         
@@ -51,11 +54,12 @@ render(){
            <div className={classes.details}>
            <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Questions
+            Question
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+          <Typography variant="subtitle1" color="black">
+           
           </Typography>
+          {}
         </CardContent>
         </div>
              </Card>
@@ -70,4 +74,4 @@ const mapStateToProps=(state)=>{
      questions:state.questions
    }
 }
-export default connect(mapStateToProps,{fetchQues})(withStyles(styles)(Quiz))
+export default connect(mapStateToProps,{quesList})(withStyles(styles)(Quiz))
