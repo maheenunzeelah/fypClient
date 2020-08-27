@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP, STUDENT_TEST} from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP, STUDENT_TEST,QUESTION_LIST} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -358,7 +358,7 @@ export const quesList=(id)=>async dispatch=>{
 await postDataApi.get(`/student/test/${id}`)
 .then(response=>{
   console.log(response.data)
-  dispatch({type:FETCH_QUESTIONS,payload:response.data})
+  dispatch({type:QUESTION_LIST,payload:response.data})
   
 }
 )

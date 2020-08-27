@@ -15,3 +15,11 @@ export const studentTestReducer=(state={},action)=>{
         return state;
     }
 }
+export const questionListReducer=(state={},action)=>{
+    switch(action.type){
+        case 'QUESTION_LIST':
+        return action.payload;
+        default:
+        return state;
+    }
+}
