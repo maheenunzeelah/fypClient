@@ -61,6 +61,9 @@ this.setState((prevState)=>{
     return <div className="white">Quiz Ended</div>
   }
 }
+displayQuestion=()=>{
+  return
+}
   render() {
     const { classes, questions } = this.props
     console.log(questions.length,this.state.currentQuesIndex)
@@ -89,10 +92,16 @@ this.setState((prevState)=>{
                 </label>
 
                   </div> : <div>
-                  <label>
+                    {questions[this.state.currentQuesIndex].answers.map((ans,i)=>{
+                      return <div><label>
                       <input type="checkbox"  component="input" value="true" />
-                      {questions[this.state.currentQuesIndex].answer}
-                </label><br />
+                      {Object.values(ans)}
+                      
+                </label>
+                <br />
+                </div>
+                    })}
+                  <br />
                     
                     </div>}
                     <Button className='pink float-right' onClick={this.handleClick}>Next</Button>
