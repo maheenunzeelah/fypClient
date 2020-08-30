@@ -3,6 +3,7 @@ import { Card, Typography, Button, CardActions, CardContent, withStyles } from '
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { quesList } from '../../actions';
+import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { isEmpty } from '../../validation/is-empty'
 
 const styles = (themes) => ({
@@ -61,6 +62,11 @@ this.setState((prevState)=>{
     return <div className="white">Quiz Ended</div>
   }
 }
+handleAnsClick=(value)=>{
+  if(Object.values(value)===this.props.questions.corrAns){
+    
+  }
+}
 displayQuestion=()=>{
   return
 }
@@ -75,6 +81,7 @@ displayQuestion=()=>{
             <Card className={classes.root}>
               <div className={classes.details}>
                 <CardContent className={classes.content}>
+                <form onSubmit={this.props.handleSubmit(this.handleAnsClick)}>
                   <Typography component="h5" variant="h5">
                     Question
           </Typography>
@@ -83,18 +90,18 @@ displayQuestion=()=>{
                   </Typography>
                   {questions[this.state.currentQuesIndex].type == 'T/F' ? <div>
                     <label>
-                      <input type="radio" name="answer" component="input" value="true" />
+                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} component="input" value="true" />
                       True
                 </label><br />
                     <label>
-                      <input type="radio" name="answer" component="input" value="false" />
+                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} component="input" value="false" />
                       False
                 </label>
 
                   </div> : <div>
                     {questions[this.state.currentQuesIndex].answers.map((ans,i)=>{
                       return <div><label>
-                      <input type="checkbox"  component="input" value="true" />
+                      <Field type="checkbox"  name={Object.keys(ans)} component="input"  />
                       {Object.values(ans)}
                       
                 </label>
@@ -104,7 +111,8 @@ displayQuestion=()=>{
                   <br />
                     
                     </div>}
-                    <Button className='pink float-right' onClick={this.handleClick}>Next</Button>
+                    <Button className='pink float-right' type="submit" onClick={this.handleClick}>Next</Button>
+                    </form>
                 </CardContent>
               </div>
             </Card>
@@ -127,4 +135,8 @@ const mapStateToProps = (state) => {
     questions: state.questionList
   }
 }
-export default connect(mapStateToProps, { quesList })(withStyles(styles)(Quiz))
+const formValues=reduxForm({
+  form: 'quiz',
+  pristine: isPristine('quiz'),
+})(Quiz)
+export default connect(mapStateToProps, { quesList })(withStyles(styles)(formValues))
