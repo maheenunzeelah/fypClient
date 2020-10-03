@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Typography, Button, CardActions, CardContent, withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { quesList } from '../../actions';
+import { quesList,result } from '../../actions';
 import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { isEmpty } from '../../validation/is-empty'
 
@@ -34,6 +34,7 @@ class Quiz extends Component {
       numOfAnsweredQues: 0,
       currentQuesIndex: 0,
       score: 0,
+      perct:0,
       corrAnswers: 0,
       wrongAnswers: 0,
       time: {}
@@ -59,6 +60,7 @@ class Quiz extends Component {
 handleAnsClick=(value)=>{
   const {classes}=this.props
   //check if tests have questions or not
+  console.log(this.state.currentQuesIndex)
   if(this.state.currentQuesIndex!=this.props.questions.length){
     this.setState((prevState)=>{
        // increase index
@@ -100,16 +102,15 @@ handleAnsClick=(value)=>{
      })
    }
  }
- if(this.state.currentQuesIndex==this.props.questions.length){
-  return <Card className={classes.root}>
-  <CardContent className={classes.content}>
-    <p>Result:{` ${this.state.score*100/4}%`}</p>
-  </CardContent>
-  </Card>}
+ if(this.state.currentQuesIndex==this.props.questions.length-1){
+   console.log("done")
+   this.setState(prevState=>{
+    return prevState.perct=prevState.score*100/this.props.questions.length
+  },()=> this.props.result(value,this.props.questions[index].test,this.state.score,this.state.perct))
+  
+  }
 }
-displayQuestion=()=>{
-  return
-}
+
   render() {
     const { classes, questions } = this.props
     console.log(questions.length,this.state.currentQuesIndex)
@@ -160,12 +161,12 @@ displayQuestion=()=>{
         </div>
       )
     }
-    // else if(this.state.currentQuesIndex==questions.length){
-    //   return <Card className={classes.root}>
-    //   <CardContent className={classes.content}>
-    //     <p>Result:{` ${this.state.score*100/4}%`}</p>
-    //   </CardContent>
-    //   </Card>}
+    else if(this.state.currentQuesIndex==questions.length){
+      return <Card className={classes.root}>
+      <CardContent className={classes.content}>
+        <p>Result:{` ${this.state.perct} %`}</p>
+      </CardContent>
+      </Card>}
     else {
       return <div></div>
     }
@@ -182,4 +183,4 @@ const formValues=reduxForm({
   form: 'quiz',
   pristine: isPristine('quiz'),
 })(Quiz)
-export default connect(mapStateToProps, { quesList })(withStyles(styles)(formValues))
+export default connect(mapStateToProps, { quesList,result })(withStyles(styles)(formValues))

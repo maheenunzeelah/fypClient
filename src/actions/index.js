@@ -365,13 +365,16 @@ await postDataApi.get(`/student/test/${id}`)
 }
 
 //Result of students
-export const result=(data)=>async dispatch=>{
+export const result=(formData,test,score,perct)=>async dispatch=>{
+  const data={...formData,test,score,perct}
+  console.log
+  (data)
   await postDataApi.post('/student/result',data)
   .then(response=>{
     alert('saved')
   })
   .catch(err=>{
-    console.log(err)
+      console.log(err)
   })
 }
  
