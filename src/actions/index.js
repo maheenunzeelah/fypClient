@@ -363,6 +363,17 @@ await postDataApi.get(`/student/test/${id}`)
 }
 )
 }
+
+//Result of students
+export const result=(data)=>async dispatch=>{
+  await postDataApi.post('/student/result',data)
+  .then(response=>{
+    alert('saved')
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+}
  
 // logout
  export const logout=()=>dispatch=>{

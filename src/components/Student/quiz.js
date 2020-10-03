@@ -50,22 +50,62 @@ class Quiz extends Component {
 
   }
   componentDidMount(){
-    console.log(this.props)
+   // console.log(this.props)
     // this.setState({numOfQues:questions.length})
   }
-handleClick=()=>{
-if(this.state.currentQuesIndex!=this.props.questions.length){
-this.setState((prevState)=>{
-    return prevState.currentQuesIndex=prevState.currentQuesIndex+1
-  })}
-  else{
-    return <div className="white">Quiz Ended</div>
-  }
-}
+// handleClick=()=>{
+
+// }
 handleAnsClick=(value)=>{
-  if(Object.values(value)===this.props.questions.corrAns){
-    
+  const {classes}=this.props
+  //check if tests have questions or not
+  if(this.state.currentQuesIndex!=this.props.questions.length){
+    this.setState((prevState)=>{
+       // increase index
+        return prevState.currentQuesIndex=prevState.currentQuesIndex+1
+      })}
+   
+  let index=this.state.currentQuesIndex
+  let ans=Object.values(value) //to match T/F ans
+  let key=Object.keys(value) //to match mcqs ans
+  console.log(value,ans[index],index)
+  
+  if(this.props.questions[index].type==='T/F'){
+    if(ans[index]===this.props.questions[index].answer){
+      this.setState(prevState=>{
+        return prevState.score=prevState.score+1
+      })
+      console.log(ans[index]+ " is correct" )
+    }
+    else{
+      console.log(ans[index]+ " is incorrect" )
+    }
   }
+
+  else if(this.props.questions[index].type==='MCQs')
+ {
+   // The ans clicked by user will have true value
+   if(ans[index]){
+     this.props.questions[index].corr.map(corrAns=>{
+       //If corr ans array have name part of which matches with key of selected ans
+       if(key[index].indexOf(corrAns)!=-1){
+        this.setState(prevState=>{
+          return prevState.score=prevState.score+1
+        })
+         console.log(key[index] +" is correct")
+       }
+       else{
+        console.log(key[index] +" is incorrect")
+       }
+     })
+   }
+ }
+ if(this.state.currentQuesIndex==this.props.questions.length){
+  return <Card className={classes.root}>
+  <CardContent className={classes.content}>
+    <p>Result:{` ${this.state.score*100/4}%`}</p>
+  </CardContent>
+  </Card>}
 }
 displayQuestion=()=>{
   return
@@ -101,7 +141,7 @@ displayQuestion=()=>{
                   </div> : <div>
                     {questions[this.state.currentQuesIndex].answers.map((ans,i)=>{
                       return <div><label>
-                      <Field type="checkbox"  name={Object.keys(ans)} component="input"  />
+                      <Field type="checkbox"  name={"mcq"+Object.keys(ans)} component="input"  />
                       {Object.values(ans)}
                       
                 </label>
@@ -111,7 +151,7 @@ displayQuestion=()=>{
                   <br />
                     
                     </div>}
-                    <Button className='pink float-right' type="submit" onClick={this.handleClick}>Next</Button>
+                    <Button className='pink float-right' type="submit">Next</Button>
                     </form>
                 </CardContent>
               </div>
@@ -120,9 +160,12 @@ displayQuestion=()=>{
         </div>
       )
     }
-    else if(this.state.currentQuesIndex==questions.length){
-     return <div className="pink-text">Quiz Ended</div>
-    }
+    // else if(this.state.currentQuesIndex==questions.length){
+    //   return <Card className={classes.root}>
+    //   <CardContent className={classes.content}>
+    //     <p>Result:{` ${this.state.score*100/4}%`}</p>
+    //   </CardContent>
+    //   </Card>}
     else {
       return <div></div>
     }
