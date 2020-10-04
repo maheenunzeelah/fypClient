@@ -5,7 +5,7 @@ import Buttontest from './Buttontest';
 import Tab from '../Tab.js'
 import TestWindow from '../TestWindow';
 import { connect } from 'react-redux';
-import { fetchTests, fetchCourseList } from '../../actions';
+import { fetchTests, fetchCourseList,editGroup } from '../../actions';
 import Newtest from './Newtest';
 import AddQues from '../Questions/AddQues';
 import EditTest from './EditTest';
@@ -62,7 +62,7 @@ class Test extends Component {
       <div className="container">
         {/*  */}
 
-        <button className=" border border-dark Test1" style={{backgroundColor:'#fff0fb'}} id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
+        <button  className="collapsible btn btn-outline-black" style={{textAlign:'left', backgroundColor:'#fff0fb', textTransform:'lowercase', fontSize:'16px'}} id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
         {console.log(test._id)}
         {test.grp.map(gr => {
           return <div id={`demo${test._id}`} className="w3-container collapse black-text ">
@@ -70,7 +70,7 @@ class Test extends Component {
             <hr />
             <div className="w3-row">
               <div className="w3-half">
-                <p style={{fontSize:'17px'}}><i className="fa fa-users fa-2x mr-3" aria-hidden="true"></i>{gr.groupId.groupName} </p>
+                <p style={{fontSize:'15px'}}><i className="fa fa-users fa-2x mr-3" aria-hidden="true"></i>{gr.groupId.groupName} </p>
               </div>
 
 
@@ -89,7 +89,8 @@ class Test extends Component {
                 <Link to={{ pathname: '/dashboard/editTest', state: { testName: test.testName, course: test.course, id: test._id } }} className="w3-btn blue-text font-weight-bold"  >Edit </Link></span>
 
               {/*Assign Test button*/}
-              <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' className="w3-btn blue-text " >Assign </Link></span>
+              <span className="Link blue-text"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' className="w3-btn blue-text " 
+              onClick={({gr_id})=>this.props.editGroup(gr.groupId._id)} >Assign </Link></span>
 
 
 
@@ -205,4 +206,4 @@ const mapStateToProps = (state) => {
     courses: state.filter.course
   }
 }
-export default connect(mapStateToProps, { fetchTests, fetchCourseList })(Test);
+export default connect(mapStateToProps, { fetchTests, fetchCourseList ,editGroup})(Test);

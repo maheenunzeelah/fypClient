@@ -44,13 +44,13 @@ filteredList=(grp,index)=>{
              
    return  <div className="container amber-text">
               
-     <button  className="collapsible btn btn-outline-pink" style={{textAlign:'left'}} id="Group1" data-toggle="collapse" data-target={`#demo${index}`}><i class="fa fa-users fa-2x "  aria-hidden="true"></i> {grp.groupName}</button>
+     <button  className="collapsible btn btn-outline-black" style={{textAlign:'left'}} id="Group1" data-toggle="collapse" data-target={`#demo${index}`}><i className="fa fa-users fa-2x "  aria-hidden="true"></i> {grp.groupName}</button>
      
      <div id={`demo${index}`} class="w3-container collapse">
      <br/>
-     <p>1 test Assigned</p><hr/>
+
          
-         <div className="w3-row">
+         {/* <div className="w3-row">
              <div className="w3-half">
              <p><i class="fa fa-file-o fa-1x" aria-hidden="true"></i> arisha</p>
              </div>
@@ -59,24 +59,18 @@ filteredList=(grp,index)=>{
              <Link to='/Test' id="Preview">Preview</Link>
              <Link to='/Test' class="w3-btn w3-ripple w3-teal">Result</Link>
              </div>
-         </div>
+         </div> */}
          <hr/>
 
        <div className="w3-row" id="Links">
          
-         <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Test' class="w3-btn" >Members (0) </Link></span>
-         <span className="Link"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' onClick={(grp_id)=>this.props.editGroup(grp._id)} class="w3-btn" >Assign </Link></span>
-         <span className="Link"><i class="fa fa-signal" aria-hidden="true"></i>
-           <button  class="w3-btn dropdown-toggle" data-toggle="dropdown">  Statistics  </button>
-           <div class="dropdown-menu">
-           <Link to='/Test' class="dropdown-item" href="">By Group</Link>
-           <Link to='/Test' class="dropdown-item" href="#">By Questions</Link>
-           </div>
-         </span>
+         {/* <span className="Link"><i class="fa fa-pencil" aria-hidden="true"></i><Link to='/Test' class="w3-btn" >Members (0) </Link></span> */}
+         <span className="Link blue-text"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' onClick={(grp_id)=>this.props.editGroup(grp._id)} className="w3-btn blue-text" >Assign </Link></span>
+        
          
        </div>
        <br/>
-       <Link to='/Test'><p><i class="fa fa-plus-circle" aria-hidden="true"></i> Assign a test</p></Link>
+       {/* <Link to='/Test'><p><i class="fa fa-plus-circle" aria-hidden="true"></i> Assign a test</p></Link> */}
      </div>
    <br/>
    </div>
@@ -135,7 +129,7 @@ renderList=()=>{
             
            
             {/* groups list  */}
-            <div id="Group" className="w3-container  w3-padding-16 " style={{border:'solid pink'}}>
+            <div id="Group" className="w3-container  w3-padding-16 " style={{border:'solid pink', backgroundColor:'#fff0fb'}}>
             <br/>
                 
                     {/* search and new group option */}
