@@ -22,7 +22,7 @@ class Dashboard extends Component {
     const { isAuthenticatedTeacher, isAuthenticatedStudent, user } = this.props.auth;
     if (isAuthenticatedTeacher) {
       return (
-        <MDBNavbar style={{ backgroundColor: "rgb(47, 156, 181)" }} dark expand="md">
+        <MDBNavbar style={{ backgroundColor: "#d9adad" }} dark expand="md">
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>

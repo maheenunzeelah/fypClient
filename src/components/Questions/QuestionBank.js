@@ -80,7 +80,7 @@ handleSubmit=(e)=>{
                         return(
          
          <div>     
-        <div className="blue lighten-5" id="Qheading">
+        <div className="" id="Qheading">
         <span> Question {quesNo++}</span>
        
             <ul class="float-right">
@@ -216,19 +216,19 @@ handleSubmit=(e)=>{
  
          <hr></hr>
  
-         <ul id="options" className="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12">
+         <ul id="options" className="col-lg-9 col-xl-9 col-md-10 col-sm-12 col-12" >
                
                {/*Answers button*/}
-                 <li><a href={`#demo${qu._id}`} data-toggle="collapse" className="pink-text font-weight-bold"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
+                 <li><a href={`#demo${qu._id}`} data-toggle="collapse" className=" font-weight-bold blue-grey-text"><i className="fa fa-expand " aria-hidden="true"></i>Answers</a></li>
                 
                 {/*Edit Question button*/}
-                <li ><Link to={{ pathname: '/dashboard/editQues' , state: { question: qu.question, answers: qu.answers, quesId: qu._id ,type:qu.type, corr:qu.corr} }}  className="pink-text  font-weight-bold" onClick={()=>{this.handleClick(qu.test)}}><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
+                <li ><Link to={{ pathname: '/dashboard/editQues' , state: { question: qu.question, answers: qu.answers, quesId: qu._id ,type:qu.type, corr:qu.corr} }}  className="blue-grey-text font-weight-bold" onClick={()=>{this.handleClick(qu.test)}}><i className="fa fa-pencil" aria-hidden="true"></i>Edit</Link></li>
 
                 {/*Used In button show us test in which question is used*/}
-                 <li><a href={`#used${qu._id}`} className="pink-text  font-weight-bold" data-toggle="collapse"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
+                 <li><a href={`#used${qu._id}`} className="blue-grey-text font-weight-bold" data-toggle="collapse"><i className="fa fa-share" aria-hidden="true"></i>Used In</a></li>
                  
                  {/*Delete Question button*/}
-                 <li><a href className="pink-text  font-weight-bold"
+                 <li><a href className="blue-grey-text font-weight-bold"
                   onClick={()=>this.handleDelete(qu._id)}><i className="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
  
              </ul>
@@ -245,13 +245,13 @@ handleSubmit=(e)=>{
     return(<div className="container">
     <TestWindow to="/QuestionBank" label="Question Bank" separator=" > "/>
             
-    <div className="jumbotron vertical-center black" style={{border:"3px solid #42a5f5"}}> 
+    <div > 
 
 <Tab></Tab>
 <br></br>
 
 <div className="container"  >
-    <form onSubmit={(e)=>this.handleSubmit(e)}  className="w3-container w3-padding-16  w3-border-blue w3-leftbar blue lighten-4 pink-text" style={{color:"#1C2331"}}id="QuestionBank">
+    <form onSubmit={(e)=>this.handleSubmit(e)}  className="w3-container w3-padding-16   w3-leftbar  " style={{backgroundColor:"#fff0fb"}} id="QuestionBank">
         
             <h5><strong>Filters:</strong></h5>
            <br></br>
@@ -304,13 +304,11 @@ handleSubmit=(e)=>{
    </form>
 <br></br>
  
-   <div className="w3-container w3-padding-16 w3-border-blue w3-leftbar blue lighten-4 " id="Questions" style={{color:"#1C2331"}}>
+   <div className="w3-container w3-padding-16  w3-leftbar  " id="Questions" style={{backgroundColor:"#fff0fb"}}>
 
         
     <div className="row ">
-        <div className="col-xl-7 col-lg-7 col-md-6 col-sm-5 col-6">
-                <Button></Button >
-        </div>
+      
 
         <div className="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
                 <div className="dropdown">
@@ -319,26 +317,11 @@ handleSubmit=(e)=>{
                 </button>
 
                 <div className="dropdown-menu">
-                        <Link to='/dashboard/addQues' className="dropdown-item" href>Add new</Link>
-                        <Link to='#' href className="dropdown-item" >Import new</Link> 
+                        <Link to='/dashboard/addQues' className="dropdown-item black-text" >Add new</Link>
+                         
                 </div>
                 </div>
         </div>
-
-            
-
-        <div className="dropdown col-xl-2
-         col-lg-2 col-md-1 col-sm-1 col-1 d-none d-lg-block d-xl-block d-md-block d-sm-block">
-               <button type="button" className="btn pink white-text dropdown-toggle" data-toggle="dropdown">
-                  More
-                </button>
-                <div className="dropdown-menu">
-                 
-                    <a className="dropdown-item" href="">Edit Question Setting</a>
-                  <a className="dropdown-item" href="#">Export Questions</a>
-                 
-                </div>
-              </div>
             
 
             </div>

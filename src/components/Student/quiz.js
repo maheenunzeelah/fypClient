@@ -193,12 +193,8 @@ class Quiz extends Component {
                
                {questions.map((ques,index)=>{
                  val=Object.values(this.state.answer)
-                val2=ques.answers.map(ans=>{
-                  if(Object.keys(ans)=='answer3'){
-                    console.log(Object.values(ans))
-                  }
-                })
-               
+                
+                  console.log(val[index])
                 
                  return <div className=" jumbotron grey lighten-4">
                  <h4><bold>{`Question${index+1} of ${questions.length}`}</bold></h4>
@@ -210,11 +206,11 @@ class Quiz extends Component {
                   <div ><p className="green-text font-weight-bold">Correct Ans: {ques.answer}</p>
                    <p className={ques.answer==val[index]?"black-text":"red-text"}> Your Ans : {val[index]}</p>
                   </div>
-                  :<div>Correct Ans: {ques.corr.map(ans=><ul><li>{ques.answers.map(an=>{
+                  :<div><p>Correct Ans: {ques.corr.map(ans=><ul><li>{ques.answers.map(an=>{
                     if(Object.keys(an)==ans){
                       return Object.values(an)
                     }
-                  })}</li></ul>)}
+                  })}</li></ul>)}</p>
                   </div>
                   }
                   
