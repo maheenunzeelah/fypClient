@@ -89,8 +89,8 @@ export const setCurrentTeacher = decoded => {
     type: SET_CURRENT_TEACHER,
     payload: decoded
   }
-
 }
+
 export const quesType = (quesType) => {
   return {
     type: 'SET_QUEST_TYPE',

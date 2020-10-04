@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Card, Typography, Button, CardActions, CardContent, withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { quesList,result } from '../../actions';
+import { quesList, result } from '../../actions';
 import { Field, isPristine, reduxForm, change } from 'redux-form';
 import { isEmpty } from '../../validation/is-empty'
 
 const styles = (themes) => ({
   root: {
     display: 'flex',
-    width: '365px',
-    margin: '120px'
+    width: '400px',
+    margin: '120px',
+    backgroundColor:'#eeeeee'
   },
   details: {
     display: 'flex',
@@ -18,6 +19,7 @@ const styles = (themes) => ({
   },
   content: {
     flex: '1 0 auto',
+    padding:'20px'
   },
 
 })
@@ -29,12 +31,12 @@ class Quiz extends Component {
       currentQues: {},
       nextQues: {},
       previousQues: {},
-      answer: '',
+      answer: [],
       numOfQues: 0,
       numOfAnsweredQues: 0,
       currentQuesIndex: 0,
       score: 0,
-      perct:0,
+      perct: 0,
       corrAnswers: 0,
       wrongAnswers: 0,
       time: {}
@@ -50,123 +52,181 @@ class Quiz extends Component {
     this.props.quesList(this.props.location.state.id)
 
   }
-  componentDidMount(){
-   // console.log(this.props)
+  componentDidMount() {
+    // console.log(this.props)
     // this.setState({numOfQues:questions.length})
   }
-// handleClick=()=>{
+  // handleClick=()=>{
 
-// }
-handleAnsClick=(value)=>{
-  const {classes}=this.props
-  //check if tests have questions or not
-  console.log(this.state.currentQuesIndex)
-  if(this.state.currentQuesIndex!=this.props.questions.length){
-    this.setState((prevState)=>{
-       // increase index
-        return prevState.currentQuesIndex=prevState.currentQuesIndex+1
-      })}
-   
-  let index=this.state.currentQuesIndex
-  let ans=Object.values(value) //to match T/F ans
-  let key=Object.keys(value) //to match mcqs ans
-  console.log(value,ans[index],index)
-  
-  if(this.props.questions[index].type==='T/F'){
-    if(ans[index]===this.props.questions[index].answer){
-      this.setState(prevState=>{
-        return prevState.score=prevState.score+1
+  // }
+  handleAnsClick = (value) => {
+    const { classes } = this.props
+    //check if tests have questions or not
+    console.log(this.state.currentQuesIndex)
+    if (this.state.currentQuesIndex != this.props.questions.length) {
+      this.setState((prevState) => {
+        // increase index
+        return prevState.currentQuesIndex = prevState.currentQuesIndex + 1
       })
-      console.log(ans[index]+ " is correct" )
     }
-    else{
-      console.log(ans[index]+ " is incorrect" )
-    }
-  }
 
-  else if(this.props.questions[index].type==='MCQs')
- {
-   // The ans clicked by user will have true value
-   if(ans[index]){
-     this.props.questions[index].corr.map(corrAns=>{
-       //If corr ans array have name part of which matches with key of selected ans
-       if(key[index].indexOf(corrAns)!=-1){
-        this.setState(prevState=>{
-          return prevState.score=prevState.score+1
+    let index = this.state.currentQuesIndex
+    let ans = Object.values(value) //to match T/F ans
+    let key = Object.keys(value) //to match mcqs ans
+    console.log(value, ans[index], index)
+
+    if (this.props.questions[index].type === 'T/F') {
+      if (ans[index] === this.props.questions[index].answer) {
+        this.setState(prevState => {
+          return prevState.score = prevState.score + 1
         })
-         console.log(key[index] +" is correct")
-       }
-       else{
-        console.log(key[index] +" is incorrect")
-       }
-     })
-   }
- }
- if(this.state.currentQuesIndex==this.props.questions.length-1){
-   console.log("done")
-   this.setState(prevState=>{
-    return prevState.perct=prevState.score*100/this.props.questions.length
-  },()=> this.props.result(value,this.props.questions[index].test,this.state.score,this.state.perct))
-  
+        console.log(ans[index] + " is correct")
+      }
+      else {
+        console.log(ans[index] + " is incorrect")
+      }
+    }
+
+    else if (this.props.questions[index].type === 'MCQs') {
+      // The ans clicked by user will have true value
+      if (ans[index]) {
+        this.props.questions[index].corr.map(corrAns => {
+          //If corr ans array have name part of which matches with key of selected ans
+          if (key[index].indexOf(corrAns) != -1) {
+            this.setState(prevState => {
+              return prevState.score = prevState.score + 1
+            })
+            console.log(key[index] + " is correct")
+          }
+          else {
+            console.log(key[index] + " is incorrect")
+          }
+        })
+      }
+    }
+    if (this.state.currentQuesIndex == this.props.questions.length - 1) {
+      console.log("done")
+      this.setState(prevState => {
+        return prevState.perct = prevState.score * 100 / this.props.questions.length,
+        prevState.answer=value
+      }, () => this.props.result(value, this.props.questions[index].test, this.state.score, this.state.perct))
+
+    }
   }
-}
 
   render() {
     const { classes, questions } = this.props
-    console.log(questions.length,this.state.currentQuesIndex)
-    if (!isEmpty(questions) && this.state.currentQuesIndex!=questions.length) {
+    let val, val2
+    console.log(questions.length, this.state.currentQuesIndex)
+    if (!isEmpty(questions) && this.state.currentQuesIndex != questions.length) {
       return (
         <div className="container">
 
-          
-            <Card className={classes.root}>
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
+
+          <Card className={classes.root}>
+            <div className={classes.details}>
+              <CardContent className={classes.content}>
                 <form onSubmit={this.props.handleSubmit(this.handleAnsClick)}>
-                  <Typography component="h5" variant="h5">
-                    Question
+                  <Typography component="h4" variant="h4" className="mb-3">
+                    Question {this.state.currentQuesIndex+1}
           </Typography>
-                  <Typography variant="subtitle1" color="black">
+                  <Typography style={{fontSize:"17px"}} color="black">
                     {questions[this.state.currentQuesIndex].question}
                   </Typography>
                   {questions[this.state.currentQuesIndex].type == 'T/F' ? <div>
-                    <label>
-                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} component="input" value="true" />
+                    <label >
+                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} style={{margin:"10px" , fontSize:'16px'}} component="input" value="true" />
                       True
                 </label><br />
                     <label>
-                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} component="input" value="false" />
+                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} style={{margin:"10px", fontSize:'18px'}} component="input" value="false" />
                       False
                 </label>
 
                   </div> : <div>
-                    {questions[this.state.currentQuesIndex].answers.map((ans,i)=>{
-                      return <div><label>
-                      <Field type="checkbox"  name={"mcq"+Object.keys(ans)} component="input"  />
-                      {Object.values(ans)}
-                      
-                </label>
-                <br />
-                </div>
-                    })}
-                  <br />
-                    
+                      {questions[this.state.currentQuesIndex].answers.map((ans, i) => {
+                        return <div><label>
+                          <Field type="checkbox" name={"mcq" + Object.keys(ans)} component="input" style={{margin:"10px", fontSize:'18px'}}/>
+                          {Object.values(ans)}
+
+                        </label>
+                          <br />
+                        </div>
+                      })}
+                      <br />
+
                     </div>}
-                    <Button className='pink float-right' type="submit">Next</Button>
-                    </form>
-                </CardContent>
-              </div>
-            </Card>
-          
+                  <Button className='pink float-right' type="submit">Next</Button>
+                </form>
+              </CardContent>
+            </div>
+          </Card>
+
         </div>
       )
     }
-    else if(this.state.currentQuesIndex==questions.length){
-      return <Card className={classes.root}>
-      <CardContent className={classes.content}>
-        <p>Result:{` ${this.state.perct} %`}</p>
-      </CardContent>
-      </Card>}
+    else if (this.state.currentQuesIndex == questions.length) {
+      return <Card className="container" style={{ marginTop: '80px', padding: '50px', marginBottom:'80px' , border:'3px solid #e3f2fd' }}>
+        <CardContent>
+          <div className="container">
+            <div className="row " style={{fontSize:'22px'}}>
+              <div className="col-md-6"  >
+               <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Student Name: Arisha Kashif</h5> 
+        
+                <h5 style={{fontSize:'18px' , fontWeight:'bold'}}>Group Name: group1</h5>
+        
+                <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Test Name: test1</h5>
+       </div>
+
+              <div className="col-md-6">
+                <h2 className="blue-text">Result:</h2>
+                Score: {`${this.state.score}/${questions.length}`}
+                <br />
+                Percentage :{`${this.state.perct} %`}
+                <div className="progress" style={{width:'200px'}}>
+                  <div className="progress-bar" role="progressbar" style={{width:`${this.state.perct}%`}} aria-valuenow={this.state.perct} aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+            <div className="row pt-5">
+             <div className="col-md-9">
+               
+               {questions.map((ques,index)=>{
+                 val=Object.values(this.state.answer)
+                val2=ques.answers.map(ans=>{
+                  if(Object.keys(ans)=='answer3'){
+                    console.log(Object.values(ans))
+                  }
+                })
+               
+                
+                 return <div className=" jumbotron grey lighten-4">
+                 <h4><bold>{`Question${index+1} of ${questions.length}`}</bold></h4>
+                 <hr />
+                <p>{ques.question}</p>
+                <div>
+                  
+                  {ques.type=='T/F'?
+                  <div ><p className="green-text font-weight-bold">Correct Ans: {ques.answer}</p>
+                   <p className={ques.answer==val[index]?"black-text":"red-text"}> Your Ans : {val[index]}</p>
+                  </div>
+                  :<div>Correct Ans: {ques.corr.map(ans=><ul><li>{ques.answers.map(an=>{
+                    if(Object.keys(an)==ans){
+                      return Object.values(an)
+                    }
+                  })}</li></ul>)}
+                  </div>
+                  }
+                  
+                </div>
+                </div>
+               })}
+             </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    }
     else {
       return <div></div>
     }
@@ -179,8 +239,8 @@ const mapStateToProps = (state) => {
     questions: state.questionList
   }
 }
-const formValues=reduxForm({
+const formValues = reduxForm({
   form: 'quiz',
   pristine: isPristine('quiz'),
 })(Quiz)
-export default connect(mapStateToProps, { quesList,result })(withStyles(styles)(formValues))
+export default connect(mapStateToProps, { quesList, result })(withStyles(styles)(formValues))
