@@ -77,7 +77,10 @@ function Landing(props) {
     );
   }
   else {
-    return <div></div>
+    return <div style={{margin:'200px'}} className="jumbotron">
+    <h3 className="pink-text">No Test or Groups Found</h3>
+    <h5>You are not added in any group yet!</h5>
+    </div>
   }
 }
 const mapStateToProp = (state) => {

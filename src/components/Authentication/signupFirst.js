@@ -149,7 +149,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const formWrapped = reduxForm({
   form: 'SignupFirst',
-  validate
+ destroyOnUnmount: false,
+ validate
 })(SignupFirst);
 
 export default connect(mapStateToProps, { teacherSignup, studentAuth })(formWrapped); 

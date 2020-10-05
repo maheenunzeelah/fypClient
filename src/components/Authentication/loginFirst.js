@@ -129,6 +129,7 @@ auth:state.auth
 
 const formWrapped= reduxForm({
 form: 'Login',
+destroyOnUnmount: false,
 validate
 })(LoginFirst);
 

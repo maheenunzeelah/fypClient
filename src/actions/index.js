@@ -272,6 +272,8 @@ export const studentSignup = (msg) => async (dispatch, getState) => {
         await postDataApi.post('signup/studentVoice', formData)
           .then(response => {
             // alert(response.data)
+            localStorage.removeItem('jwtToken')
+            dispatch(setCurrentStudent({}))
             window.location.replace('/signup');
           })
       })()
@@ -352,6 +354,19 @@ export const studentLogin = (msg) => async (dispatch, getState) => {
       window.location.reload();
     })
 
+}
+export const faceLogin=()=>async dispatch=>{
+  await postDataApi.post('/login/studentFace')
+  .then(response => {
+    console.log("doneee")
+    if (response.data.face == "done") {
+      dispatch({
+        type: 'FACE_DONE',
+        payload: true
+      })
+    }
+
+  })
 }
 //groups of Student
 export const groupTest = () => async (dispatch, getState) => {

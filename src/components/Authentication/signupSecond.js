@@ -16,19 +16,31 @@ class SignupSecond extends Component {
         isRecording: false,
         blobURL: '',
         isBlocked: false,
-        isCalled:true
+        isCalled:true,
+        count:0
     }
+    func=()=>{
+       
+            if(arrVoices.length!==this.props.RecNo){
+                this.start()
+            setInterval(()=>{
+                this.start()
+            setTimeout(this.stop,6000)
+            },7000)
+        }
+    }
+    
   
     start = () => {
-        
+       
         if (this.state.isBlocked) {
             console.log('Permission Denied');
         } else {
             Mp3Recorder
                 .start()
                 .then(() => {
-                    this.setState({ isRecording: true });
-                    
+                    this.setState({ isRecording: true ,count:this.state.count+1},()=>console.log(this.state.count));
+                  
                 }).catch((e) => console.error(e));
         }
         // this.setState({ isRecording: true })
@@ -54,6 +66,7 @@ class SignupSecond extends Component {
                  console.log(arrVoices)
                  if(arrVoices.length===this.props.RecNo)
                  this.props.actionCreator(arrVoices);
+               
             },
            
             ).catch((e) => console.log(e));
@@ -112,25 +125,25 @@ class SignupSecond extends Component {
     render() {
         return (
             <div className="container">
-                <div className="jumbotron mt-5">
-                    <h5 style={{ margin: "22px" }}>Say Something for 5 seconds and give 5 samples   </h5>
+                <div className="jumbotron mt-5" style={{ margin: "122px" ,padding:'60px'}}>
+                    <h5 style={{ margin: "22px" ,padding:'5px'}}>Say Something. After approx {this.props.RecNo*5} sec your request will be submitted </h5>
 
                     <audio src={this.state.blobURL} controls="controls" />
-                    <button className="btn btn-lg btn-primary float-right" onClick={this.start} disabled={this.state.isRecording}>
+                    <button className="btn btn-lg btn-primary float-right" onClick={this.func} disabled={this.state.isRecording}>
                         Record
                 </button>
-                    <button className="btn btn-lg btn-danger float-right" onClick={this.stop} disabled={!this.state.isRecording}>
+                    {/* <button className="btn btn-lg btn-danger float-right" onClick={this.stop} disabled={!this.state.isRecording}>
                         Stop
-                </button>
+                </button> */}
 
                 </div>
                 <div className="text-center mt-4">
-                  <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }}  onClick={this.props.previousPage}>
+                  {/* <MDBBtn id="StuNext" className="default-color"  style={{ marginBottom: "74px" }}  onClick={this.props.previousPage}>
                     Previous
               </MDBBtn>
                   <MDBBtn className="default-color" type="submit" style={{ marginBottom: "74px" }} onClick={this.props.onNext}>
                     Next
-              </MDBBtn>
+              </MDBBtn> */}
                 </div>
             </div>
         )

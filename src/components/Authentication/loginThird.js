@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Card, CardContent, Button, Typography } from '@material-ui/core';
-import { studentFace } from '../../actions';
+import { faceLogin } from '../../actions';
 import { connect } from 'react-redux';
-class SignupThird extends Component {
+class LoginThird extends Component {
     state={
         face:false
     }
     handleClick=()=>{
-        this.props.studentFace()
+        this.props.faceLogin()
       
     }
     componentWillReceiveProps(nextProps) {
@@ -42,4 +42,4 @@ return{
 face:state.face
 }
 }
-export default connect(mapStateToProps,{studentFace})(SignupThird);
+export default connect(mapStateToProps,{faceLogin})(LoginThird);
