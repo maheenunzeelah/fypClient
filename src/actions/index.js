@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER,SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES ,GROUP_LIST,CURRENT_GROUP, STUDENT_TEST,QUESTION_LIST} from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER, SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES, GROUP_LIST, CURRENT_GROUP, STUDENT_TEST, QUESTION_LIST } from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -46,7 +46,7 @@ export const teacherLogin = (formValues) => async dispatch => {
 
       setAuthtoken(response.data.token)
       // //Decoding token
-      const decoded=jwt_decode(response.data.token);
+      const decoded = jwt_decode(response.data.token);
       console.log(decoded)
       dispatch(setCurrentTeacher(decoded));
       alert("login");
@@ -182,39 +182,39 @@ export const deleteTest = (id) => async dispatch => {
       alert(response.data)
       window.location.replace('/dashboard')
     })
-    
+
 }
 // Groups
-export const createGroup=(groupName)=>async dispatch=>{
- await postDataApi.post('login/teacher/createGroup',groupName)
-  .then(response => {
+export const createGroup = (groupName) => async dispatch => {
+  await postDataApi.post('login/teacher/createGroup', groupName)
+    .then(response => {
 
-    if (response.data === "Enter Group name")
-      alert(response.data)
-    else {
-      alert("Group created");
-      dispatch({type:CURRENT_GROUP, payload:response.data._id})
-       window.location.replace('/dashboard/editGroup')      
-    }
-  })
-  .catch(err => {
-    if (err.response.data.group !== undefined)
-      alert(err.response.data.group);
+      if (response.data === "Enter Group name")
+        alert(response.data)
+      else {
+        alert("Group created");
+        dispatch({ type: CURRENT_GROUP, payload: response.data._id })
+        window.location.replace('/dashboard/editGroup')
+      }
+    })
+    .catch(err => {
+      if (err.response.data.group !== undefined)
+        alert(err.response.data.group);
 
-  })
+    })
 }
 //fetch Groups list
-export const groupList=(page)=>async dispatch=>{
-    const response=await postDataApi.get(`login/teacher/groupList/${page}`)
-    console.log(response.data)
-    dispatch({type:GROUP_LIST,payload:response.data})
+export const groupList = (page) => async dispatch => {
+  const response = await postDataApi.get(`login/teacher/groupList/${page}`)
+  console.log(response.data)
+  dispatch({ type: GROUP_LIST, payload: response.data })
 }
 //fetch student list
-export const fetchStudents=(value)=>async dispatch=>{
+export const fetchStudents = (value) => async dispatch => {
   console.log(value.batch)
- const response= await postDataApi.get(`login/teacher/fetchStudents/${value.batch}`)
- console.log(response.data)
-  dispatch({type:'FETCH_STUDENTS',payload:response.data})
+  const response = await postDataApi.get(`login/teacher/fetchStudents/${value.batch}`)
+  console.log(response.data)
+  dispatch({ type: 'FETCH_STUDENTS', payload: response.data })
 }
 //Current Group
 export const editGroup = (id) => {
@@ -222,20 +222,20 @@ export const editGroup = (id) => {
   return { type: CURRENT_GROUP, payload: id }
 }
 //add Students to group
-export const AddStudents=(value)=>async (dispatch,getState)=>{
+export const AddStudents = (value) => async (dispatch, getState) => {
   console.log(value)
- await postDataApi.post(`login/teacher/addStudents/`,value)
- .then(response=>{
-   console.log(response.data)
- })
+  await postDataApi.post(`login/teacher/addStudents/`, value)
+    .then(response => {
+      console.log(response.data)
+    })
 }
 //assign test
-export const AssignTestApi=(value)=>async (dispatch,getState)=>{
+export const AssignTestApi = (value) => async (dispatch, getState) => {
   console.log(value)
- await postDataApi.post(`login/teacher/assignTests/`,value)
- .then(response=>{
-   console.log(response.data)
- })
+  await postDataApi.post(`login/teacher/assignTests/`, value)
+    .then(response => {
+      console.log(response.data)
+    })
 }
 //current Group
 
@@ -263,12 +263,12 @@ export const studentSignup = (msg) => async (dispatch, getState) => {
       localStorage.setItem('jwtToken', response.data.token);
       (async function voiceSignup() {
         console.log(msg)
-        msg.map((form,index) => {
+        msg.map((form, index) => {
           form.id = response.data.id
-          formData.append('data', form,form.id)
-        
+          formData.append('data', form, form.id)
+
         })
-       
+
         await postDataApi.post('signup/studentVoice', formData)
           .then(response => {
             // alert(response.data)
@@ -284,6 +284,19 @@ export const studentSignup = (msg) => async (dispatch, getState) => {
     })
 
 }
+export const studentFace = () => async dispatch => {
+  await postDataApi.post('/signup/studentFace')
+    .then(response => {
+      if (response.data.face == "done") {
+        dispatch({
+          type: 'FACE_DONE',
+          payload: true
+        })
+      }
+
+    })
+}
+
 export const studentAuth = (formValues) => {
   console.log(formValues)
   return ({
@@ -293,32 +306,32 @@ export const studentAuth = (formValues) => {
 
 }
 
-export const studentLogin=(msg) => async (dispatch,getState) => {
+export const studentLogin = (msg) => async (dispatch, getState) => {
   let formData = new FormData();
   var studentData = getState().student;
   await postDataApi.post('/login/student', studentData)
     .then(response => {
-      const token=response.data.token
-      if(response.data.id){
+      const token = response.data.token
+      if (response.data.id) {
         (async function voiceAuth() {
           msg.map(form => {
             form.id = response.data.id
             console.log(form)
-            formData.append('data', form,form.id)
+            formData.append('data', form, form.id)
           })
-         
+
           await postDataApi.post('login/studentVoiceAuth', formData)
             .then(response => {
               // saving token in response in localStorage
               localStorage.setItem('jwtToken', token);
-        
+
               setAuthtoken(token)
               // //Decoding token
-              const decoded=jwt_decode(token);
+              const decoded = jwt_decode(token);
               console.log(decoded)
               dispatch(setCurrentStudent(decoded));
               alert('login')
- 
+
             })
         })()
       }
@@ -329,7 +342,7 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
       // //Decoding token
       // const decoded=jwt_decode(response.data);
       // dispatch(setCurrentUser(decoded));
-   
+
     })
     .catch(err => {
       if (err.response.data.email === undefined)
@@ -341,47 +354,47 @@ export const studentLogin=(msg) => async (dispatch,getState) => {
 
 }
 //groups of Student
-export const groupTest=()=>async (dispatch,getState)=>{
-  const id=getState().auth.user.studentid
-  const response=await postDataApi.get(`/student/groupTest/${id}`)
-   dispatch({type:GROUP_LIST,payload:response.data})
+export const groupTest = () => async (dispatch, getState) => {
+  const id = getState().auth.user.studentid
+  const response = await postDataApi.get(`/student/groupTest/${id}`)
+  dispatch({ type: GROUP_LIST, payload: response.data })
 }
 
 //tests of Student
-export const studentTest=()=>async (dispatch,getState)=>{
-  const id=getState().auth.user.studentid
-  const response=await postDataApi.get(`/student/groupTest/${id}`)
-   dispatch({type:GROUP_LIST,payload:response.data})
+export const studentTest = () => async (dispatch, getState) => {
+  const id = getState().auth.user.studentid
+  const response = await postDataApi.get(`/student/groupTest/${id}`)
+  dispatch({ type: GROUP_LIST, payload: response.data })
 }
 //questions for student's test
-export const quesList=(id)=>async dispatch=>{
-await postDataApi.get(`/student/test/${id}`)
-.then(response=>{
-  console.log(response.data)
-  dispatch({type:QUESTION_LIST,payload:response.data})
-  
-}
-)
+export const quesList = (id) => async dispatch => {
+  await postDataApi.get(`/student/test/${id}`)
+    .then(response => {
+      console.log(response.data)
+      dispatch({ type: QUESTION_LIST, payload: response.data })
+
+    }
+    )
 }
 
 //Result of students
-export const result=(formData,test,score,perct)=>async dispatch=>{
-  const data={...formData,test,score,perct}
+export const result = (formData, test, score, perct) => async dispatch => {
+  const data = { ...formData, test, score, perct }
   console.log
-  (data)
-  await postDataApi.post('/student/result',data)
-  .then(response=>{
-    alert('saved')
-  })
-  .catch(err=>{
+    (data)
+  await postDataApi.post('/student/result', data)
+    .then(response => {
+      alert('saved')
+    })
+    .catch(err => {
       console.log(err)
-  })
+    })
 }
- 
+
 // logout
- export const logout=()=>dispatch=>{
-   localStorage.removeItem('jwtToken')
-   setAuthtoken(false)
-   dispatch(setCurrentTeacher({}))
-   dispatch(setCurrentStudent({}))
- }
+export const logout = () => dispatch => {
+  localStorage.removeItem('jwtToken')
+  setAuthtoken(false)
+  dispatch(setCurrentTeacher({}))
+  dispatch(setCurrentStudent({}))
+}

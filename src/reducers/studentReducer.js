@@ -23,3 +23,12 @@ export const questionListReducer=(state={},action)=>{
         return state;
     }
 }
+export const faceReducer=(state={face:false},action)=>{
+    switch(action.type){
+        case 'FACE_DONE':
+            return action.payload
+            default:
+            return state;
+    }
+
+}
