@@ -14,7 +14,7 @@ class FooterPage extends Component {
     
     render() {
   return (
-    <MDBFooter className="main_div" color="mdb-color" >
+    <MDBFooter className="main_div "  style={{backgroundColor:'#c56183 '}} >
       <MDBContainer className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="4">

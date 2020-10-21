@@ -79,7 +79,16 @@ export const currentTestReducer=(state={}, action)=>{
         return state
     }
 }
-
+export const currentGroupTest=(state={}, action)=>{
+    switch(action.type){
+       
+        case 'CURRENT_GROUP_TEST':
+        return action.payload   
+        
+        default:
+        return state
+    }
+}
 export const groupListReducer=(state={}, action)=>{
     
     switch(action.type){

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import '../../css/Test.css'
 import { BrowserRouter, HashRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
 import Buttontest from './Buttontest';
 import Tab from '../Tab.js'
@@ -27,7 +26,7 @@ class Test extends Component {
 
   updateSearch = (e) => {
     this.setState({
-      search: e.target.value
+      search: e.target.value.toLowerCase()
     })
   }
   handleChange = () => {
@@ -42,13 +41,13 @@ class Test extends Component {
   }
   DynamicButtons = () => {
     return this.props.tests.map(test =>
-      <section className="pagin">
-        {test.currentPage != 1 && test.previousPage != 1 ? <a className="white-text" onClick={() => this.props.fetchTests(1, this.state.course)}>1</a> : null}
-        {test.hasPreviousPage ? <a className="white-text" onClick={() => this.props.fetchTests(test.previousPage, this.state.course)}>{test.previousPage}</a> : null}
-        <a className="white-text" onClick={() => this.props.fetchTests(test.currentPage, this.state.course)}>{test.currentPage}</a>
+      <section className="pagin mb-5" style={{color:"#1f3c88"}}>
+        {test.currentPage != 1 && test.previousPage != 1 ? <a  onClick={() => this.props.fetchTests(1, this.state.course)}>1</a> : null}
+        {test.hasPreviousPage ? <a  onClick={() => this.props.fetchTests(test.previousPage, this.state.course)}>{test.previousPage}</a> : null}
+        <a  onClick={() => this.props.fetchTests(test.currentPage, this.state.course)}>{test.currentPage}</a>
 
-        {test.hasNextPage ? <a className="white-text" onClick={() => this.props.fetchTests(test.nextPage, this.state.course)}>{test.nextPage}</a> : null}
-        {(test.lastPage != test.currentPage && test.nextPage != test.lastPage) ? <span className="white-text">...<a className="white-text" onClick={() => this.props.fetchTests(test.lastPage, this.state.course)}>{test.lastPage}</a></span> : null
+        {test.hasNextPage ? <a  onClick={() => this.props.fetchTests(test.nextPage, this.state.course)}>{test.nextPage}</a> : null}
+        {(test.lastPage != test.currentPage && test.nextPage != test.lastPage) ? <span >...<a onClick={() => this.props.fetchTests(test.lastPage, this.state.course)}>{test.lastPage}</a></span> : null
         }
 
       </section>
@@ -62,7 +61,12 @@ class Test extends Component {
       <div className="container">
         {/*  */}
 
-        <button  className="collapsible btn btn-outline-black" style={{textAlign:'left', backgroundColor:'#fff0fb', textTransform:'lowercase', fontSize:'16px'}} id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}</button>
+        <button  className="collapsible btn btn-outline-black" style={{textAlign:'left', backgroundColor:'#fff0fb', textTransform:'lowercase', fontSize:'16px'}} id={`#${test._id}`} data-toggle="collapse" data-target={`#demo${test._id}`}>{test.testName}
+        <span className="Link float-right" ><i class="fa fa-pencil" aria-hidden="true"></i>
+
+{/*Edit Test button*/}
+<Link to={{ pathname: '/dashboard/editTest', state: { testName: test.testName, course: test.course, id: test._id } }} className="w3-btn blue-text font-weight-bold"  >Edit </Link></span>
+        </button>
         {console.log(test._id)}
         {test.grp.map(gr => {
           return <div id={`demo${test._id}`} className="w3-container collapse black-text ">
@@ -83,10 +87,7 @@ class Test extends Component {
             <hr />
 
             <div className="w3-row" id="Links">
-              <span className="Link" ><i class="fa fa-pencil" aria-hidden="true"></i>
-
-                {/*Edit Test button*/}
-                <Link to={{ pathname: '/dashboard/editTest', state: { testName: test.testName, course: test.course, id: test._id } }} className="w3-btn blue-text font-weight-bold"  >Edit </Link></span>
+             
 
               {/*Assign Test button*/}
               <span className="Link blue-text"><i class="fa fa-plus-circle" aria-hidden="true"></i><Link to='/dashboard/editGroup' className="w3-btn blue-text " 
@@ -107,7 +108,7 @@ class Test extends Component {
     this.props.tests.filter(test => {
       filtered = test.groups.filter(tes => {
         //If value in searched bar matches the value of testname
-        return (tes.testName.indexOf(this.state.search) !== -1)
+        return (tes.testName.toLowerCase().indexOf(this.state.search) !== -1)
       })
 
     })

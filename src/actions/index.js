@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER, SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES, GROUP_LIST, CURRENT_GROUP, STUDENT_TEST, QUESTION_LIST } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER, SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES, GROUP_LIST, CURRENT_GROUP, STUDENT_TEST, QUESTION_LIST,CURRENT_GROUP_TEST } from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -235,9 +235,17 @@ export const AssignTestApi = (value) => async (dispatch, getState) => {
   await postDataApi.post(`login/teacher/assignTests/`, value)
     .then(response => {
       console.log(response.data)
+      if(response.data.id)
+       dispatch( { type: CURRENT_GROUP_TEST, payload: response.data.id })
+      else{
+        alert(response.data.resu)
+      }
+    })
+    .catch(err=>{
+      console.log(err)
     })
 }
-//current Group
+
 
 //STUDENT PANEL ACTION CREATORS
 export const setCurrentStudent = decoded => {

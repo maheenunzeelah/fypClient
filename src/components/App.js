@@ -29,7 +29,7 @@ function App() {
   
    <BrowserRouter>
     
-    <div className="App">
+    <div className="App" style={{backgroundColor:"#f4d9c6"}}>
      <Switch>
     <PrivateStudentRoute path='/student' component={PrivateStudentLayout} />
      <PrivateRoute  path="/dashboard" component={PrivateLayout} />

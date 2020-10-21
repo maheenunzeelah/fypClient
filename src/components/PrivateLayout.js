@@ -20,7 +20,7 @@ function PrivateLayout(){
         
         <Router history={createHistory}>
            
-        <div>
+        <div >
         
          <Dashboard />
          

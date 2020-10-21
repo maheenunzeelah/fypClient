@@ -118,8 +118,8 @@ const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
-    backgroundColor:"#ffe082",
-    border:'solid 2px #ffab00'
+    backgroundColor:"#bdbdbd",
+    border:'solid 2px #212121'
   },
   highlight:
     theme.palette.type === 'light'
@@ -180,8 +180,8 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    backgroundColor:'#ffe082',
-    border:"solid 1px #ffab00"
+    backgroundColor:'#bdbdbd',
+    border:"solid 1px #212121"
   },
   paper: {
     width: '100%',
@@ -278,7 +278,7 @@ function EnhancedTable(props) {
     <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer className="amber lighten-4">
+        <TableContainer className="grey lighten-2">
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"

@@ -37,7 +37,7 @@ class EditTest extends Component {
         <TestWindow to="/dashboard/editTest" label="Edit Test" separator=' > ' />
 
         <div className="container">
-          <div className="jumbotron ">
+          <div className="jumbotron " style={{backgroundColor:"#f8efd4"}} >
             <h3>Edit Test</h3>
             <hr />
             <div className="row">
@@ -62,7 +62,7 @@ class EditTest extends Component {
                     Delete
             </button>
 
-                  <Link to="/dashboard/addQues" ><button className="btn btn-sm float-right btn-danger" onClick={()=>{this.handleClick(this.state.data.testId)}}>
+                    <Link to={{pathname:"/dashboard/addQues", state:{id:this.state.data.testId}}} ><button className="btn btn-sm float-right btn-danger" onClick={()=>{this.handleClick(this.state.data.testId)}}>
                     Add Questions
             </button></Link>
 

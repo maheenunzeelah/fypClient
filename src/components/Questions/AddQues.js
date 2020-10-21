@@ -5,7 +5,7 @@ import TestWindow from '../TestWindow';
 import { Field, reduxForm, isPristine, getFormValues } from 'redux-form';
 import renderField from '../renderField';
 import { connect } from 'react-redux';
-import { addQues, quesType } from '../../actions';
+import { addQues, quesType, editTest } from '../../actions';
 import { func } from 'prop-types';
 import _ from 'lodash';
 
@@ -13,14 +13,29 @@ let cAns = []; //For storing correct answers
 
 class AddQues extends Component {
 
+    constructor(props) {
+        super(props)
+        console.log(this.props.location.state.id)
+        this.state = {
+            type: "T/F",
+            show: false,
+            ans: '',
+            currentTest:this.props.location.state.id,
+            availAnsOpt: 3 // default ans options for MCQs
+        }
+
+    }
+
+
     componentDidMount() {
+        
         this.props.quesType("T/F")
     }
-    state = {
-        type: "T/F",
-        show: false,
-        ans: '',
-        availAnsOpt: 3 // default ans options for MCQs
+    componentWillMount(){
+     this.props.editTest(this.state.currentTest)
+    }
+    conponentWillUnmount(){
+       this.props.editTest(null)
     }
     callbackFunction = (ChildData) => {
         this.setState({
@@ -32,27 +47,28 @@ class AddQues extends Component {
     corrAnsFunction = (ans, val) => {
         this.setState({ show: val })
         var answer
-        if(val===false && this.state.ans.length>0){
-            answer=this.state.ans.filter(an=>{
-               return an!==ans
-           })  
-           this.setState({ans:answer},()=> console.log(this.state.ans))
-       }
-       else{
-   
-           this.setState({ans:[...this.state.ans,ans]},()=> console.log(this.state.ans))
-       }
-    
+        if (val === false && this.state.ans.length > 0) {
+            answer = this.state.ans.filter(an => {
+                return an !== ans
+            })
+            this.setState({ ans: answer }, () => console.log(this.state.ans))
+        }
+        else {
+
+            this.setState({ ans: [...this.state.ans, ans] }, () => console.log(this.state.ans))
+        }
+
     }
     handleSubmit = (formFields) => {
+    
         console.log(this.props.formValues)
         var answers = [] //For all answers
-        var partial = {} 
+        var partial = {}
         const { formValues } = this.props
         if (this.state.type === 'MCQs') {
             //Getting form values from Editor through mapStateToProps
-           
-     
+
+
             for (var x in formValues) {
                 // searches in formValue object for answer keys
                 if (x.includes("answer")) {
@@ -66,16 +82,16 @@ class AddQues extends Component {
             }
             //concatenate partial object and answer array into single object
             partial = { ...partial, answers }
-            
+
             // Insert corrAns value in partial object
             partial = { ...partial, corr: this.state.ans }
 
         }
-        else { 
-            partial ={...formValues,...formFields}
-          } //for T/F
+        else {
+            partial = { ...formValues, ...formFields }
+        } //for T/F
 
-console.log(partial)
+        console.log(partial)
         //Send complete partial object that contains all form values into action creator
         this.props.addQues(partial)
     }
@@ -100,7 +116,7 @@ console.log(partial)
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8">
-                                <h3 className="white-text">Select Question Type</h3><br />
+                                <h3 className="pink-text">Select Question Type</h3><br />
                                 <QuesType parentFunction={this.callbackFunction} /><br />
                             </div>
                             {this.state.type === "MCQs" ? (
@@ -120,7 +136,7 @@ console.log(partial)
                         </div>
                     </div>
 
-                    <h3 className="white-text">Question 1</h3><br />
+                    <h3 className="pink-text">Question 1</h3><br />
                     <Editor name="question" question />
 
                     {
@@ -129,7 +145,7 @@ console.log(partial)
                         this.state.type === "MCQs" ? (
 
                             _.times(this.state.availAnsOpt, (i) => <div>
-                                <h3 className="white-text">{`Answer${i + 1}`}</h3>
+                                <h3 className="pink-text">{`Answer${i + 1}`}</h3>
 
                                 {/*Using loadash library _.times to repeat component n times*/}
                                 <Editor name={`answer${i + 1}`} corrAns={this.corrAnsFunction} />
@@ -137,7 +153,7 @@ console.log(partial)
 
                             // When Ques Type is True/False
                             (<div>
-                                <h3 className="white-text">Answer </h3>
+                                <h3 className="pink-text">Answer </h3>
                                 <div className="jumbotron" style={{ width: "650px", height: "180px", margin: "20px" }}>
                                     <p className="lead">This is the correct answer</p>
                                     <label>
@@ -160,9 +176,11 @@ console.log(partial)
         );
     }
 }
-const mapStateToProps=(state)=> {
+const mapStateToProps = (state) => {
+    console.log(state.currentTest   )
     return {
         //getting all Field Values from Editor form
+        currentTest: state.currentTest,
         formValues: getFormValues('Editor')(state) // here 'form' is the name you have given your redux form 
     }
 }
@@ -171,4 +189,4 @@ const formWrapped = reduxForm({
     pristine: isPristine('Question')
 })(AddQues);
 
-export default connect(mapStateToProps, { addQues, quesType })(formWrapped);
+export default connect(mapStateToProps, { addQues, quesType, editTest })(formWrapped);

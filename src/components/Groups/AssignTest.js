@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: '#ffecb3',
-        border: 'solid 2px #ffab00'
+        backgroundColor: '#bdbdbd',
+        border: 'solid 2px #212121'
     },
 }));
 
@@ -55,10 +55,12 @@ function AssignTest(props) {
     }, [course])
 
    const handleSubmit=()=>{
+       props.callback(checked);
     console.log(props.groupId)
     const arr=checked.map(check=>{
       return {testId:check,groupId:props.groupId}
      })
+     if(arr.length>0)
      props.AssignTestApi(arr)
    }
 
@@ -105,7 +107,7 @@ function AssignTest(props) {
                             })}
                             
                         </List>
-                        <Button variant="contained" color="secondary" className="float-right mt-5" onClick={handleSubmit}>
+                        <Button variant="contained" color="secondary" className="float-right mt-5" disabled={checked.length<=0} onClick={handleSubmit}>
                                 Assign 
                             </Button>
                     </form>

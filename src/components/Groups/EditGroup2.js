@@ -3,13 +3,14 @@ import TestWindow from '../TestWindow';
 import '../../css/EditGroup.css'
 import EnhancedTable from './AddStudents2';
 import { renderBatchField } from '../renderField';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm  } from 'redux-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Box, Stepper, Step, StepLabel, Button, Typography } from '@material-ui/core'
 import { fetchStudents } from '../../actions';
 import { connect } from 'react-redux'
 import { isEmpty } from '../../validation/is-empty';
-import AssignTest from './AssignTest'
+import AssignTest from './AssignTest';
+import Settings from '../PublicPages/Settings';
 import TestPreview from '../TestPreview';
 
 
@@ -32,7 +33,7 @@ function getSteps() {
     return ['Add Students', 'Assign Tests', 'Settings', 'Preview'];
 }
 
-function getStepContent(stepIndex, props) {
+function getStepContent(stepIndex, props, parentFunction) {
 
     function handleSubmit(formValue) {
         props.fetchStudents(formValue)
@@ -64,12 +65,19 @@ function getStepContent(stepIndex, props) {
             return (
                 <div className="container mt-5 mb-5 align-center ">
                     <center>
-                            <AssignTest />
+                            <AssignTest callback={parentFunction}/>
                             </center>
                 </div>
             )
         case 2:
-            return 'This is the bit I really care about!';
+            return  (
+                <div className="container mt-5 mb-5 align-center ">
+                    <center>
+                            <Settings />
+                            </center>
+                </div>
+            )
+
         default:
             return 'Unknown stepIndex';
     }
@@ -78,12 +86,15 @@ function getStepContent(stepIndex, props) {
 function EditGroup(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
+    const[checked,setChecked]=React.useState([]);
     const steps = getSteps();
-
+    console.log(props)
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
+    const parentFunction=(arrChecked)=>{
+        setChecked(arrChecked)
+        }
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
@@ -96,7 +107,7 @@ function EditGroup(props) {
 
         <div className="container mt-5 mb-5 ">
              <TestWindow to="/dashboard/newGroup" label="Edit Group" separator=' > ' />
-            <Stepper activeStep={activeStep} alternativeLabel style={{ border: "solid 2px #ffab00" }} className="amber lighten-4">
+            <Stepper activeStep={activeStep} alternativeLabel style={{ border: "solid 2px #212121" }} className="grey lighten-1" >
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel className="">{label}</StepLabel>
@@ -111,7 +122,7 @@ function EditGroup(props) {
                     </div>
                 ) : (
                         <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep, props)}</Typography>
+                            <Typography className={classes.instructions}>{getStepContent(activeStep, props,parentFunction)}</Typography>
                             <div>
                                 <Button
                                     disabled={activeStep === 0}
@@ -121,7 +132,8 @@ function EditGroup(props) {
                                 >
                                     Back
                 </Button>
-                                <Button variant="contained" color="primary" onClick={handleNext}>
+                                <Button variant="contained" color="primary" onClick={handleNext}
+                                disabled={checked.length<=0 && activeStep===1}>
                                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                 </Button>
                             </div>
@@ -135,11 +147,13 @@ function EditGroup(props) {
 const mapStateToProps = (state) => {
 
     return {
-        studentList: state.studentList
+        studentList: state.studentList,
+    
     }
 }
 const formWrapped = reduxForm({
-    form: 'Batch'
+    form: 'Batch',
+    
 }
 )(EditGroup)
 export default connect(mapStateToProps, { fetchStudents })(formWrapped);

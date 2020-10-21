@@ -13,7 +13,7 @@ class Main extends Component {
         //backgroundColor:"rgb(7, 3, 54)"
         //className="rgba-black-strong "
         return (
-            <div style={{ color: "#bbdefb" }}>
+            <div style={{ color: "#14274e" }}>
                 <div className="container  mt-5 ">
                     <div className="row " >
                         <div className="containercol-lg-6 col-md-6  col-sm-12 " >
@@ -25,7 +25,7 @@ class Main extends Component {
                                      paperwork and provide you easy way for creating and checking tests, preparing results and much more.
                                  </p>
 
-                                <div className='btn btn-lg pink lighten-4 pink-text' ><Link to="/signupas"> Register Now </Link></div>
+                                <div className='btn btn-lg pink lighten-4' ><Link to="/signupas" > Register Now </Link></div>
 
                             </div>
                             <div>
