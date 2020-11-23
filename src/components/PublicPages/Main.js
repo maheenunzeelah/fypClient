@@ -25,7 +25,7 @@ class Main extends Component {
                                      paperwork and provide you easy way for creating and checking tests, preparing results and much more.
                                  </p>
 
-                                <div className='btn btn-lg pink lighten-4' ><Link to="/signupas" > Register Now </Link></div>
+                                <Link to="/signupas" className="text-reset"> <div className='btn btn-lg pink lighten-4 ' > Register Now </div></Link>
 
                             </div>
                             <div>

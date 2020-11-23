@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { MDBNavbar, MDBNavbarToggler, MDBCollapse, MDBNavbarNav, MDBIcon, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem,MDBNavLink,MDBNavItem, MDBTable, MDBTableBody, MDBTableHead,MDBNavbarBrand } from "mdbreact";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
-import { logout } from './../actions'
+import { connect } from 'react-redux';
+import { logout } from './../actions';
+import Spinner from './Spinner';
+
 class Dashboard extends Component {
   state = {
     isOpen: false
@@ -19,8 +21,9 @@ class Dashboard extends Component {
 
   render() {
 
-    const { isAuthenticatedTeacher, isAuthenticatedStudent, user } = this.props.auth;
-    if (isAuthenticatedTeacher) {
+    const { isAuthenticatedTeacher, isAuthenticatedStudent, user} = this.props.auth;
+   
+   if (isAuthenticatedTeacher) {
       return (
         <MDBNavbar style={{ backgroundColor: "#d9adad" }} dark expand="md">
           <MDBNavbarToggler onClick={this.toggleCollapse} />

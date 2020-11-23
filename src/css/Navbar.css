@@ -1,0 +1,17 @@
+.links{
+    font-size: 16px
+  }
+  .links:hover{
+    font-size: 19px;
+    font-weight: bold;
+    color:rgb(107, 10, 42) !important;
+  }
+
+  .navb{
+    background-color: #c56183;
+    color: white
+  }
+
+  .subNav {
+    background-Color: #d9adad
+  }

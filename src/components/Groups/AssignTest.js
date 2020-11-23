@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import { isEmpty } from '../../validation/is-empty';
 import { connect } from 'react-redux';
-import { fetchTests, fetchCourseList,AssignTestApi } from '../../actions';
+import { fetchTests, fetchCourseList, AssignTestApi } from '../../actions';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +25,22 @@ function AssignTest(props) {
     const classes = useStyles();
     const [checked, setChecked] = React.useState([]);
     const [course, setCourse] = React.useState('')
+
+    const DynamicButtons = () => {
+        return props.tests.map(test =>
+            <section className="pagin mb-5" style={{ color: "#1f3c88" }}>
+                {test.currentPage != 1 && test.previousPage != 1 ? <a onClick={() => props.fetchTests(1, course)}>1</a> : null}
+                {test.hasPreviousPage ? <a onClick={() => props.fetchTests(test.previousPage, course)}>{test.previousPage}</a> : null}
+                <a onClick={() => props.fetchTests(test.currentPage, course)}>{test.currentPage}</a>
+
+                {test.hasNextPage ? <a onClick={() => props.fetchTests(test.nextPage, course)}>{test.nextPage}</a> : null}
+                {(test.lastPage != test.currentPage && test.nextPage != test.lastPage) ? <span >...<a onClick={() => props.fetchTests(test.lastPage, course)}>{test.lastPage}</a></span> : null
+                }
+
+            </section>
+        )
+
+    }
     useEffect(() => {
 
         props.fetchTests(1)
@@ -54,15 +70,17 @@ function AssignTest(props) {
         props.fetchTests(1, course)
     }, [course])
 
-   const handleSubmit=()=>{
-       props.callback(checked);
-    console.log(props.groupId)
-    const arr=checked.map(check=>{
-      return {testId:check,groupId:props.groupId}
-     })
-     if(arr.length>0)
-     props.AssignTestApi(arr)
-   }
+    const handleSubmit = () => {
+        props.callback(checked);
+        console.log(props.groupId)
+        const arr = checked.map(check => {
+            return { testId: check, groupId: props.groupId }
+        })
+        if (arr.length > 0)
+            props.AssignTestApi(arr)
+
+
+    }
 
     return (
         <div className="container">
@@ -106,14 +124,19 @@ function AssignTest(props) {
 
                             })}
                             
+        
+                       
+                        { DynamicButtons() }
+
+        
                         </List>
-                        <Button variant="contained" color="secondary" className="float-right mt-5" disabled={checked.length<=0} onClick={handleSubmit}>
-                                Assign 
+                <Button variant="contained" color="secondary" className="float-right mt-5" disabled={checked.length <= 0} onClick={handleSubmit}>
+                    Assign
                             </Button>
                     </form>
-                </div>
-            </div>
         </div>
+            </div >
+        </div >
     )
 }
 function mapStateToProps(state) {
@@ -123,4 +146,4 @@ function mapStateToProps(state) {
         courses: state.filter.course
     }
 }
-export default connect(mapStateToProps, { fetchTests, fetchCourseList,AssignTestApi })(AssignTest)
+export default connect(mapStateToProps, { fetchTests, fetchCourseList, AssignTestApi })(AssignTest)

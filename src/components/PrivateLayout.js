@@ -10,6 +10,7 @@ import EditTest from './Tests/EditTest';
 import EditGroup from './Groups/EditGroup2';
 import QuestionBank from './Questions/QuestionBank';
 import New_Group from './Groups/New_Group';
+import UpdateGroup from './Groups/UpdateGroup';
 import Group from './Groups/Group';
 import createHistory from './history';
 import PrivateRoute from './privateRoute';
@@ -31,6 +32,7 @@ function PrivateLayout(){
            <PrivateRoute  path="/dashboard/newTest" exact component={Newtest}></PrivateRoute>
            <PrivateRoute  path="/dashboard/editTest" component={EditTest}></PrivateRoute>
            <PrivateRoute  path="/dashboard/editGroup" component={EditGroup}></PrivateRoute>
+           <PrivateRoute  path="/dashboard/updateGroup" component={UpdateGroup}></PrivateRoute>  
            <PrivateRoute path="/dashboard/group" component={Group}></PrivateRoute>
            <PrivateRoute path="/dashboard/newGroup" component={New_Group}></PrivateRoute>
            <PrivateRoute path="/dashboard/QuestionBank" component={QuestionBank}></PrivateRoute>

@@ -17,8 +17,8 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   table: {
     minWidth: 450,
-    backgroundColor: '#ffecb3',
-    border: "solid 2px #ffab00"
+    backgroundColor: "#fff0fb",
+    border: "solid 2px #fff0fb"
   },
 });
 

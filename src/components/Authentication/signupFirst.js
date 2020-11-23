@@ -74,8 +74,8 @@ class SignupFirst extends Component {
         <MDBRow>
           <MDBCol md="3"></MDBCol>
           <MDBCol md="6" >
-            <Card className="m-5 mdb-color lighten-5">
-              <CardContent >
+            <Card className="m-5 border border-dark ">
+              <CardContent  >
             <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error " encType='multipart/form-data' style={{ color: " #1C2331" }}>
               <p className="h4 text-center   font-weight-bold" style={{ marginTop: "50px", marginBottom: "-60px" }} >Sign up</p>
               <div style={{ textAlign: "left" }}>
@@ -109,7 +109,7 @@ class SignupFirst extends Component {
               </div>
               </div>
                 <div className="text-center mt-4">
-                  <Button id="StuNext" type="submit" className="unique-color-dark white-text btn btn-lg" style={{ marginBottom: "74px" }} >
+                  <Button id="StuNext" type="submit" className="pink white-text btn btn-lg" style={{ marginBottom: "74px" }} >
                     Next
               </Button>
               </div>

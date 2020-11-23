@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route , Switch} from 'react-router-dom';
+import {FAQ} from './PublicPages/Faq';
 import TourPage from './PublicPages/TourPage';
 import Quizsettings from './PublicPages/QuizSettings';
 import Overview from './PublicPages/Overview';
@@ -29,6 +30,7 @@ return(
      <Route path="/signupas" component={RoleSelection}></Route>
      <Route path="/login" component={Login}></Route>
      <Route path="/tourpage" component={Overview}></Route>
+     <Route path="/faq" component={FAQ}></Route>
      <Route path="/contact" component={Contact}></Route>
      <Route path="/overview" component={Overview}></Route>
      <Route path="/quizSettings" component={Quizsettings}></Route>

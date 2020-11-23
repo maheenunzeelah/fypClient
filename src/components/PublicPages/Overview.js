@@ -11,7 +11,7 @@ function Overview(){
     <div className="Overview" >
     <Card />
       <div className="container" >
-        <div className="jumbotron" style={{border:"solid pink ", marginTop:"30px",backgroundColor:"rgb(1, 4, 20)", color:'#90caf9 '}}>
+        <div className="jumbotron" style={{border:"solid pink ", marginTop:"30px",backgroundColor:"#f4d9c6", color:'"rgb(1, 4, 20)"'}}>
           <div style={{ width:'100%'}}>
           <Timeline style={{position:'relative', right:'20%'}}>
             <TimelineItem >
@@ -22,7 +22,7 @@ function Overview(){
         <TimelineContent className="m-5">
               <div className="row">
                <div className="col-lg-12" style={{ marginbOttom:'30px'}}>
-                <h3 className="font-weight-bold amber-text">Create Test</h3>
+                <h3 className="font-weight-bold black-text">Create Test</h3>
                 </div>
                </div>
                <div className="row pt-3">
@@ -43,7 +43,7 @@ function Overview(){
         <TimelineContent className="m-5">
                <div className="row">
                 <div className="col-lg-12">
-                <h3 className="font-weight-bold amber-text">View Results</h3>
+                <h3 className="font-weight-bold black-text">View Results</h3>
                 </div>
                 </div>
                 <div className="row pt-3">
@@ -64,7 +64,7 @@ function Overview(){
         <TimelineContent className="m-5">
               <div className="row">
                 <div className="col-lg-12">
-                <h3 className="font-weight-bold amber-text">Analyse statistics</h3>
+                <h3 className="font-weight-bold black-text">Analyse statistics</h3>
                 </div>
                 </div>
                 <div className="row align-item-center">

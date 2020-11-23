@@ -257,15 +257,7 @@ handleSubmit=(e)=>{
            <br></br>
 
             <div class="w3-row-padding">
-                {/* <div class="w3-quarter">
-                        <label>Status</label>  
-                        <select class="w3-input w3-border">
-                                <option> All</option>
-                                <option> Used</option>
-                                <option> Unused</option>
-                        </select>
-                </div> */}
-                
+            
                 <div class="w3-quarter">  
                         <label> Question Type  </label>
                         <select className="w3-input w3-border" id="quesTypeOpt" onChange={this.handleTypeChange}>

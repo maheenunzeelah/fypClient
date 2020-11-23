@@ -6,12 +6,14 @@ import { renderBatchField } from '../renderField';
 import { Field, reduxForm  } from 'redux-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Box, Stepper, Step, StepLabel, Button, Typography } from '@material-ui/core'
-import { fetchStudents } from '../../actions';
+import { fetchStudents,profileLoading ,editGroup} from '../../actions';
 import { connect } from 'react-redux'
 import { isEmpty } from '../../validation/is-empty';
 import AssignTest from './AssignTest';
 import Settings from '../PublicPages/Settings';
 import TestPreview from '../TestPreview';
+import Spinner from '../Spinner';
+import { stat } from 'fs';
 
 
 
@@ -65,7 +67,8 @@ function getStepContent(stepIndex, props, parentFunction) {
             return (
                 <div className="container mt-5 mb-5 align-center ">
                     <center>
-                            <AssignTest callback={parentFunction}/>
+                    <AssignTest callback={parentFunction}/>
+                            
                             </center>
                 </div>
             )
@@ -73,7 +76,8 @@ function getStepContent(stepIndex, props, parentFunction) {
             return  (
                 <div className="container mt-5 mb-5 align-center ">
                     <center>
-                            <Settings />
+                  
+                    <Settings />
                             </center>
                 </div>
             )
@@ -88,6 +92,9 @@ function EditGroup(props) {
     const [activeStep, setActiveStep] = React.useState(0);
     const[checked,setChecked]=React.useState([]);
     const steps = getSteps();
+    React.useEffect(()=>{
+       
+    })
     console.log(props)
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -104,9 +111,10 @@ function EditGroup(props) {
     };
 
     return (
-
+        props.location.state.groupId.length>0?
         <div className="container mt-5 mb-5 ">
              <TestWindow to="/dashboard/newGroup" label="Edit Group" separator=' > ' />
+             {props.location.state.name?<h5>{props.location.state.name}</h5>:null}
             <Stepper activeStep={activeStep} alternativeLabel style={{ border: "solid 2px #212121" }} className="grey lighten-1" >
                 {steps.map((label) => (
                     <Step key={label}>
@@ -140,15 +148,17 @@ function EditGroup(props) {
                         </div>
                     )}
             </div>
-        </div>
+        </div>:
+        window.location.replace('/dashboard/group')
     );
 }
 
 const mapStateToProps = (state) => {
-
+console.log(state.currentGroup)
     return {
         studentList: state.studentList,
-    
+        loading:state.loading,
+        currentGroup:state.currentGroup
     }
 }
 const formWrapped = reduxForm({
@@ -156,4 +166,4 @@ const formWrapped = reduxForm({
     
 }
 )(EditGroup)
-export default connect(mapStateToProps, { fetchStudents })(formWrapped);
+export default connect(mapStateToProps, { fetchStudents,profileLoading,editGroup })(formWrapped);

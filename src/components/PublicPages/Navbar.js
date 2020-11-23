@@ -5,61 +5,51 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TourPage from "./TourPage";
 import Signup from "../Authentication/Signup";
 import Login from '../Authentication/login';
+import '../../css/Navbar.css';
 
 class NavbarPage extends Component {
-state = {
-  isOpen: false
-};
 
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
-// handleClick=(e)=>{
-// this.
-// }
+ 
 
-render() {
-  return (
-    <Router>      
-      <MDBNavbar style={{ backgroundColor: "#c56183" }}  dark expand="md">
-        <MDBNavbarToggler onClick={this.toggleCollapse} />
-        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav left>
-            <a className="navbar-brand white-text" href="#">E-Catechism</a>
-          </MDBNavbarNav>
-          <MDBNavbarNav right  className="cyan-text">
-            <MDBNavItem >
-            <a className="navbar-brand white-text" href="/login">Login</a>
-            </MDBNavItem>
-            <MDBNavItem>
-            <a className="navbar-brand white-text" href="/signupas">Sign Up</a>
-            </MDBNavItem>
-          </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBNavbar>       
-      <MDBNavbar style={{backgroundColor:'#d9adad'}} dark expand="md">
-        <MDBNavbarBrand>
-          <strong className="white-text"></strong>
-        </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={this.toggleCollapse} />
-        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem >
-            <a className="navbar-brand white-text" href="/">Home</a>
-            </MDBNavItem>
-            <MDBNavItem>
-            <a className="nav-link white-text" href="/tourpage">Take a Tour</a>
-            </MDBNavItem>
-            <MDBNavItem>
-            <a className="nav-link white-text" href="#">FAQ</a>
-            </MDBNavItem>
-            <MDBNavItem>
-            <a className="nav-link white-text" href="/contact">Contact Us</a>
-            </MDBNavItem>
-          </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBNavbar>
-    </Router>
+  render() {
+   
+  
+    return (
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-light navb " >
+          <Link className="navbar-brand " to="/"><h3 className="font-weight-bold">E-Catechism</h3></Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <ul className="navbar-nav ml-auto mt-2 mr-5 mt-lg-0 " >
+            <li className="nav-item pr-3">
+              <Link className="nav-link links" to="/login">Login</Link>
+            </li>
+            <li className="nav-item ">
+              <Link className="nav-link links" to="/signupas">Signup</Link>
+            </li>
+          </ul>
+        </nav>
+        <nav className="navbar navbar-expand-lg navbar-light subNav" >
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li className="nav-item ">
+                <Link className="nav-link links" to="/" >Home </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link links" to="/tourpage">Take A Tour </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link links" to="/faq">Faq </Link>
+              </li>
+              <li className="nav-item ">
+                <Link className="nav-link links" to="/contact">Contact</Link>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+      </div>
     );
   }
 }

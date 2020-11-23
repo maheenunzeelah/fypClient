@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {AddStudents} from '../../actions';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import Spinner from '../Spinner';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -275,6 +276,7 @@ function EnhancedTable(props) {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, studList.length - page * rowsPerPage);
 
   return (
+    props.loading.loading?<Spinner />:
     <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -357,7 +359,8 @@ function EnhancedTable(props) {
 const mapStateToProps=(state)=>{
   console.log(state.currentGroup)
      return{
-       groupId:state.currentGroup
+       groupId:state.currentGroup,
+       loading:state.loading
      }
 }
 export default connect(mapStateToProps,{AddStudents})(EnhancedTable)

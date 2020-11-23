@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import { RadioButton} from '@material-ui/core';
 import {Link, NavLink, BrowserRouter, Route, Switch,withRouter} from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import Dashboard from '../Dashboard';
@@ -80,29 +81,29 @@ class LoginFirst extends Component {
  <MDBRow>
    <MDBCol md="3"></MDBCol>
    <MDBCol md="6">
-     <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" style={{ color:" white"}}>
-       <p className="h4 text-center pink-text font-weight-bold " style={{ marginTop:"50px", marginBottom:"-60px"}} >LOG IN</p>
+     <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="ui form error" style={{ color:" black", fontSize:'16px'}}>
+       <p className="h4 text-center pink-text font-weight-bold " style={{ marginTop:"50px", marginBottom:"-60px" ,fontSize:'30px'}} >LOG IN</p>
        <div style={{textAlign:"left"}}>
          
          <Field name="email" type="email" component={renderField} label="Email"  />
          <Field name="password" type="password" component={renderField} label="Password"  />
-         <label>Login as a:</label>
+         <label className="pb-2 pt-3">Login as a:</label>
    <div>
-     <label>
-       <Field name="role" component="input" type="radio" value="teacher"  onClick={this.buttonEnable} />
+     <label >
+       <Field name="role" component="input" type="radio" value="teacher"  onClick={this.buttonEnable} />&nbsp;&nbsp;
        Teacher
      </label><br />
      <label>
-       <Field name="role" component="input" type="radio" value="student"  onClick={this.buttonEnable}/>
+       <Field name="role" component="input" type="radio" value="student"  onClick={this.buttonEnable}/>&nbsp;&nbsp;
        Student
      </label>
      <Field name="role" component={renderError} />
    </div>
        <div className="text-center mt-4">
-         <MDBBtn  id="StuNext" className="pink accent-2" type="submit" style={{marginBottom:"74px" }} disabled={this.state.nextisDisabled}>
+         <MDBBtn  id="StuNext" className="pink accent-2 black-text" type="submit" style={{marginBottom:"74px" }} disabled={this.state.nextisDisabled}>
            Next
          </MDBBtn>
-         <MDBBtn className="pink accent-2" type="submit" style={{marginBottom:"74px"}} disabled={this.state.registerisDisabled}>
+         <MDBBtn className="pink accent-2 black-text" type="submit" style={{marginBottom:"74px"}} disabled={this.state.registerisDisabled}>
            Login
          </MDBBtn>
        </div>

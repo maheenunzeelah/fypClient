@@ -51,7 +51,7 @@ export const fetchTestReducer=(state={},action)=>{
     switch(action.type){
        
         case 'FETCH_TESTS':
-        return {...state, tests:action.payload}
+        return {...state,tests:action.payload}
         
         default:
         return state
@@ -62,7 +62,7 @@ export const fetchQuesReducer=(state={},action)=>{
     switch(action.type){
        
         case 'FETCH_QUESTIONS':
-        return {...state, question:action.payload}
+        return {...state,question:action.payload}
         
         default:
         return state
