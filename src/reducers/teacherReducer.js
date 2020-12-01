@@ -1,3 +1,6 @@
+
+
+
 export const signupReducer=(state={},action)=>{
     switch(action.type){
         case 'SIGN_UP':
@@ -117,5 +120,14 @@ export const fetchStudentsReducer=(state={},action)=>{
         return action.payload
         default:
         return state
+    }
+}
+
+export const setSettingsReducer=(state={},action)=>{
+    switch(action.type){
+        case'SET_SETTINGS':
+         return action.payload
+        default:
+         return state 
     }
 }

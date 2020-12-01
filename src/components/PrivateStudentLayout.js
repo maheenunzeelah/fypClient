@@ -5,6 +5,7 @@ import Landing from './Student/landing'
 import Quiz from './Student/quiz'
 import Setting from './Student/settings'
 import createHistory from './history';
+import Preview from '../components/Groups/Preview';
 import PrivateStudentRoute from './privateStudentRoutes';
 
 
@@ -20,8 +21,8 @@ function PrivateStudentLayout(){
          <Switch>
          <PrivateStudentRoute exact path ="/student" component={Landing} />
          <PrivateStudentRoute path ="/student/quiz" component={Quiz} />
-         <PrivateStudentRoute path ="/student/settings" component={Setting} />
-           
+         <PrivateStudentRoute path ="/student/settings/:id" component={Setting} />
+       
            </Switch>
         
          </div>

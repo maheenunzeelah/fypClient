@@ -1,7 +1,7 @@
 import React from 'react';
 import Overview from './Overview';
 import Video from './Video';
-import {BrowserRouter, Route, Switch , withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Card(){
 return(
@@ -10,10 +10,10 @@ return(
      <div className="col-lg-1"></div>
      <div className="col-lg-4">
      <div className="list-group " style={{width:'300px' , margin:"20px auto 20px 30px" }} >
-     <a  href="/tourpage" > <button type="button" className="list-group-item list-group-item-secondary  list-group-item-action pink lighten-5 mb-5 mt-5" >
+     <Link  to="/tourpage" > <button type="button" className="list-group-item list-group-item-secondary  list-group-item-action pink lighten-5 mb-5 mt-5" >
         <p className="pink-text">Overview</p>
-        </button></a>
-        <a href="/quizSettings" className="pink-text "><button type="button" className="list-group-item list-group-item-secondary list-group-item-action pink lighten-5" ><p className="pink-text">Quiz Settings</p></button></a>
+        </button></Link>
+        <Link to="/quizSettings" className="pink-text "><button type="button" className="list-group-item list-group-item-secondary list-group-item-action pink lighten-5" ><p className="pink-text">Quiz Settings</p></button></Link>
         {/* <button type="button" className="list-group-item list-group-item-secondary list-group-item-action pink-text  pink lighten-5 ">Quiz Results</button> */}
         {/* <button type="button" className="list-group-item list-group-item-secondary list-group-item-action pink-text  pink lighten-5">Quiz Access</button>
         <button type="button" className="list-group-item list-group-item-secondary list-group-item-action pink-text  pink lighten-5">API/ Integrate</button> */}

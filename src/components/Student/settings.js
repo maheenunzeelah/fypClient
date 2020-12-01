@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom';
+import Preview from '../Groups/Preview'
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Setiings(props) {
+export default function Settings(props) {
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -36,6 +37,9 @@ export default function Setiings(props) {
         <Typography variant="h5" component="h2">
           Settings
         </Typography>
+        <div>
+          <Preview id={props.match.params.id}/>
+        </div>
       </CardContent>
       <CardActions>
       <Link to={{pathname:'/student/quiz', state:{id:props.location.state.id}}}><Button className="pink">Start</Button></Link>

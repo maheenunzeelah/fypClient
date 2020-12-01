@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse , MDBIcon} from "mdbreact";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TourPage from "./TourPage";
 import Signup from "../Authentication/Signup";
@@ -23,10 +23,10 @@ class NavbarPage extends Component {
           </button>
           <ul className="navbar-nav ml-auto mt-2 mr-5 mt-lg-0 " >
             <li className="nav-item pr-3">
-              <Link className="nav-link links" to="/login">Login</Link>
+              <Link className="nav-link links" to="/login">Login<MDBIcon icon="sign-in-alt" className=" ml-2"/></Link>
             </li>
             <li className="nav-item ">
-              <Link className="nav-link links" to="/signupas">Signup</Link>
+              <Link className="nav-link links" to="/signupas">Signup<MDBIcon icon="user-plus" className=" ml-2"/></Link>
             </li>
           </ul>
         </nav>

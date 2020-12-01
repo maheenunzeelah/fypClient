@@ -8,11 +8,13 @@ import AddQues from './Questions/AddQues';
 import EditQues from './Questions/EditQues';
 import EditTest from './Tests/EditTest';
 import EditGroup from './Groups/EditGroup2';
+import Preview from './Groups/Preview';
 import QuestionBank from './Questions/QuestionBank';
 import New_Group from './Groups/New_Group';
 import UpdateGroup from './Groups/UpdateGroup';
 import Group from './Groups/Group';
 import createHistory from './history';
+import Settings from '../components/PublicPages/Settings'
 import PrivateRoute from './privateRoute';
 
 
@@ -35,6 +37,8 @@ function PrivateLayout(){
            <PrivateRoute  path="/dashboard/updateGroup" component={UpdateGroup}></PrivateRoute>  
            <PrivateRoute path="/dashboard/group" component={Group}></PrivateRoute>
            <PrivateRoute path="/dashboard/newGroup" component={New_Group}></PrivateRoute>
+           <PrivateRoute path="/dashboard/settings/:id" component={Settings}></PrivateRoute>
+           <PrivateRoute path="/dashboard/preview" component={Preview}></PrivateRoute>  
            <PrivateRoute path="/dashboard/QuestionBank" component={QuestionBank}></PrivateRoute>
            
            </Switch>

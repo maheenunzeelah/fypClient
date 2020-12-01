@@ -1,5 +1,5 @@
 import postDataApi from '../apis/postDataApi';
-import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER, SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES, GROUP_LIST, CURRENT_GROUP, STUDENT_TEST, QUESTION_LIST, CURRENT_GROUP_TEST, PROFILE_LOADING } from './types';
+import { SIGN_UP, LOG_IN, SET_CURRENT_TEACHER, SET_CURRENT_STUDENT, FETCH_TESTS, FETCH_QUESTIONS, CURRENT_TEST, FETCH_COURSES, GROUP_LIST, CURRENT_GROUP, STUDENT_TEST, QUESTION_LIST, CURRENT_GROUP_TEST, PROFILE_LOADING ,SET_SETTINGS} from './types';
 import setAuthtoken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
@@ -293,11 +293,22 @@ export const AssignTestApi = (value) => async (dispatch, getState) => {
 //Save Settings
 export const saveSettings = (data) => async (dispatch,getState) => {
   data={...data, groupAssignedTestId:getState().currentGroupTest}
-  console.log(data)
+  dispatch({ type: SET_SETTINGS, payload: data })
   await postDataApi.post('login/teacher/saveSettings', data)
     .then(response => {
+      
       alert(response.data.message)
     })
+}
+
+//get Settings
+export const getSettings = (id) => async dispatch => {
+ console.log(id);
+  await postDataApi.get(`login/teacher/getSettings/${id}`)
+    .then(response => {
+      dispatch({type:SET_SETTINGS,payload:response.data})
+    })
+
 }
 
 //STUDENT PANEL ACTION CREATORS

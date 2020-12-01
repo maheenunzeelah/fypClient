@@ -171,7 +171,7 @@ class Quiz extends Component {
           <div className="container">
             <div className="row " style={{fontSize:'22px'}}>
               <div className="col-md-6"  >
-               <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Student Name: Arisha Kashif</h5> 
+               <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Student Name: {this.props.user.studentName}</h5> 
         
                 <h5 style={{fontSize:'18px' , fontWeight:'bold'}}>Group Name: group1</h5>
         
@@ -232,7 +232,8 @@ class Quiz extends Component {
 const mapStateToProps = (state) => {
   console.log(state.questionList)
   return {
-    questions: state.questionList
+    questions: state.questionList,
+    user:state.auth.user
   }
 }
 const formValues = reduxForm({

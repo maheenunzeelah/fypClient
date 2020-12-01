@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -50,6 +50,7 @@ function Landing(props) {
                   </TableRow>
                 </TableHead>
                 {group.testId.map(test => {
+                  console.log(group._id)
                   return <TableBody>
 
                     <TableRow key={test._id}>
@@ -60,8 +61,9 @@ function Landing(props) {
                       <TableCell align="left">{}</TableCell>
 
                     </TableRow>
+                  
                     <TableRow>
-                      <TableCell align="left"><Link to={{pathname:'/student/settings', state:{id:test._id}}}><Button className="pink">Start</Button></Link></TableCell>
+                      <TableCell align="left"><Link to=  {{pathname:`/student/settings/${group._id}`, state:{id:test._id}}}><Button className="pink" >Start</Button></Link></TableCell>
 
                     </TableRow>
 

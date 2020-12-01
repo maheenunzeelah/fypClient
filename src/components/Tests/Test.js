@@ -94,8 +94,8 @@ class Test extends Component {
 
 
               <div className="w3-right ">
-                <Link to='/setting' className="blue-text" id="Setting">Settings</Link>
-                <Link to='/setting' className="blue-text" id="Preview">Preview</Link>
+                <Link to={`/dashboard/settings/${gr.groupId._id}`} className="blue-text" id="Setting">Settings</Link>
+                <Link to='/dashboard/preview' className="blue-text" id="Preview">Preview</Link>
                 <Link to='/setting' className="w3-btn w3-ripple pink accent-3">Result</Link>
               </div>
             </div>

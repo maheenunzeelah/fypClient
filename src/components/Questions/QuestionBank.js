@@ -305,11 +305,11 @@ handleSubmit=(e)=>{
         <div className="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
                 <div className="dropdown">
                 <button  className="btn pink white-text dropdown-toggle " data-toggle="dropdown">
-                        Add Questions
+                        Add Questions in Test
                 </button>
 
                 <div className="dropdown-menu">
-                        <Link to='/dashboard/addQues' className="dropdown-item black-text" >Add new</Link>
+                        <Link to='/dashboard' className="dropdown-item black-text" >Add new </Link>
                          
                 </div>
                 </div>
