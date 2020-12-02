@@ -166,6 +166,7 @@ class Quiz extends Component {
       )
     }
     else if (this.state.currentQuesIndex == questions.length) {
+      const {testName,groupName}=this.props.location.state;
       return <Card className="container" style={{ marginTop: '80px', padding: '50px', marginBottom:'80px' , border:'3px solid #e3f2fd' }}>
         <CardContent>
           <div className="container">
@@ -173,9 +174,9 @@ class Quiz extends Component {
               <div className="col-md-6"  >
                <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Student Name: {this.props.user.studentName}</h5> 
         
-                <h5 style={{fontSize:'18px' , fontWeight:'bold'}}>Group Name: group1</h5>
+                <h5 style={{fontSize:'18px' , fontWeight:'bold'}}>Group Name: {groupName}</h5>
         
-                <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Test Name: test1</h5>
+                <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Test Name: {testName}</h5>
        </div>
 
               <div className="col-md-6">

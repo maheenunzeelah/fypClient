@@ -63,7 +63,7 @@ function Landing(props) {
                     </TableRow>
                   
                     <TableRow>
-                      <TableCell align="left"><Link to=  {{pathname:`/student/settings/${group._id}`, state:{id:test._id}}}><Button className="pink" >Start</Button></Link></TableCell>
+                      <TableCell align="left"><Link to=  {{pathname:`/student/settings/${group._id}`, state:{id:test._id, testName:test.testName, groupName:group.groupId.groupName}}}><Button className="pink" >Start</Button></Link></TableCell>
 
                     </TableRow>
 

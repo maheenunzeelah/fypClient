@@ -141,7 +141,7 @@ class Dashboard extends Component {
       
           <MDBNavbarNav left>
           <a href="/student"><MDBBtn className="mr-auto" color="pink" >Tests</MDBBtn></a>
-          <a href="/student/quiz"><MDBBtn className="mr-auto"  color="pink" >Group</MDBBtn></a>
+          <a href="#"><MDBBtn className="mr-auto"  color="pink"  disabled>Group</MDBBtn></a>
           </MDBNavbarNav>
 
         </MDBCollapse>

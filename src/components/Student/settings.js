@@ -29,7 +29,7 @@ export default function Settings(props) {
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-
+ const {id,testName,groupName}=props.location.state;
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -42,7 +42,7 @@ export default function Settings(props) {
         </div>
       </CardContent>
       <CardActions>
-      <Link to={{pathname:'/student/quiz', state:{id:props.location.state.id}}}><Button className="pink">Start</Button></Link>
+      <Link to={{pathname:'/student/quiz', state:{id,testName,groupName}}}><Button className="pink">Start</Button></Link>
       </CardActions>
     </Card>
   );
