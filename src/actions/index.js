@@ -77,10 +77,7 @@ export const createTest = (testName) => async dispatch => {
       if (response.data === "Enter Test name")
         alert(response.data)
       else {
-        alert(<Alert severity="success">
-          <AlertTitle>Success</AlertTitle>
-          Test Created
-        </Alert>)
+        alert("Test Created")
         dispatch({ type: CURRENT_TEST, payload: response.data._id })
       }
     })

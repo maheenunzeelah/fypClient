@@ -7,6 +7,7 @@ import renderField from '../renderField';
 import { connect } from 'react-redux';
 import { addQues, quesType, editTest } from '../../actions';
 import { func } from 'prop-types';
+import {isEmpty} from '../../validation/is-empty'
 import _ from 'lodash';
 
 let cAns = []; //For storing correct answers
@@ -15,12 +16,12 @@ class AddQues extends Component {
 
     constructor(props) {
         super(props)
-        console.log(this.props.location.state.id)
+        // console.log(this.props.location.state.id)
         this.state = {
             type: "T/F",
             show: false,
             ans: '',
-            currentTest:this.props.location.state.id,
+            
             availAnsOpt: 3 // default ans options for MCQs
         }
 
@@ -28,11 +29,20 @@ class AddQues extends Component {
 
 
     componentDidMount() {
-        
+     
         this.props.quesType("T/F")
     }
     componentWillMount(){
-     this.props.editTest(this.state.currentTest)
+        console.log(this.props.location.state)
+        if(!isEmpty(this.props.location.state)){
+            this.setState({
+                currentTest:this.props.location.state.id
+            },()=>{this.props.editTest(this.state.currentTest)})
+        }
+        else{
+            this.props.editTest(this.props.currentTest)
+        }
+     
     }
     conponentWillUnmount(){
        this.props.editTest(null)
