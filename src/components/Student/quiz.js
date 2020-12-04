@@ -11,7 +11,7 @@ const styles = (themes) => ({
     display: 'flex',
     width: '400px',
     margin: '120px',
-    backgroundColor:'#eeeeee'
+    backgroundColor: '#eeeeee'
   },
   details: {
     display: 'flex',
@@ -19,7 +19,7 @@ const styles = (themes) => ({
   },
   content: {
     flex: '1 0 auto',
-    padding:'20px'
+    padding: '20px'
   },
 
 })
@@ -39,7 +39,8 @@ class Quiz extends Component {
       perct: 0,
       corrAnswers: 0,
       wrongAnswers: 0,
-      time: {}
+      time: {},
+      answers: []
     }
   }
   displayQuestions = (question) => {
@@ -63,17 +64,23 @@ class Quiz extends Component {
     const { classes } = this.props
     //check if tests have questions or not
     console.log(this.state.currentQuesIndex)
+    this.props.reset()
     if (this.state.currentQuesIndex != this.props.questions.length) {
       this.setState((prevState) => {
         // increase index
         return prevState.currentQuesIndex = prevState.currentQuesIndex + 1
       })
     }
-
     let index = this.state.currentQuesIndex
+    console.log(Object.values(value))
+    this.setState({
+      answers:[...this.state.answers,{ans:Object.values(value)[0],ques:this.props.questions[this.state.currentQuesIndex].question}]
+    },()=>{console.log(this.state.answers)})
+    // value = { ...{ ...value, ques: this.props.questions[this.state.currentQuesIndex].question } }
+    
     let ans = Object.values(value) //to match T/F ans
     let key = Object.keys(value) //to match mcqs ans
-    console.log(value, ans[index], index)
+    
 
     if (this.props.questions[index].type === 'T/F') {
       if (ans[index] === this.props.questions[index].answer) {
@@ -108,7 +115,7 @@ class Quiz extends Component {
       console.log("done")
       this.setState(prevState => {
         return prevState.perct = prevState.score * 100 / this.props.questions.length,
-        prevState.answer=value
+          prevState.answer = value
       }, () => this.props.result(value, this.props.questions[index].test, this.state.score, this.state.perct))
 
     }
@@ -128,25 +135,26 @@ class Quiz extends Component {
               <CardContent className={classes.content}>
                 <form onSubmit={this.props.handleSubmit(this.handleAnsClick)}>
                   <Typography component="h4" variant="h4" className="mb-3">
-                    Question {this.state.currentQuesIndex+1}
-          </Typography>
-                  <Typography style={{fontSize:"17px"}} color="black">
+                    Question {this.state.currentQuesIndex + 1}
+                  </Typography>
+                  <Typography style={{ fontSize: "17px" }} color="black">
                     {questions[this.state.currentQuesIndex].question}
                   </Typography>
                   {questions[this.state.currentQuesIndex].type == 'T/F' ? <div>
                     <label >
-                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} style={{margin:"10px" , fontSize:'16px'}} component="input" value="true" />
+                      {/* {`answer${this.state.currentQuesIndex}`} */}
+                      <Field type="radio" name="ans" style={{ margin: "10px", fontSize: '16px' }} component="input" value="true" />
                       True
                 </label><br />
                     <label>
-                      <Field type="radio" name={`answer${this.state.currentQuesIndex}`} style={{margin:"10px", fontSize:'18px'}} component="input" value="false" />
+                      <Field type="radio" name="ans" style={{ margin: "10px", fontSize: '18px' }} component="input" value="false" />
                       False
                 </label>
 
                   </div> : <div>
                       {questions[this.state.currentQuesIndex].answers.map((ans, i) => {
                         return <div><label>
-                          <Field type="checkbox" name={"mcq" + Object.keys(ans)} component="input" style={{margin:"10px", fontSize:'18px'}}/>
+                          <Field type="checkbox" name={`ans${i+1}`} component="input" style={{ margin: "10px", fontSize: '18px' }} />
                           {Object.values(ans)}
 
                         </label>
@@ -166,59 +174,59 @@ class Quiz extends Component {
       )
     }
     else if (this.state.currentQuesIndex == questions.length) {
-      const {testName,groupName}=this.props.location.state;
-      return <Card className="container" style={{ marginTop: '80px', padding: '50px', marginBottom:'80px' , border:'3px solid #e3f2fd' }}>
+      const { testName, groupName } = this.props.location.state;
+      return <Card className="container" style={{ marginTop: '80px', padding: '50px', marginBottom: '80px', border: '3px solid #e3f2fd' }}>
         <CardContent>
           <div className="container">
-            <div className="row " style={{fontSize:'22px'}}>
+            <div className="row " style={{ fontSize: '22px' }}>
               <div className="col-md-6"  >
-               <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Student Name: {this.props.user.studentName}</h5> 
-        
-                <h5 style={{fontSize:'18px' , fontWeight:'bold'}}>Group Name: {groupName}</h5>
-        
-                <h5 style={{fontSize:'18px', fontWeight:'bold'}}>Test Name: {testName}</h5>
-       </div>
+                <h5 style={{ fontSize: '18px', fontWeight: 'bold' }}>Student Name: {this.props.user.studentName}</h5>
+
+                <h5 style={{ fontSize: '18px', fontWeight: 'bold' }}>Group Name: {groupName}</h5>
+
+                <h5 style={{ fontSize: '18px', fontWeight: 'bold' }}>Test Name: {testName}</h5>
+              </div>
 
               <div className="col-md-6">
                 <h2 className="blue-text">Result:</h2>
                 Score: {`${this.state.score}/${questions.length}`}
                 <br />
                 Percentage :{`${this.state.perct} %`}
-                <div className="progress" style={{width:'200px'}}>
-                  <div className="progress-bar" role="progressbar" style={{width:`${this.state.perct}%`}} aria-valuenow={this.state.perct} aria-valuemin="0" aria-valuemax="100"></div>
+                <div className="progress" style={{ width: '200px' }}>
+                  <div className="progress-bar" role="progressbar" style={{ width: `${this.state.perct}%` }} aria-valuenow={this.state.perct} aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
             </div>
             <div className="row pt-5">
-             <div className="col-md-9">
-               
-               {questions.map((ques,index)=>{
-                 val=Object.values(this.state.answer)
-                
+              <div className="col-md-9">
+
+                {questions.map((ques, index) => {
+                  val = Object.values(this.state.answer)
+
                   console.log(val[index])
-                
-                 return <div className=" jumbotron grey lighten-4">
-                 <h4><bold>{`Question${index+1} of ${questions.length}`}</bold></h4>
-                 <hr />
-                <p>{ques.question}</p>
-                <div>
-                  
-                  {ques.type=='T/F'?
-                  <div ><p className="green-text font-weight-bold">Correct Ans: {ques.answer}</p>
-                   <p className={ques.answer==val[index]?"black-text":"red-text"}> Your Ans : {val[index]}</p>
+
+                  return <div className=" jumbotron grey lighten-4">
+                    <h4><bold>{`Question${index + 1} of ${questions.length}`}</bold></h4>
+                    <hr />
+                    <p>{ques.question}</p>
+                    <div>
+
+                      {ques.type == 'T/F' ?
+                        <div ><p className="green-text font-weight-bold">Correct Ans: {ques.answer}</p>
+                          <p className={ques.answer == val[index] ? "black-text" : "red-text"}> Your Ans : {val[index]}</p>
+                        </div>
+                        : <div><p>Correct Ans: {ques.corr.map(ans => <ul><li>{ques.answers.map(an => {
+                          if (Object.keys(an) == ans) {
+                            return Object.values(an)
+                          }
+                        })}</li></ul>)}</p>
+                        </div>
+                      }
+
+                    </div>
                   </div>
-                  :<div><p>Correct Ans: {ques.corr.map(ans=><ul><li>{ques.answers.map(an=>{
-                    if(Object.keys(an)==ans){
-                      return Object.values(an)
-                    }
-                  })}</li></ul>)}</p>
-                  </div>
-                  }
-                  
-                </div>
-                </div>
-               })}
-             </div>
+                })}
+              </div>
             </div>
           </div>
         </CardContent>
@@ -234,7 +242,7 @@ const mapStateToProps = (state) => {
   console.log(state.questionList)
   return {
     questions: state.questionList,
-    user:state.auth.user
+    user: state.auth.user
   }
 }
 const formValues = reduxForm({
