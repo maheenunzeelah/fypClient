@@ -63,7 +63,7 @@ class Quiz extends Component {
   handleAnsClick = (value) => {
     const { classes } = this.props
     //check if tests have questions or not
-    console.log(this.state.currentQuesIndex)
+    console.log(value)
     this.props.reset()
     if (this.state.currentQuesIndex != this.props.questions.length) {
       this.setState((prevState) => {
@@ -73,13 +73,14 @@ class Quiz extends Component {
     }
     let index = this.state.currentQuesIndex
     console.log(Object.values(value))
+    let key = Object.keys(value)
     this.setState({
-      answers:[...this.state.answers,{ans:Object.values(value)[0],ques:this.props.questions[this.state.currentQuesIndex].question}]
+      answers:[...this.state.answers,{...value,ques:this.props.questions[this.state.currentQuesIndex].question}]
     },()=>{console.log(this.state.answers)})
     // value = { ...{ ...value, ques: this.props.questions[this.state.currentQuesIndex].question } }
     
     let ans = Object.values(value) //to match T/F ans
-    let key = Object.keys(value) //to match mcqs ans
+   //to match mcqs ans
     
 
     if (this.props.questions[index].type === 'T/F') {
@@ -116,7 +117,7 @@ class Quiz extends Component {
       this.setState(prevState => {
         return prevState.perct = prevState.score * 100 / this.props.questions.length,
           prevState.answer = value
-      }, () => this.props.result(value, this.props.questions[index].test, this.state.score, this.state.perct))
+      }, () => this.props.result(this.state.answers, this.props.questions[index].test, this.state.score, this.state.perct)) 
 
     }
   }
@@ -124,7 +125,7 @@ class Quiz extends Component {
   render() {
     const { classes, questions } = this.props
     let val, val2
-    console.log(questions.length, this.state.currentQuesIndex)
+    console.log(questions.length, this.state.currentQuesIndex,this.state.answer)
     if (!isEmpty(questions) && this.state.currentQuesIndex != questions.length) {
       return (
         <div className="container">
@@ -143,18 +144,18 @@ class Quiz extends Component {
                   {questions[this.state.currentQuesIndex].type == 'T/F' ? <div>
                     <label >
                       {/* {`answer${this.state.currentQuesIndex}`} */}
-                      <Field type="radio" name="ans" style={{ margin: "10px", fontSize: '16px' }} component="input" value="true" />
+                      <Field type="radio" name="answer" style={{ margin: "10px", fontSize: '16px' }} component="input" value="true" />
                       True
                 </label><br />
                     <label>
-                      <Field type="radio" name="ans" style={{ margin: "10px", fontSize: '18px' }} component="input" value="false" />
+                      <Field type="radio" name="answer" style={{ margin: "10px", fontSize: '18px' }} component="input" value="false" />
                       False
                 </label>
 
                   </div> : <div>
                       {questions[this.state.currentQuesIndex].answers.map((ans, i) => {
                         return <div><label>
-                          <Field type="checkbox" name={`ans${i+1}`} component="input" style={{ margin: "10px", fontSize: '18px' }} />
+                          <Field type="checkbox" name={`answer${i+1}`} component="input" style={{ margin: "10px", fontSize: '18px' }}  />
                           {Object.values(ans)}
 
                         </label>

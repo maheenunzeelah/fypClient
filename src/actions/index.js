@@ -462,8 +462,8 @@ export const quesList = (id) => async dispatch => {
 }
 
 //Result of students
-export const result = (formData, test, score, perct) => async dispatch => {
-  const data = { ...formData, test, score, perct }
+export const result = (answers, test, score, perct) => async dispatch => {
+  const data = {answers, test, score, perct }
   console.log
     (data)
   await postDataApi.post('/student/result', data)
